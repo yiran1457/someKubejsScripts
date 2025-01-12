@@ -1,4 +1,4 @@
-
+//priority:1000
 
 /**@type {$Color_} */
 const $Color = Java.loadClass("java.awt.Color");
