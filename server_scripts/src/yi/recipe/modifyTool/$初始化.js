@@ -9,3 +9,11 @@ Recipes$Tool.function = {}
 var Recipes = {}
 Recipes.recipes = {}
 Recipes.function = {}
+
+const Function2ClassExtends = function(target){
+    for(let i in arguments){
+        if(arguments[i]!=target){
+            Object.assign(target.prototype,arguments[i].prototype)
+        }
+    }
+}

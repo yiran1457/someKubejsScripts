@@ -11,11 +11,7 @@ cataclysm_amethyst_bless.prototype = {
             return this
         }
 }
-Object.assign(cataclysm_amethyst_bless.prototype,
-    tool.Base_Recipes.prototype,
-    tool.Result.prototype,
-    tool.Ingredient.prototype
-)
+Function2ClassExtends(cataclysm_amethyst_bless,tool.Base_Recipes,tool.Result,tool.Ingredient)
 /**@type {new()cataclysm_weapon_fusion_ & Base_Recipes_ & Result_} */
 let cataclysm_weapon_fusion = function(){
     Recipes.function.Base_Recipes.call(this,"cataclysm:weapon_fusion")
@@ -27,11 +23,7 @@ cataclysm_weapon_fusion.prototype = {
     return this
 }
 }
-Object.assign(cataclysm_weapon_fusion.prototype,
-    tool.Base_Recipes.prototype,
-    tool.Result.prototype,
-    tool.Ingredient.prototype
-)
+Function2ClassExtends(cataclysm_weapon_fusion,tool.Base_Recipes,tool.Result,tool.Ingredient)
 
 Recipes.recipes.cataclysm = {
     get amethyst_bless$紫水晶祭坛祝福(){

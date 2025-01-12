@@ -207,17 +207,3 @@ Recipes.function.FluidResults.prototype = {
         return this
     }
 }
-/**
- * @type {new(type)=>FluidResults_&FluidResult_&Base_Recipes_&FluidIngredient_&FluidIngredients_}
- */
-let xxx = function(type){
-Recipes.function.Base_Recipes.call(this,type)
-}
-Object.assign(xxx.prototype,
-    Recipes.function.FluidIngredient.prototype,
-    Recipes.function.FluidIngredients.prototype,
-    Recipes.function.FluidResult.prototype,
-    Recipes.function.FluidResults.prototype,
-    Recipes.function.Base_Recipes.prototype)
-
-    new xxx(1).setFluidIngredient('create:flowing_tea').addFluidResult('sophisticatedcore:xp_still').modifyjson(j=>Client.tell(j))

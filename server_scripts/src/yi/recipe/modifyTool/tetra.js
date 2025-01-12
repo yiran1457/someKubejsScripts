@@ -89,7 +89,7 @@ tetra_materials.prototype.builder = function (event) {
     event.addJson(`tetra:materials/${category}/${this.json.key}`, this.json)
 }
 //继承原型
-Object.assign(tetra_materials.prototype, basic_tetra.prototype)
+Function2ClassExtends(tetra_materials, basic_tetra)
 
 
 

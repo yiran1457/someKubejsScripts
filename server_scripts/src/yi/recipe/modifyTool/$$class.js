@@ -77,8 +77,19 @@ class cataclysm_weapon_fusion_ {
     constructor() { }
     setIngredients(/**@type {Special.Item} */base,/**@type {Special.Item} */addition) { return this }
 }
-
-
+class ae2_inscriber_ {
+    constructor() { }
+    setIngredients(/**@type {Special.Item} */Middle,/**@type {Special.Item} */Top,/**@type {Special.Item} */Bottom) {return this}
+    keepBesideItem(/**@type {Boolean} */boolean) {return this}
+}
+class MrCrayfish_Result_{
+    constructor() { }
+    setResult(/**@type {Special.Item} */result) {return this}
+}
+class MrCrayfish_Time_{
+    constructor(){}
+    setTime(/**@type {Number} */time) {return this}
+}
 //=============================================
 //  Tetra
 //=============================================
