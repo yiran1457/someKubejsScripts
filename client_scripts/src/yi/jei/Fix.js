@@ -1,6 +1,6 @@
 const { $RecipeType } = require("packages/mezz/jei/api/recipe/$RecipeType")
 
-//为配方左侧无物品提示的配方添加提示
+//为配方添加 工作方块
 JEIAddedEvents.registerRecipeCatalysts(e => {
     /**@type {(recipeType,Items:Special.Item[])} */
     let Items_In_RecipesTab = (recipeType, Items) => {
