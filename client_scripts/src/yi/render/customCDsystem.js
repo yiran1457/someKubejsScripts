@@ -1,5 +1,5 @@
 
-//为自定义的CD渲染冷却条，仅渲染CDname为common的冷却
+
 //client
 let chectCDTag = (itemStack) => itemStack?.nbt?.cooldown?.common !== undefined 
 RenderJSEvents.RegisterItemDecorations(e => {

@@ -1,5 +1,5 @@
-const { $Color } = require("packages/java/awt/$Color")
-const { $ContainerScreenEvent$Render$Foreground } = require("packages/net/minecraftforge/client/event/$ContainerScreenEvent$Render$Foreground")
+
+
 
 NativeEvents.onEvent($ContainerScreenEvent$Render$Foreground,/**@param {$ContainerScreenEvent$Render$Foreground} e */e => {
     if (Client.player.containerMenu.containerId == 123654789) {

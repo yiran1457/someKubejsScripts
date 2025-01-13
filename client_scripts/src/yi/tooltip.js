@@ -1,5 +1,5 @@
 
-const { $MobEffect } = require("packages/net/minecraft/world/effect/$MobEffect")
+
 
 
 function secondsToTime(seconds) {

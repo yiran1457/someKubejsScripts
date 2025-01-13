@@ -1,12 +1,12 @@
-const { $RecipeType } = require("packages/mezz/jei/api/recipe/$RecipeType")
 
-//为配方添加 工作方块
+
+//为配方左侧无物品提示的配方添加提示
 JEIAddedEvents.registerRecipeCatalysts(e => {
     /**@type {(recipeType,Items:Special.Item[])} */
     let Items_In_RecipesTab = (recipeType, Items) => {
         e.data['addRecipeCatalysts(mezz.jei.api.recipe.RecipeType,net.minecraft.world.item.ItemStack[])'](recipeType, Items)
     }
-    e.data.getJeiHelpers().getAllRecipeTypes().forEach(/**@param {$RecipeType} recipeType */recipeType => {
+    e.data.getJeiHelpers().getAllRecipeTypes().forEach(recipeType => {
         switch (recipeType.getUid().toString()) {
             case 'custom:altar':
                 Items_In_RecipesTab(recipeType, ['ars_nouveau:arcane_pedestal', 'ars_nouveau:arcane_platform'])
