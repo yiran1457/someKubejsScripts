@@ -2,7 +2,6 @@
 //const  $PatchouliAPI  = Java.loadClass("vazkii.patchouli.api.PatchouliAPI")
 const  $Character  = Java.loadClass("java.lang.Character")
 let str = str => new $Character(str)
-const { $PatchouliAPI } = require("packages/vazkii/patchouli/api/$PatchouliAPI")
 
 BlockEvents.rightClicked('minecraft:diamond_block', (event) => {
     const { item, level, block } = event

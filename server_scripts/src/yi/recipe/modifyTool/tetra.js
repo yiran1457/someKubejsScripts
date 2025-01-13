@@ -1,9 +1,6 @@
 //priority:999
 
 
-import { $ItemStack$Type } from "packages/net/minecraft/world/item/$ItemStack"
-import { $ItemEffect } from "packages/se/mickelus/tetra/effect/$ItemEffect"
-import { $ModularItem } from "packages/se/mickelus/tetra/items/modular/$ModularItem"
 
 /**
  * @typedef {"bone"|"fabric"|"fibre"|"gem"|"rod"|"metal"|"misc"|"scale"|"skin"|"socket"|"stone"|"wood"} categoryType
@@ -25,7 +22,7 @@ basic_tetra.prototype.showJson = function () {
     return this
 }
 
-/**@type {new( key:string , category:categoryType , primary:number , secondary:number , tertiary:number , durability:number , integrityCost:number , integrityGain:number , magicCapacity:number , toolLevel:number , toolEfficiency:number , textures:("default"|"wood")[] , material:({ items?:$ItemStack$Type[] , tag?:string , count?:number , nbt?:{} }) , tints:{ glyph:string , texture:string } )tetra_materials_} */
+/**@type {new( key:string , category:categoryType , primary:number , secondary:number , tertiary:number , durability:number , integrityCost:number , integrityGain:number , magicCapacity:number , toolLevel:number , toolEfficiency:number , textures:("default"|"wood")[] , material:({ items?:Special.Item[] , tag?:string , count?:number , nbt?:{} }) , tints:{ glyph:string , texture:string } )tetra_materials_} */
 let tetra_materials = function (
     key,
     category,

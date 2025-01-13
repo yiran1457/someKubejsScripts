@@ -1,7 +1,6 @@
-const { $LivingHurtEvent } = require("packages/net/minecraftforge/event/entity/living/$LivingHurtEvent")
-const { $ModularItem } = require("packages/se/mickelus/tetra/items/modular/$ModularItem")
 
-NativeEvents.onEvent($LivingHurtEvent,/**@param {$LivingHurtEvent} e */e => {
+
+NativeEvents.onEvent($LivingDamageEvent,/**@param {$LivingHurtEvent_} e */e => {
     let player = e.source.player
     if (player) {
         let heldItem = player.mainHandItem
@@ -10,9 +9,9 @@ NativeEvents.onEvent($LivingHurtEvent,/**@param {$LivingHurtEvent} e */e => {
         if (Item instanceof $ModularItem) {
             let target = e.entity
             let damageCount = e.amount
-            player.tell(e.source.getType())
-            ArsManaStream(player, heldItem, Item, target, damageCount, DamageType)
-            ForgeEnergyStream(player, heldItem, Item, target, damageCount, DamageType)
+            player.tell(`伤害：§e${e.getAmount()}`)
+            //ArsManaStream(player, heldItem, Item, target, damageCount, DamageType)
+            //ForgeEnergyStream(player, heldItem, Item, target, damageCount, DamageType)
         }
     }
 })

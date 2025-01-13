@@ -1,14 +1,9 @@
 
-const { $SimpleContainer } = require("packages/net/minecraft/world/$SimpleContainer")
-const { $SimpleMenuProvider } = require("packages/net/minecraft/world/$SimpleMenuProvider")
-const { $ChestMenu } = require("packages/net/minecraft/world/inventory/$ChestMenu")
-const { $MenuType } = require("packages/net/minecraft/world/inventory/$MenuType")
-const { $ToolAction } = require("packages/net/minecraftforge/common/$ToolAction")
-const { $WorkbenchTile } = require("packages/se/mickelus/tetra/blocks/workbench/$WorkbenchTile")
-const { $ModularItem } = require("packages/se/mickelus/tetra/items/modular/$ModularItem")
 
 
-let { ItemStack2Json , FluidStack2Json } = Recipes$Tool.function
+
+
+let { ItemStack2Json , FluidStack2Json } = Recipes.function
 let sequenced_assembly$序列 = function(ingredient,transitionalItem){
     this.json = {
         ingredient:ItemStack2Json(ingredient),
@@ -164,17 +159,3 @@ ServerEvents.entityLootTables(e=>{
     })
 })
 
-ItemEvents.firstRightClicked('tetra:modular_double',e=>{
-    if(e.item.item instanceof $ModularItem){
-        e.item.item.getToolLevel(e.item,$ToolAction.get('hammer_dig'))
-        
-    }
-})
-
-BlockEvents.rightClicked('tetra:basic_workbench', e => {
-    //判断玩家是否蹲下以及玩家是否拿着锤子等级高于3的锤
-    if (e.player.isShiftKeyDown() || e.item.item.getToolLevel(e.item, $ToolAction.get('hammer_dig')) > 3) {
-        e.level.destroyBlock(e.block.pos, true)
-        e.player.swing(e.hand)
-    }
-})

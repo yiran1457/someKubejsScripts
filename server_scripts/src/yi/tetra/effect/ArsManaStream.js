@@ -1,4 +1,4 @@
-const { $CapabilityRegistry } = require("packages/com/hollingsworth/arsnouveau/setup/registry/$CapabilityRegistry")
+
 
 
 /**@type {(player:$Player_, heldItem:$ItemStack_, Item:$ModularItem_, target:$LivingEntity_, damageCount:number, DamageType:string)=>void} */

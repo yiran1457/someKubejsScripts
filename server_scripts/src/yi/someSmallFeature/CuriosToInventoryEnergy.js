@@ -1,7 +1,6 @@
-
+//priority:1001
 //将饰品栏背饰第一个物品当作电池(给背包物品供电)
 
-const { $CuriosApi } = require("packages/top/theillusivec4/curios/api/$CuriosApi")
 
 //设置最大能量交换速率
 let Max_change_energy = 1000
@@ -50,10 +49,7 @@ const TetraEnergyCap = (e) => {
                 if (MaxEnergy > 0) {
                     if (Energy > 0) {
                         if (Energy < MaxEnergy) {
-                            if (vibration_count[index] == 20) {
-                                energy.receiveEnergy(item.item.getEffectLevel(item, $ItemEffect.get('yi:vibration')), false)
-                                vibration_count[index] = 0
-                            } else { vibration_count[index]++ }
+                                //energy.receiveEnergy(item.item.getEffectLevel(item, $ItemEffect.get('yi:vibration')), false)
                         }
                         if (Damage != MaxDamage) {
                             energy.receiveEnergy(- 20 * Damage, false)

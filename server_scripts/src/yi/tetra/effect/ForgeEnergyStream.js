@@ -1,4 +1,3 @@
-const { $ForgeCapabilities } = require("packages/net/minecraftforge/common/capabilities/$ForgeCapabilities")
 
 
 

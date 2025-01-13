@@ -4,8 +4,6 @@
  * @typedef {(player:$Player_, heldItem:$ItemStack_, Item:$ModularItem_, target:$LivingEntity_, damageCount:number, mana:$IManaCap_, ManaChange:{mana:{count:0}})=>void} ArsManaHandler
  */
 
-let { $DamageTypes } = require("packages/net/minecraft/world/damagesource/$DamageTypes")
-let { $ItemEffect } = require("packages/se/mickelus/tetra/effect/$ItemEffect")
 
 
 
