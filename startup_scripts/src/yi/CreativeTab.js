@@ -19,3 +19,4 @@ StartupEvents.modifyCreativeTab('kubejs:tab',e=>{
         Item.of("yi:infinity_potion")
     ])
 })
+

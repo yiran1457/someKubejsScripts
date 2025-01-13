@@ -1,7 +1,5 @@
 
 
-const { $EnchantmentCategory } = require("packages/net/minecraft/world/item/enchantment/$EnchantmentCategory")
-
 //注册附魔Category
 $EnchantmentCategory.create('infinity_food',(i)=>{return Item.of(i.id).hasTag('infinity:food')})
 //注册附魔

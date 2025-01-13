@@ -1,8 +1,5 @@
 //priority:1
 
-const { $BasicItemJS$Builder } = require("packages/dev/latvian/mods/kubejs/item/custom/$BasicItemJS$Builder")
-
-
 
 
 //物品注册
@@ -34,9 +31,6 @@ StartupEvents.registry('item', event => {
     event.create('yi:technological_core').maxStackSize(16).rarity('yi')
     event.create('yi:structure_wand').unstackable().rarity('yi')
     event.create('yi:chest_wand').unstackable().rarity('yi')
-
-
-
 
 
 
@@ -125,6 +119,25 @@ ItemEvents.modification(e => {
 
     e.modify('create:minecart_contraption', item => {
         item.maxStackSize = 1
+    })
+
+
+    //给予tetra FE的属性，实现效果写于server  ---tetra_energy.js
+    e.modify(/tetra:modular_/, i => {
+        i.attachCapability(CapabilityBuilder.ENERGY.customItemStack()
+            .canReceive(i => true)
+            .receiveEnergy((item, energycount, boolean) => {
+                let energy = item.nbt.getInt('Energy')
+                let maxenergy = item.nbt.getInt('MaxEnergy')
+                let inenergy = Math.min(1000, energycount, maxenergy - energy)
+                if (!boolean) {
+                    item.nbt.putInt('Energy', energy + inenergy)
+                }
+                return inenergy
+            })
+            .getEnergyStored(item => item.nbt.getInt('Energy'))
+            .getMaxEnergyStored(item => item.nbt.getInt('MaxEnergy'))
+        )
     })
 
 })
