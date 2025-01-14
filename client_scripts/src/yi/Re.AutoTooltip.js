@@ -16,15 +16,6 @@ let ToCheckKey = (/**@type {string} */key) => {
         return keydown(key)?'T':'F'
     return !keydown(key.substring(2))?'T':'F'
 }
-                                          
-//根据lang来自动生成tooltip
-let tooltip_path
-//设置lang的命名空间
-let namespace = 'autotooltip'
-//设置默认lang类型
-let deflang = 'en_us'
-
-
 
 //根据lang来自动生成tooltip
 //设置lang的命名空间
