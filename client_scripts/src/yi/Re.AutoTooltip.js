@@ -9,7 +9,7 @@ let  $GLFW  = Java.loadClass("org.lwjgl.glfw.GLFW")
  * } keyname 
  * @returns 
  */
-let keydown = (keyname)=>Client.isKeyDown($GLFW[`GLFW_KEY_${keyname}`]
+let keydown = (keyname)=>Client.isKeyDown($GLFW[`GLFW_KEY_${keyname}`])
                                           
 let ToCheckKey = (/**@type {string} */key) => {
     if(key.indexOf('no')==-1)
