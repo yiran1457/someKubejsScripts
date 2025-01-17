@@ -1,0 +1,1 @@
+{"replace":true,"slots":["double/head_right"],"keySuffixes":["_right"],"materialSlotCount":1,"materialRevealSlot":0,"rarity":"temporary","displayType":"major","glyph":{"textureX":144,"textureY":48},"outcomes":[{"material":{"items":["tetra:chthonic_extractor"]},"requiredTools":{"hammer_dig":"minecraft:iron"},"moduleKey":"double/extractor","moduleVariant":"extractor/extractor"}]}

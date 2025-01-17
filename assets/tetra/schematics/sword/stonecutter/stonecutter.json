@@ -1,0 +1,1 @@
+{"replace":true,"slots":["sword/blade"],"repair":false,"materialSlotCount":1,"materialRevealSlot":0,"rarity":"temporary","displayType":"major","glyph":{"textureX":240,"textureY":32},"outcomes":[{"material":{"items":["tetra:stonecutter"]},"requiredTools":{"hammer_dig":"minecraft:wood"},"moduleKey":"sword/stonecutter","moduleVariant":"stonecutter/stonecutter"}]}

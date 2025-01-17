@@ -1,0 +1,1 @@
+{"replace":true,"slots":["sword/guard"],"materialSlotCount":1,"displayType":"minor","glyph":{"textureX":88,"textureY":112},"outcomes":[{"materials":["tetra:fibre/","tetra:skin/"],"moduleKey":"sword/binding","moduleVariant":"sword_binding/"},{"material":{"items":["tetra:forged_bolt"]},"moduleKey":"sword/binding","moduleVariant":"sword_binding/bolt"}]}

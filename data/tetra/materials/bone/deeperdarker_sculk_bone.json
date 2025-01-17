@@ -1,0 +1,44 @@
+{
+    "key": "deeperdarker_sculk_bone",
+    "category": "bone",
+    "primary": 6.4,
+    "secondary": 3.5,
+    "tertiary": 3.5,
+    "durability": 5,
+    "integrityCost": 8,
+    "integrityGain": 1,
+    "magicCapacity": 54,
+    "toolLevel": "tetranomicon:tier_eight",
+    "toolEfficiency": 3,
+    "improvements": {
+        "arrested": 0
+    },
+    "effects": {
+        "enderReverb": [
+            2,
+            0.2
+        ]
+    },
+    "tints": {
+        "glyph": "cbceb3",
+        "texture": "cbceb3"
+    },
+    "textures": [
+        "bone",
+        "crude"
+    ],
+    "material": {
+        "items": [
+            "deeperdarker:sculk_bone"
+        ]
+    },
+    "requiredTools": {
+        "hammer_dig": "tetra:maxed_forge_hammer"
+    },
+    "conditions": [
+        {
+            "type": "forge:mod_loaded",
+            "modid": "deeperdarker"
+        }
+    ]
+}

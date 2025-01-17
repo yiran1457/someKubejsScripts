@@ -1,0 +1,35 @@
+{
+    "key": "alex_farseer_arm",
+    "category": "skin",
+    "primary": "4.3",
+    "secondary": "5.9",
+    "tertiary": "1.1",
+    "durability": "36",
+    "integrityCost": "3",
+    "integrityGain": "1",
+    "magicCapacity": "311",
+    "toolLevel": "0",
+    "toolEfficiency": "0",
+    "tints": {
+      "glyph": "9400D3",
+      "texture": "9400D3"
+    },
+    "textures": [
+      "crude",
+      "default"
+    ],
+    "material": {
+      "items": [
+        "alexsmobs:farseer_arm"
+      ]
+    },
+    "effects" : {
+      "reaching": 2
+    },
+    "attributes":{
+        "forge:attack_range":1.5
+    },
+    "requiredTools": {
+      "cut": "minecraft:iron"
+    }
+  }

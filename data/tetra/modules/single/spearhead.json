@@ -1,0 +1,22 @@
+{
+    "replace": false,
+    "improvements": [
+      "tetra:vvaddon/hasteeffect",
+      "tetra:vvaddon/speedeffect",
+      "tetra:vvaddon/strengtheffect",
+      "tetra:vvaddon/nightvisioneffect",
+      "tetra:vvaddon/bloodfull",
+      "tetra:vvaddon/bloodlow",
+      "tetra:vvaddon/height",
+      "tetra:vvaddon/charge",
+      "tetra:vvaddon/combo",
+      "tetra:vvaddon/sniper",
+      "tetra:vvaddon/homology",
+      "tetra:vvaddon/honor",
+      "tetra:vvaddon/evil",
+      "tetra:vvaddon/hitaway",
+      "tetra:vvaddon/exp_i",
+      "tetra:vvaddon/exp_ii",
+      "tetra:vvaddon/exp_iii"
+    ]
+  }

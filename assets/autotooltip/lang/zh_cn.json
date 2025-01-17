@@ -1,0 +1,8 @@
+{
+    "tooltip.minecraft.iron_ingot": "常规",
+    "yi.structure_wand.D.P.tooltip": "D+P",
+    "yi.structure_wand.noD.noP.tooltip": "noD+noP",
+    "yi.structure_wand.LEFT_SHIFT.LEFT_CONTROL.tooltip": "shift+ctrl",
+    "yi.structure_wand.LEFT_SHIFT.N.tooltip": "shift+n",
+    "yi.structure_wand.LEFT_CONTROL.M.tooltip": "ctrl+n"
+}

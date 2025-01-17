@@ -1,0 +1,1 @@
+{"replace":true,"slots":["toolbelt/belt"],"materialSlotCount":1,"requirement":{"type":"tetra:module","module":"toolbelt/belt_wool"},"glyph":{"textureY":112},"displayType":"minor","outcomes":[{"material":{"items":["minecraft:leather"]},"requiredTools":{"cut":"minecraft:gold"},"moduleKey":"toolbelt/belt","moduleVariant":"belt/leather"}]}

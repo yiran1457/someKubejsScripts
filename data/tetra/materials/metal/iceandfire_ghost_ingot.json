@@ -1,0 +1,27 @@
+{
+    "key" : "iceandfire_ghost_ingot",
+    "category" : "metal",
+    "primary" : 3.8,
+    "secondary" : 1.4,
+    "tertiary" : 1.9,
+    "durability" : 88,
+    "integrityCost" : 4,
+    "integrityGain" : 2,
+    "magicCapacity" : 810,
+    "toolLevel" : "minecraft:iron",
+    "toolEfficiency" : 3,
+    "tints" : {
+      "glyph" : "90EE90",
+      "texture" : "90EE90"
+    },
+    "effects": {
+        "art_of_forging:esoteric_edge": 30
+    },
+    "textures" : [ "metal", "default" ],
+    "material" : {
+      "items" : [ "iceandfire:ghost_ingot" ]
+    },
+    "requiredTools" : {
+      "hammer_dig" : "minecraft:stone"
+    }
+  }

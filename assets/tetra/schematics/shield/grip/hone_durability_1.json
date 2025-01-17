@@ -1,0 +1,1 @@
+{"replace":true,"slots":["shield/grip"],"materialSlotCount":0,"hone":true,"rarity":"hone","displayType":"major","glyph":{"textureY":240},"requirement":{"type":"tetra:not","requirement":{"type":"tetra:improvement","improvement":"grip_hone/durability"}},"outcomes":[{"requiredTools":{"hammer_dig":"minecraft:gold"},"improvements":{"grip_hone/durability":1}}]}

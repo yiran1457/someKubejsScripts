@@ -1,0 +1,27 @@
+{
+  "key": "alex_guster_eye",
+  "category": "socket",
+  "primary": 0,
+  "secondary": 0,
+  "tertiary": 0,
+  "durability": 158,
+  "integrityCost": 2,
+  "integrityGain": 0,
+  "magicCapacity": 185,
+  "toolLevel": 0,
+  "toolEfficiency": 4,
+  "attributes":{
+    "generic.attack_knockback":3.0},
+  "tints": {
+    "glyph": "fc9b1c",
+    "texture": "fc9b1c"
+  },
+  "textures": [
+    "default"
+  ],
+  "effects" : {
+    "howling": [2,3]
+  },
+  "experienceCost": 20,
+  "material":{"items":["alexsmobs:guster_eye"]}
+}

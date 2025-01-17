@@ -1,0 +1,1 @@
+{"replace":true,"slots":["toolbelt/belt"],"materialSlotCount":1,"requirement":{"type":"tetra:module","variant":"belt/rope"},"glyph":{"textureY":112},"displayType":"minor","outcomes":[{"materials":["tetra:fabric/wool/"],"moduleKey":"toolbelt/belt_wool","moduleVariant":"belt_wool/"}]}

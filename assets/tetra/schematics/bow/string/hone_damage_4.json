@@ -1,0 +1,1 @@
+{"replace":true,"slots":["bow/string"],"materialSlotCount":0,"hone":true,"rarity":"hone","displayType":"major","glyph":{"textureX":32,"textureY":240},"requirement":{"type":"tetra:improvement","improvement":"bowstring_hone/damage","level":3},"outcomes":[{"improvements":{"bowstring_hone/damage":4}}]}

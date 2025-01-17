@@ -1,0 +1,1 @@
+{"replace":true,"slots":["sword/guard"],"materialSlotCount":1,"rarity":"temporary","displayType":"minor","glyph":{"textureX":152,"textureY":112},"requirement":{"type":"tetra:perk","perk":"support","level":{"min":1}},"outcomes":[{"materials":["tetra:metal/","tetra:wood/","tetra:gem/"],"moduleKey":"sword/decorative_guard","moduleVariant":"decorative_guard/"}]}
