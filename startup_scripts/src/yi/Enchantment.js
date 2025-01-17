@@ -9,7 +9,9 @@ StartupEvents.registry('enchantment',event=>{
     //设置翻译键,写lang
     .displayName(Text.translatable('enchantment.yi.infinity'))
 
-    event.create('yi:evil_life_drain').category('weapon').rarity('very_rare')/*
+    event.create('yi:evil_life_drain').rarity('rare').canEnchant(()=>true)
+    
+    /*
     .postAttack((attacker,entity,level)=>{
         if(attacker.health>1){
             attacker.attack(attacker.damageSources().magic(),1)

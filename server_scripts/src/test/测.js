@@ -2,11 +2,11 @@
 
 
 
-let { ItemStack2Json , FluidStack2Json } = Recipes.function
-let sequenced_assembly$序列 = function(ingredient,transitionalItem){
+let { ItemStack2Json, FluidStack2Json } = Recipes.function
+let sequenced_assembly$序列 = function (ingredient, transitionalItem) {
     this.json = {
-        ingredient:ItemStack2Json(ingredient),
-        transitionalItem:ItemStack2Json(transitionalItem||ingredient),
+        ingredient: ItemStack2Json(ingredient),
+        transitionalItem: ItemStack2Json(transitionalItem || ingredient),
         sequence: [],
         type: "create:sequenced_assembly",
         loops: 3,
@@ -43,11 +43,11 @@ sequenced_assembly$序列.prototype = {
         })
         return this
     },
-    pressing$辊压(){
+    pressing$辊压() {
         this.json.sequence.push({
-                "type": "create:pressing",
-                "ingredients": [this.json.transitionalItem],
-                "results": [this.json.transitionalItem]
+            "type": "create:pressing",
+            "ingredients": [this.json.transitionalItem],
+            "results": [this.json.transitionalItem]
         })
         return this
     },
@@ -56,11 +56,11 @@ sequenced_assembly$序列.prototype = {
             {
                 "type": "create:filling",
                 "ingredients": [this.json.transitionalItem,
-                    FluidStack2Json(fluid)
+                FluidStack2Json(fluid)
                 ],
                 "results": [this.json.transitionalItem]
             })
-            return this
+        return this
     },
     getjson() { return this.json },
     setLoops(time) {
@@ -82,15 +82,15 @@ sequenced_assembly$序列.prototype = {
 
 
 ServerEvents.recipes(e => {
-    let x = new sequenced_assembly$序列(Item.of("touhou_little_maid:power_point",2,{display:{Lore:['{"color":"white","text":"what can i say ?"}']}}).weakNBT())
-    .addResults(Item.of("yi:technological_core",11,{display:{Lore:['{"color":"white","text":"what can i say ?"}']}}))
-    .energising$充能(5000)
-    .deploying$安装(Item.of('acacia_door'),true)
-    .filling$注液('64x minecraft:lava')
+    let x = new sequenced_assembly$序列(Item.of("touhou_little_maid:power_point", 2, { display: { Lore: ['{"color":"white","text":"what can i say ?"}'] } }).weakNBT())
+        .addResults(Item.of("yi:technological_core", 11, { display: { Lore: ['{"color":"white","text":"what can i say ?"}'] } }))
+        .energising$充能(5000)
+        .deploying$安装(Item.of('acacia_door'), true)
+        .filling$注液('64x minecraft:lava')
     x.overBuilder(e)
 
 
-    
+
 })
 
 
@@ -99,7 +99,7 @@ ServerEvents.recipes(e => {
 
 
 
-let tellSomeThings = (info)=>{
+let tellSomeThings = (info) => {
     console.log(info)
     Client.player.tell(info)
 }
@@ -124,7 +124,7 @@ ItemEvents.firstRightClicked('yi:structure_wand', e => {
             return new $ChestMenu('minecraft:generic_9x3', 123654789, inventory, container, 3)
         }, `${item.displayName.getString()}`))
         player.swing()
-    }else{
+    } else {
         /**@type {$ListTag_} */
         let ItemList = item.nbt.get('Item')
         /**@type {string} */
@@ -142,37 +142,24 @@ PlayerEvents.chestClosed(e => {
     })
 })
 
-ServerEvents.entityLootTables(e=>{
-    let simpleAddLootItem2Entity = function(entityid,test){
-        e.modifyEntity(entityid,l=>{
-            l.addPool(p=>{
+ServerEvents.entityLootTables(e => {
+    let simpleAddLootItem2Entity = function (entityid, test) {
+        e.modifyEntity(entityid, l => {
+            l.addPool(p => {
                 p.addItem
             })
         })
     }
-    e.modifyEntity('pig',loot=>{
-        loot.addPool(pool=>{
-            pool.addItem('diamond',10,{"min":2, "max":3})['killedByPlayer']().randomChanceWithLooting(0.01,0.1).survivesExplosion()
-            pool.addItem('diamond',100,1).randomChanceWithLooting(0.01,10).survivesExplosion()
+    e.modifyEntity('pig', loot => {
+        loot.addPool(pool => {
+            pool.addItem('diamond', 10, { "min": 2, "max": 3 })['killedByPlayer']().randomChanceWithLooting(0.01, 0.1).survivesExplosion()
+            pool.addItem('diamond', 100, 1).randomChanceWithLooting(0.01, 10).survivesExplosion()
         })
     })
 })
 
-ServerEvents.tags('item',e=>{
-    e.add('infinity:food',['moonstone:apple','apple'])
-})
-
-
-
-BlockEvents.rightClicked(e=>{
-    if(e.hand=='off_hand')return
-    /**@type {$ServerLevel_} */
-    let level = e.level
-    let pos = e.player.block.pos
-    if(simpleCheckPosInStructure(level,pos,'minecraft:desert_pyramid')){
-        e.player.tell('ok')
-    }
-    
+ServerEvents.tags('item', e => {
+    e.add('infinity:food', ['moonstone:apple', 'apple'])
 })
 
 
