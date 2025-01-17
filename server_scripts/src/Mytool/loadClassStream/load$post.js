@@ -12,6 +12,8 @@ let {
     $LivingHurtEvent,
     $ModularItem,
     $PatchouliAPI,
-    $TickEvent$PlayerTickEvent
+    $TickEvent$PlayerTickEvent,
+    $Registries,
+    $ResourceKey
 } = myRequire
 

@@ -16,6 +16,8 @@ let { $ModularItem } = require("packages/se/mickelus/tetra/items/modular/$Modula
 let { $PatchouliAPI } = require("packages/vazkii/patchouli/api/$PatchouliAPI")
 let { $LivingDamageEvent } = require("packages/net/minecraftforge/event/entity/living/$LivingDamageEvent")
 let { $TickEvent$PlayerTickEvent } = require("packages/net/minecraftforge/event/$TickEvent$PlayerTickEvent")
+let { $Registries } = require("packages/net/minecraft/core/registries/$Registries")
+let { $ResourceKey } = require("packages/net/minecraft/resources/$ResourceKey")
 
 myRequire.$SimpleContainer = $SimpleContainer
 myRequire.$SimpleMenuProvider = $SimpleMenuProvider
@@ -30,3 +32,5 @@ myRequire.$ModularItem = $ModularItem
 myRequire.$PatchouliAPI = $PatchouliAPI
 myRequire.$LivingDamageEvent = $LivingDamageEvent
 myRequire.$TickEvent$PlayerTickEvent = $TickEvent$PlayerTickEvent
+myRequire.$Registries = $Registries
+myRequire.$ResourceKey = $ResourceKey

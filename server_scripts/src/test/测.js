@@ -1,5 +1,3 @@
-const { $AttributeModifier } = require("packages/net/minecraft/world/entity/ai/attributes/$AttributeModifier")
-
 
 
 
@@ -163,4 +161,18 @@ ServerEvents.entityLootTables(e=>{
 ServerEvents.tags('item',e=>{
     e.add('infinity:food',['moonstone:apple','apple'])
 })
+
+
+
+BlockEvents.rightClicked(e=>{
+    if(e.hand=='off_hand')return
+    /**@type {$ServerLevel_} */
+    let level = e.level
+    let pos = e.player.block.pos
+    if(simpleCheckPosInStructure(level,pos,'minecraft:desert_pyramid')){
+        e.player.tell('ok')
+    }
+    
+})
+
 
