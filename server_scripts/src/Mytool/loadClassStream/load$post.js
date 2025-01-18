@@ -14,6 +14,7 @@ let {
     $PatchouliAPI,
     $TickEvent$PlayerTickEvent,
     $Registries,
-    $ResourceKey
+    $ResourceKey,
+    $Enchantment
 } = myRequire
 
