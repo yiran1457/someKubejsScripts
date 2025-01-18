@@ -17,6 +17,7 @@ function simpleCheckPosInStructure(level, pos, structureName) {
 
 function getRandomInt(Min, Max) { return Math.floor(Math.random() * (Max - Min + 1) + Min) }
 
+
 /**
  * 检测物品是否能附魔上某附魔
  * @param {$ItemStack_} itemstack 
@@ -29,8 +30,7 @@ function checkItemCanEnchant(itemstack, enchantname) {
 let AllEnchantIDList = {}
 try {
     for (let i = 0; true; i++) {
-        enchantlist$[$Enchantment.byId(i).id] = i
+        AllEnchantIDList[$Enchantment.byId(i).id] = i
     }
 } catch (err) {
 }
-

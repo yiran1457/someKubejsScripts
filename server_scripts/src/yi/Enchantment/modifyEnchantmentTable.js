@@ -1,14 +1,17 @@
 //===========================================
 //对附魔台进行修改
 //增加附魔点数的设定以获取额外附魔
+//暂时无法限制附魔台获取的最高等级低于附魔台原能获取的最高等级(如果彻底代理了附魔台应该就可以)
 //===========================================
+
 
 
 //结构对附魔经验的影响，乘算
 let structureEffect = { 'minecraft:desert_pyramid': 1.5, 'cataclysm:burning_arena': 2.5 }
 //额外附魔的列表，name必填，其余为可选
 let specialEnchantment = [
-    { structure: 'cataclysm:burning_arena', requiredlevel: 50, name: 'yi:evil_life_drain', Maxlevel: 10, chance: 0.05 }
+    { structure: 'cataclysm:burning_arena', requiredlevel: 50, name: 'yi:evil_life_drain', Maxlevel: 1, chance: 0.05 },
+    { structure: 'cataclysm:burning_arena', requiredlevel: 30, name: 'minecraft:sweeping', Maxlevel: 8, chance: 0.36 }
 ]
 
 /**
@@ -20,7 +23,7 @@ MoreJSEvents.enchantmentTableChanged((event) => {
     slotList.forEach(slot => {//遍历三个槽位，对三个附魔选项进行修改
         requiredLevelFix(slot, level, position)
         //使用附魔点数计算额外附魔数量与等级
-        let enchantmentPoints = 100 + slot.requiredLevel * 1 - slot.enchantmentCount * 10
+        let enchantmentPoints = 100 + slot.requiredLevel * 1 - slot.enchantmentCount * 30
         addEnchantment(item, slot, level, position, enchantmentPoints)
         slot.updateClue()
     })
@@ -49,16 +52,18 @@ let addEnchantment = (item, slot, level, position, enchantmentPoints) => {
         for (; enchantmentPoints > 0; enchantmentPoints -= 20) {
             //获取本次试图的附魔
             let thisEnchantment = allowEnchantmentList[getRandomInt(0, allowEnchantmentList.length - 1)]
-            if (thisEnchantment.chance == undefined || Math.random() < thisEnchantment.chance)//获取每次的附魔成功概率并判断
-                if (!slot.hasEnchantment(thisEnchantment.name, thisEnchantment.Maxlevel)) {//检测是否有最大等级的该附魔
-                    let thislevel = 0
+            //获取附魔成功概率并判断，如不需要则跳过
+            if (thisEnchantment.chance == undefined || Math.random() < thisEnchantment.chance)
+                //检测是否有最大等级的该附魔,如果达到最大等级则跳过添加附魔
+                if (!slot.hasEnchantment(thisEnchantment.name, thisEnchantment.Maxlevel)) {
+                    let thislevel = 1
                     slot.removeEnchantments((Enchant, Enchantlevel) => {
                         if (Enchant.id == thisEnchantment.name) {
-                            thislevel = Enchantlevel//获取当前附魔等级
+                            thislevel += Enchantlevel//获取当前附魔等级并+1
                             return true
                         } else return false
                     })
-                    slot.addEnchantment(thisEnchantment.name, thislevel + 1)//添加附魔
+                    slot.addEnchantment(thisEnchantment.name, thislevel)//添加附魔
                 }
         }
 }
