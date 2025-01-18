@@ -14,3 +14,4 @@ let simpleCheckPosInStructure = (level, pos, structureName) =>
     !!level.structureManager().getStructureWithPieceAt(pos, structureKey(structureName)).getStructure()
 
 
+let getRandomInt = (Min,Max) => Math.floor(Math.random()*(Max-Min+1)+Min)
