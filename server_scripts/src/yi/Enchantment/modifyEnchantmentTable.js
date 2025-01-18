@@ -10,8 +10,9 @@
 let structureEffect = { 'minecraft:desert_pyramid': 1.5, 'cataclysm:burning_arena': 2.5 }
 //额外附魔的列表，name必填，其余为可选
 let specialEnchantment = [
-    { structure: 'cataclysm:burning_arena', requiredlevel: 50, name: 'yi:evil_life_drain', Maxlevel: 1, chance: 0.05 },
-    { structure: 'cataclysm:burning_arena', requiredlevel: 30, name: 'minecraft:sweeping', Maxlevel: 8, chance: 0.36 }
+    { name: 'yi:evil_life_drain', requiredlevel: 50, Maxlevel: 1, chance: 0.05, structure: 'cataclysm:burning_arena' },
+    { name: 'minecraft:sweeping', requiredlevel: 30, Maxlevel: 8, chance: 0.36, structure: 'cataclysm:burning_arena' },
+    { name: 'minecraft:looting', requiredlevel: 45, Maxlevel: 6, chance: 0.75 }
 ]
 
 /**
@@ -47,6 +48,8 @@ let addEnchantment = (item, slot, level, position, enchantmentPoints) => {
                     //通过判断加入允许附魔的列表
                     allowEnchantmentList.push(value)
     })
+    //附魔列表对附魔点数修正
+    enchantmentPoints *= (0.5 + allowEnchantmentList.length * 0.5)
     if (allowEnchantmentList.length !== 0)//若允许附魔列表不为空则不进行额外附魔
         //每次消耗20附魔点数试图附魔
         for (; enchantmentPoints > 0; enchantmentPoints -= 20) {
