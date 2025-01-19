@@ -7,6 +7,10 @@ ItemEvents.foodEaten(e => {
 })
 
 MoreJSEvents.enchantmentTableTooltip(e=>{
-    e.lines.add(`§c§l[Yi]§r§c§l无限附魔§r`)
-    
+    e.lines[0]=Text.of(`you can't see`).font('minecraft:alt')
+})
+
+ItemEvents.firstRightClicked(e => {
+    let {player}=e
+    player.tell(`§a${player.forgePersistentData.test}`)
 })

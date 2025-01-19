@@ -17,3 +17,16 @@ $Rarity.create('holy',"gold")
 
 
 
+CapabilityAttachEvents.entity(e=>{
+    e.register('test',c=>{
+        c.serialize(()=>{
+            let tag = c.newTag()
+            tag.put('test',c.dataTag)
+            return tag
+        })
+
+        c.deserialize((tag)=>{
+            c.setData(tag.getCompound('test'))
+        })
+    })
+})

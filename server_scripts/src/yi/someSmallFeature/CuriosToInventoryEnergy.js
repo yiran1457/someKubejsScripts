@@ -33,6 +33,11 @@ const CuriosToInventoryEnergy = (e)=> {
                 })
             }
         })
+        curios.findCurio('mirror',0).ifPresent(/**@param {$SlotResult_} stack */stack => {
+            let mirror = stack.stack()
+            mirror.getOrCreateTag().Angel = e.player.persistentData.getDouble('Angel')
+            mirror.nbt.Devil = e.player.persistentData.getDouble('Devil')
+        })
     })
 }
 

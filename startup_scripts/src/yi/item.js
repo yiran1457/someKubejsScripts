@@ -33,11 +33,20 @@ StartupEvents.registry('item', event => {
     event.create('yi:chest_wand').unstackable().rarity('yi')
 
 
-    event.create('test:curios')
+    event.create('yi:sacred_and_demonic_mirror')
+        .unstackable()
         .attachCapability(CuriosCapabilityBuilder.CURIOS.itemStack()
-        
-            .modifyAttribute('curios:ring', 'ring', 5, 'multiply_base')
-        ).tag('curios:ring')
+            .curioTick((i, c) => {
+                let player = c.entity()
+                if (player.isPlayer()) {
+                    //if(player.age%20!=0)return
+                    //i.getOrCreateTag().Angel = player.persistentData.getDouble('Angel')
+                    //i.nbt.Devil = player.persistentData.getDouble('Devil')
+                }
+            })
+        )
+        .tag('curios:mirror')
+
 
 
     event.create('yi:random_potion')
@@ -96,6 +105,8 @@ StartupEvents.registry('item', event => {
             }
             return itemstack
         })
+
+
 
 
 
