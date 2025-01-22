@@ -9,5 +9,6 @@ let {
     $PickaxeItem, 
     $Rarity, 
     $ItemEffect,
-    $RangedAttribute
+    $RangedAttribute,
+    $EntityAttributeModificationEvent
 } = myRequire
