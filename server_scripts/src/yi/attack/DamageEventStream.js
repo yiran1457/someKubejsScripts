@@ -26,18 +26,16 @@ NativeEvents.onEvent($LivingHurtEvent,/**@param {$LivingHurtEvent_} e */e => {
 
 //于护甲减伤后执行
 NativeEvents.onEvent($LivingDamageEvent,/**@param {$LivingHurtEvent_} e */e => {
-    let {source , entity:target, amount:damageCount} = e
-    let {player,immediate} = source
+    let { source, entity: target, amount: damageCount } = e
+    let { player, immediate } = source
+    let DamageType = e.source.getType()
     if (player) {//附加伤害均为无实际来源，直接来源为玩家
         let heldItem = player.mainHandItem
         let Item = heldItem.item
-        let DamageType = e.source.getType()
-        if (Item instanceof $ModularItem) {
-            ArsManaStream(player, heldItem, Item, target, damageCount, DamageType)
-            ForgeEnergyStream(player, heldItem, Item, target, damageCount, DamageType)
-            EnchantmentStream(player, heldItem, target, damageCount, DamageType)
-        }
-    }else if(immediate.isPlayer()){//一般用于附加伤害的类型判断
+        EnchantmentStream$Attack(player, heldItem, target, damageCount, DamageType)
+        ArsManaStream$Attack(player, heldItem, Item, target, damageCount, DamageType)
+        ForgeEnergyStream$Attack(player, heldItem, Item, target, damageCount, DamageType)
+    } else if (immediate.isPlayer()) {//一般用于附加伤害的类型判断
         let DamageType = source.getType()
         immediate.tell(DamageType)
     }
@@ -55,7 +53,7 @@ let basicDamageFix$addition = (player, heldItem, DamageType) => {
 /**@type {basicDamageFix} */
 let basicDamageFix$multiply_base = (player, heldItem, DamageType) => {
     let Fix = { Amount: 1 }
-    EnchantmentFix$multiply_base(player,heldItem, DamageType, Fix)
+    EnchantmentFix$multiply_base(player, heldItem, DamageType, Fix)
     return Fix.Amount
 }
 /**@type {basicDamageFix} */

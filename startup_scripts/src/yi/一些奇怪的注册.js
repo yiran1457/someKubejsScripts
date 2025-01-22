@@ -16,54 +16,23 @@ const { $EntityAttributeModificationEvent } = require("packages/net/minecraftfor
 
 
 StartupEvents.registry('attribute', e => {
-    e.createCustom('yi:holy_damage', () =>
-        new $RangedAttribute(
-            'attribute.name.holy_damage',
-            0.0,
-            0.0,
-            16384.0
-        )
-    )
-    e.createCustom('yi:evil_damage', () =>
-        new $RangedAttribute(
-            'attribute.name.evil_damage',
-            0.0,
-            0.0,
-            16384.0
-        )
-    )
+    let simpleCreateCustomAttribute =
+        (attrname, basic, min, max) => {
+            e.createCustom('yi:' + attrname, () =>
+                new $RangedAttribute('attribute.name.' + attrname, basic, min, max)
+            )
+        }
+    simpleCreateCustomAttribute('holy_damage', 0, 0, 16384)
+    simpleCreateCustomAttribute('evil_damage', 0, 0, 16384)
+    simpleCreateCustomAttribute('holy_protection', 0, -10, 1)
+    simpleCreateCustomAttribute('evil_protection', 0, -10, 1)
 })
 ForgeModEvents.onEvent($EntityAttributeModificationEvent,/**@param {$EntityAttributeModificationEvent_} e */e => {
-    if (!e.has('player', 'yi:holy_damage')) e.add('player', 'yi:holy_damage')
-    if (!e.has('player', 'yi:evil_damage')) e.add('player', 'yi:evil_damage')
-
-})
-
-
-
-CapabilityAttachEvents.entity(e => {
-    e.register('test', c => {
-        c.serialize(() => {
-            let tag = c.newTag()
-            tag.put('test', c.dataTag)
-            return tag
-        })
-
-        c.deserialize((tag) => {
-            c.setData(tag.getCompound('test'))
-        })
-    })
-})
-CapabilityAttachEvents.itemStack(e => {
-    e.register('it', c => {
-        c.serialize(() => {
-            let tag = c.newTag()
-            tag.put('it', c.dataTag)
-            return tag
-        })
-
-        c.deserialize((tag) => {
-            c.setData(tag.getCompound('it'))
-        })
-    })
+    let simpleCheckPlayerHasAttribute = (attr) => {
+        if (!e.has('player', attr)) e.add('player', attr)
+    }
+    simpleCheckPlayerHasAttribute('yi:holy_damage')
+    simpleCheckPlayerHasAttribute('yi:evil_damage')
+    simpleCheckPlayerHasAttribute('yi:holy_protection')
+    simpleCheckPlayerHasAttribute('yi:evil_protection')
 })

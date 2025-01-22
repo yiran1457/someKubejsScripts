@@ -23,5 +23,4 @@ const ManaChange$pre = (player, heldItem, Item, target, damageCount, mana, ManaC
 
 /**@type {ManaChange} */
 const ManaChange$post = (player, heldItem, Item, target, damageCount, mana, ManaChange) =>{
-    
 }
