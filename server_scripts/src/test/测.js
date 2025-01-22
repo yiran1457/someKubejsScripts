@@ -122,3 +122,7 @@ BlockEvents.leftClicked('create:lectern_controller',e => {
     if (e.block.entityData.getCompound('Controller').getString('id') != 'create:linked_controller')
         e.block.entityData = {}
 })
+ItemEvents.firstLeftClicked(e=>{
+    e.player.tell(`圣洁倍率${simpleGetHolyEffect(e.player)}`)
+    e.player.tell(`邪恶倍率${simpleGetEvilEffect(e.player)}`)
+})

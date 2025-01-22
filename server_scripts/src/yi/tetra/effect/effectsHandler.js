@@ -1,4 +1,5 @@
 //priority:1002
+// ignored : true
 /**
  * @typedef {(player:$Player_, heldItem:$ItemStack_, Item:$ModularItem_, target:$LivingEntity_, damageCount:number ,energy:$IEnergyStorage_)=>void} ForgeEnergyHandler
  * @typedef {(player:$Player_, heldItem:$ItemStack_, Item:$ModularItem_, target:$LivingEntity_, damageCount:number, mana:$IManaCap_, ManaChange:{mana:{count:0}})=>void} ArsManaHandler

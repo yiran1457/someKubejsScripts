@@ -19,6 +19,8 @@ let { $TickEvent$PlayerTickEvent } = require("packages/net/minecraftforge/event/
 let { $Registries } = require("packages/net/minecraft/core/registries/$Registries")
 let { $ResourceKey } = require("packages/net/minecraft/resources/$ResourceKey")
 let { $Enchantment } = require("packages/net/minecraft/world/item/enchantment/$Enchantment")
+let { $Player } = require("packages/net/minecraft/world/entity/player/$Player")
+let { $LivingAttackEvent } = require("packages/net/minecraftforge/event/entity/living/$LivingAttackEvent")
 
 myRequire.$SimpleContainer = $SimpleContainer
 myRequire.$SimpleMenuProvider = $SimpleMenuProvider
@@ -36,3 +38,5 @@ myRequire.$TickEvent$PlayerTickEvent = $TickEvent$PlayerTickEvent
 myRequire.$Registries = $Registries
 myRequire.$ResourceKey = $ResourceKey
 myRequire.$Enchantment = $Enchantment
+myRequire.$Player = $Player
+myRequire.$LivingAttackEvent = $LivingAttackEvent

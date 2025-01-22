@@ -15,6 +15,8 @@ let {
     $TickEvent$PlayerTickEvent,
     $Registries,
     $ResourceKey,
-    $Enchantment
+    $Enchantment,
+    $Player,
+    $LivingAttackEvent
 } = myRequire
 

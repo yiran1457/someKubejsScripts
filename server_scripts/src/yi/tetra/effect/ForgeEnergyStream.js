@@ -1,5 +1,5 @@
 //priority:1001
-
+// ignored : true
 
 /**@type {(player:$Player_, heldItem:$ItemStack_, Item:$ModularItem_, target:$LivingEntity_, damageCount:number, DamageType:string)=>void} */
 const ForgeEnergyStream = (player, heldItem, Item, target, damageCount, DamageType) => {
