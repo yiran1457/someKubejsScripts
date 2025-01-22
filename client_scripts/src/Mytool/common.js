@@ -13,7 +13,9 @@ function formatNumber(num) {
     num = num.toFixed(num % 1 !== 0 ? 1 : 0);
     return `${num}${unitIndex >= 0 ? units[unitIndex] : ''}`;
 }
-function rgbaColor(R, G, B, A) {return new $Color(R / 255, G / 255, B / 255, A / 100).getRGB() }
+function rgbaColor(R, G, B, A) {
+    return new $Color(R / 255, G / 255, B / 255, A / 100).getRGB() 
+}
 
 
 

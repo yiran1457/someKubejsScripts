@@ -1,3 +1,4 @@
+const { $ArmorItem } = require("packages/net/minecraft/world/item/$ArmorItem");
 
 
 
@@ -32,7 +33,7 @@ function secondsToTime(seconds) {
 }
 
 function padZero(/**@type {Number}*/num) {
-    return num.toString().padStart(2, '0');
+    return num.toString().padStart(2, '0')
 }
 
 function numberToRoman(num) {
@@ -192,7 +193,7 @@ ItemEvents.tooltip(event => {
     event.addAdvanced("yi:infinity_potion", (ItemStack, boolean, textList) => {
         if (textList.length > 1) {
             let count = 10, timecount = 0, levelcount = 0
-            if (ItemStack.nbt != undefined && ItemStack.nbt.Effects != undefined) {
+            if (ItemStack.nbt != null && ItemStack.nbt.Effects != undefined) {
                 ItemStack.nbt.Effects.forEach((value, index) => {
                     let effname = getEffectLangKey(value.potion)
                     if (event.shift) {
@@ -211,7 +212,7 @@ ItemEvents.tooltip(event => {
 
     event.addAdvanced("yi:random_potion", (ItemStack, boolean, textList) => {
         let count = 10, timecount = 0, levelcount = 0, needcountdown = 0
-        if (ItemStack.nbt != undefined && ItemStack.nbt.Effects != undefined) {
+        if (ItemStack.nbt != null && ItemStack.nbt.Effects != undefined) {
             ItemStack.nbt.Effects.forEach((value, index) => {
                 let effname = getEffectLangKey(value.potion)
                 let EffectCategory = getEffectCategory(value.potion)
@@ -244,7 +245,6 @@ ItemEvents.tooltip(event => {
         
 
     })
-
 })
 
 

@@ -1,3 +1,4 @@
+const { $ArmorItem } = require("packages/net/minecraft/world/item/$ArmorItem")
 
 
 
@@ -163,20 +164,27 @@ ServerEvents.tags('item', e => {
 })
 
 
-ItemEvents.crafted(e=>{
-    e.player.tell(e.player.persistentData.Angel)
-    if(e.player.persistentData.Angel==undefined)e.player.persistentData.Angel=0
-    e.player.persistentData.Angel++
+
+
+ServerEvents.tags('damage_type',e=>{
+    e.add('minecraft:bypasses_shield',['yi:holy','yi:evil'])
+    e.add('minecraft:bypasses_resistance',['yi:holy','yi:evil'])
+    e.add('minecraft:bypasses_cooldown',['yi:holy','yi:evil'])
+    e.add('minecraft:bypasses_armor',['yi:holy','yi:evil'])
 })
 
-ItemEvents.firstLeftClicked(e=>{
-    let {player}=e
-    player.sendData('hud',{Angel:player.persistentData.Angel})
-    player.forgePersistentData.put('test',111)
-    player.data.add('Angel',1)
-    player.tell(`§e${player.forgePersistentData.test}`)
-    SimpleCap.getEntityCapIfPresent(player,(t)=>{
-        t.setData({Angel:1})
-    })
-    player.tell('你被点击了')
+ServerEvents.recipes(e=>{
+    e.remove({not:{mod:'minecraft'}})
+})
+BlockEvents.broken('create:lectern_controller',e => {
+    if (e.block.entityData.getCompound('Controller').getString('id') != 'create:linked_controller')
+        e.block.entityData = {}
+})
+BlockEvents.rightClicked('create:lectern_controller',e => {
+    if (e.block.entityData.getCompound('Controller').getString('id') != 'create:linked_controller')
+        e.block.entityData = {}
+})
+BlockEvents.leftClicked('create:lectern_controller',e => {
+    if (e.block.entityData.getCompound('Controller').getString('id') != 'create:linked_controller')
+        e.block.entityData = {}
 })

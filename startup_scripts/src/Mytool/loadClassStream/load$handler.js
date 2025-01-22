@@ -12,6 +12,7 @@ let { $DeferredRegister } = require("packages/net/minecraftforge/registries/$Def
 let { $ForgeRegistries } = require("packages/net/minecraftforge/registries/$ForgeRegistries")
 let { $Rarity } = require("packages/net/minecraft/world/item/$Rarity")
 let { $ItemEffect } = require("packages/se/mickelus/tetra/effect/$ItemEffect")
+let { $RangedAttribute } = require("packages/net/minecraft/world/entity/ai/attributes/$RangedAttribute")
 
 myRequire.$BasicItemJS$Builder = $BasicItemJS$Builder
 myRequire.$EnchantmentCategory = $EnchantmentCategory
@@ -22,3 +23,4 @@ myRequire.$DeferredRegister = $DeferredRegister
 myRequire.$ForgeRegistries = $ForgeRegistries
 myRequire.$Rarity = $Rarity
 myRequire.$ItemEffect = $ItemEffect
+myRequire.$RangedAttribute = $RangedAttribute

@@ -37,12 +37,6 @@ StartupEvents.registry('item', event => {
         .unstackable()
         .attachCapability(CuriosCapabilityBuilder.CURIOS.itemStack()
             .curioTick((i, c) => {
-                let player = c.entity()
-                if (player.isPlayer()) {
-                    //if(player.age%20!=0)return
-                    //i.getOrCreateTag().Angel = player.persistentData.getDouble('Angel')
-                    //i.nbt.Devil = player.persistentData.getDouble('Devil')
-                }
             })
         )
         .tag('curios:mirror')
@@ -117,6 +111,7 @@ StartupEvents.registry('item', event => {
 //物品修改
 ItemEvents.modification(e => {
     e.modify('minecraft:carrot', i => {
+
         let builder = new $BasicItemJS$Builder('')
         builder.finishUsing(
             (stack, Level,/**@type {Internal.Player}*/LivingEntity) => {

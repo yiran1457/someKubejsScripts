@@ -1,3 +1,4 @@
+//以前的史，待改
 
 ServerEvents.tags('block', event => {
     event.add('minecraft:wither_immune', 'integrateddynamics:cable')

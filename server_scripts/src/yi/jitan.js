@@ -1,3 +1,5 @@
+//以前的史，待改
+
 function CheckBlock(e,chblock,CheckList){    let check=true
     for(let i=0;i<CheckList.length;i++){   if(e.block.offset(CheckList[i][0],CheckList[i][1],CheckList[i][2]) != chblock) check = false   }   return check    }
 function getItemInBlock(e,CheckList){

@@ -1,6 +1,40 @@
 //priority:1000
 
 
+/**@type {{}} */
+let AngelEnchantment = {'yi:fallen_angel_blessing':2}
+/**@type {{}} */
+let DevilEnchantment = {'yi:evil_life_drain':1,'yi:fallen_angel_blessing':2}
+PlayerEvents.tick(e => {
+    let { player } = e
+    if(player.age%20!==0)return//每秒进行一次计算
+    let {inventory} = player
+    let checkItemList = [
+        inventory.getArmor(0),inventory.getArmor(1),
+        inventory.getArmor(2),inventory.getArmor(3),
+        player.mainHandItem,player.offHandItem
+    ]
+    let Angel=0,Devil=0
+    checkItemList.forEach(item => {
+        item.enchantments.forEach((enchantmentid,level) => {
+            if(AngelEnchantment[enchantmentid]!=undefined)
+                Angel+=level*AngelEnchantment[enchantmentid]
+            if(DevilEnchantment[enchantmentid]!=undefined)
+                Devil+=level*DevilEnchantment[enchantmentid]
+        })
+    })
+    player.persistentData.putDouble('Angel',Angel)
+    player.persistentData.putDouble('Devil',Devil)
+    player.sendData('attr',{
+        'yi:holy_damage':e.player.getAttributeValue('yi:holy_damage'),
+        'yi:evil_damage':e.player.getAttributeValue('yi:evil_damage')
+    })
+    player.sendData('hud', {
+        Angel: player.persistentData.getDouble('Angel'),
+        Devil: player.persistentData.getDouble('Devil')
+    })
+})
+
 
 NativeEvents.onEvent($TickEvent$PlayerTickEvent,/**@param {$TickEvent$PlayerTickEvent_} e */e => {
     switch (e.phase) {
@@ -12,64 +46,3 @@ NativeEvents.onEvent($TickEvent$PlayerTickEvent,/**@param {$TickEvent$PlayerTick
             break;
     }
 })
-
-//========================================
-// 伤害相关
-//========================================
-
-
-
-//于护甲等减伤前执行
-NativeEvents.onEvent($LivingHurtEvent,/**@param {$LivingHurtEvent_} e */e => {
-    let player = e.source.player
-    if (player) {
-        let heldItem = player.mainHandItem
-        let DamageType = e.source.getType()
-        //加法乘区
-        let addition = basicDamageFix$addition(player, heldItem, DamageType)
-        //乘法乘区
-        let multiply_base = basicDamageFix$multiply_base(player, heldItem, DamageType)
-        //独立乘法乘区
-        let multiply_total = basicDamageFix$multiply_total(player, heldItem, DamageType)
-        e.amount = (e.amount + addition) * multiply_base * multiply_total
-    }
-})
-
-
-//于护甲减伤后执行
-NativeEvents.onEvent($LivingDamageEvent,/**@param {$LivingHurtEvent_} e */e => {
-    let player = e.source.player
-    if (player) {
-        let heldItem = player.mainHandItem
-        let Item = heldItem.item
-        let DamageType = e.source.getType()
-        if (Item instanceof $ModularItem) {
-            let target = e.entity
-            let damageCount = e.amount
-            e.amount*=10086
-            ArsManaStream(player, heldItem, Item, target, damageCount, DamageType)
-            ForgeEnergyStream(player, heldItem, Item, target, damageCount, DamageType)
-        }
-    }
-})
-
-
-
-
-/**@typedef {(player:$Player_,heldItem:$ItemStack_,DamageType:string)=>number} basicDamageFix */
-/**@type {basicDamageFix} */
-let basicDamageFix$addition = (player, heldItem, DamageType) => {
-    let Fix = {Amount:0}
-    return Fix.Amount
-}
-/**@type {basicDamageFix} */
-let basicDamageFix$multiply_base = (player, heldItem, DamageType) => {
-    let Fix = {Amount:1}
-    EnchantmentFix$multiply_base(heldItem, DamageType, Fix)
-    return Fix.Amount
-}
-/**@type {basicDamageFix} */
-let basicDamageFix$multiply_total = (player, heldItem, DamageType) => {
-    let Fix = {Amount:1}
-    return Fix.Amount
-}

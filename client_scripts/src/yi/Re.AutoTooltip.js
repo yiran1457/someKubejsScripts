@@ -5,7 +5,7 @@ let tooltip_path
 //设置lang的命名空间
 let namespace = 'autotooltip'
 //设置默认lang类型
-let deflang = 'en_us'
+let deflang = 'zh_cn'
 //设置默认lang路径
 let deflang_path = 'kubejs/assets/' + namespace + '/lang/' + deflang + '.json'
 

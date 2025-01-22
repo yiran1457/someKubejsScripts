@@ -10,7 +10,3 @@ MoreJSEvents.enchantmentTableTooltip(e=>{
     e.lines[0]=Text.of(`you can't see`).font('minecraft:alt')
 })
 
-ItemEvents.firstRightClicked(e => {
-    let {player}=e
-    player.tell(`§a${player.forgePersistentData.test}`)
-})
