@@ -174,3 +174,16 @@ function simpleGetEvilEffect(player) {
     if (Effect < 0) Effect = 0
     return Effect
 }
+/**
+ * 计算对混沌的影响
+ * @param {$Player_} player 
+ * @returns {number}
+ */
+function simpleGetChaosEffect(player) {
+    let Effect = 1
+    let Angel = player.persistentData.getDouble('Angel')
+    let Devil = player.persistentData.getDouble('Devil')
+    let abs = Math.abs(Angel - Devil)
+    Effect *= 1 + (Angel + Devil - 2 * abs) / 20
+    return Effect
+}

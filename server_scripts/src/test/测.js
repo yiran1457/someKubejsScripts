@@ -85,8 +85,8 @@ sequenced_assembly$序列.prototype = {
 ServerEvents.recipes(e => {
     let x = new sequenced_assembly$序列(Item.of("touhou_little_maid:power_point", 2, { display: { Lore: ['{"color":"white","text":"what can i say ?"}'] } }).weakNBT())
         .addResults(Item.of("yi:technological_core", 11, { display: { Lore: ['{"color":"white","text":"what can i say ?"}'] } }))
-        .energising$充能(5000)
-        .deploying$安装(Item.of('acacia_door'), true)
+        //.energising$充能(5000)
+        .deploying$安装(Item.of('minecraft:diamond_chestplate', '{Damage:0}').weakNBT(), true)
         .filling$注液('64x minecraft:lava')
     x.overBuilder(e)
 
@@ -125,4 +125,5 @@ BlockEvents.leftClicked('create:lectern_controller',e => {
 ItemEvents.firstLeftClicked(e=>{
     e.player.tell(`圣洁倍率${simpleGetHolyEffect(e.player)}`)
     e.player.tell(`邪恶倍率${simpleGetEvilEffect(e.player)}`)
+    e.item.nbt
 })
