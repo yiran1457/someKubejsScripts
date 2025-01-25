@@ -17,9 +17,10 @@ let someEffectWithTick = {}
 //=======================================
 /**
  * 获取结构的ResourceKey
- * @param {string} structureName  
+ * @param {Special.WorldgenStructure} structureName  
  */
 function structureKey(structureName) { return $ResourceKey.create($Registries.STRUCTURE, structureName) }
+structureKey('minecraftde')
 /**
  * 获取伤害类型的ResourceKey
  * @param {Special.DamageType} damageTypeName 
@@ -44,8 +45,8 @@ function checkItemCanEnchant(itemstack, enchantname) {
  * @returns  {boolean}
  */
 function checkEffectWithTick(player, specialName) {
-    if (someEffectWithTick[`${player.name}${specialName}`] != player.age) {
-        someEffectWithTick[`${player.name}${specialName}`] = player.age
+    if (someEffectWithTick[`${player.username}${specialName}`] != player.age) {
+        someEffectWithTick[`${player.username}${specialName}`] = player.age
         return true
     } else {
         return false
@@ -55,7 +56,7 @@ function checkEffectWithTick(player, specialName) {
  * 检测坐标是否在结构内，如果在则返回true
  * @param {$ServerLevel_} level 
  * @param {$BlockPos$MutableBlockPos_} pos 
- * @param {string} structureName 
+ * @param {Special.WorldgenStructure} structureName 
  * @returns {boolean}
  */
 function simpleCheckPosInStructure(level, pos, structureName) {

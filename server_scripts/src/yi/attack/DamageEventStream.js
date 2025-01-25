@@ -8,15 +8,32 @@
 
 //攻击事件，与受伤前执行
 NativeEvents.onEvent($LivingAttackEvent,/**@param {$LivingAttackEvent_} e */e => {
-    let player = e.source.player
-    if (player) {
-        let target = e.entity
-        let evil_damage = player.getAttributeValue('yi:evil_damage')
-        let holy_damage = player.getAttributeValue('yi:holy_damage')
+    /**@type {$LivingEntity_} */
+    let attacker = e.source.actual
+    /**@type {$LivingEntity_} */
+    let target = e.entity
+    if (attacker && target) {
+        let evil_damage = 0,holy_damage = 0
+        if (attacker.attributes.hasAttribute('yi:evil_damage'))
+            evil_damage = attacker.getAttributeValue('yi:evil_damage')
+        if (attacker.attributes.hasAttribute('yi:holy_damage'))
+            holy_damage = attacker.getAttributeValue('yi:holy_damage')
+        if (target.attributes.hasAttribute('yi:evil_protection'))
+            evil_damage *= (1 - target.getAttributeValue('yi:evil_protection'))
+        if (target.attributes.hasAttribute('yi:holy_protection'))
+            holy_damage *= (1 - target.getAttributeValue('yi:holy_protection'))
+        if (attacker.isPlayer()) {
+            evil_damage *= simpleGetEvilEffect(attacker)
+            holy_damage *= simpleGetHolyEffect(attacker)
+        }
+        target.getArmorSlots().forEach(armor => {
+            
+            attacker.tell(armor)
+        })
         if (evil_damage > 0)
-            simpleAttackEntity(player, target, 'yi:evil', evil_damage * simpleGetEvilEffect(player))
+            simpleAttackEntity(attacker, target, 'yi:evil', evil_damage)
         if (holy_damage > 0)
-            simpleAttackEntity(player, target, 'yi:holy', holy_damage * simpleGetHolyEffect(player))
+            simpleAttackEntity(attacker, target, 'yi:holy', holy_damage)
     }
 })
 
@@ -44,18 +61,24 @@ NativeEvents.onEvent($LivingDamageEvent,/**@param {$LivingHurtEvent_} e */e => {
     let DamageType = e.source.getType()
     if (player) {//附加伤害均为无实际来源，直接来源为玩家
         let heldItem = player.mainHandItem
-        //EnchantmentStream$Attack(player, heldItem, target, damageCount, DamageType)
+        EnchantmentStream$Attack(player, heldItem, target, damageCount, DamageType)
         if (heldItem.item instanceof $ModularItem) {
             TetraStream$Attack(player, heldItem, target, damageCount, DamageType)
         }
     } else if (immediate instanceof $Player) {//一般用于附加伤害的类型判断
+        let heldItem = immediate.mainHandItem
         let DamageType = source.getType()
+        if (heldItem.item instanceof $ModularItem) {
+            TetraStream$Addition(immediate, heldItem, target, damageCount, DamageType)
+        }
     }
 })
 
 
 
-
+//=============================
+// 伤害修正计算
+//=============================
 /**@typedef {(player:$Player_,heldItem:$ItemStack_,DamageType:string)=>number} basicDamageFix */
 /**@type {basicDamageFix} */
 let basicDamageFix$addition = (player, heldItem, DamageType) => {

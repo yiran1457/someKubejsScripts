@@ -28,3 +28,4 @@ StartupEvents.registry('enchantment',event=>{
     event.create('yi:avada_kedavra').rarity('very_rare').canEnchant((i)=>i.hasTag('minecraft:swords'))
 
 })
+

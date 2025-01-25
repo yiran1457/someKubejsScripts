@@ -1,0 +1,28 @@
+{
+    "list": [
+        {
+            "id": "yi:evil_damage",
+            "intrinsic": 0.0,
+            "order": 10000.0,
+            "usePercent": true
+        },
+        {
+            "id": "yi:holy_damage",
+            "intrinsic": 0.0,
+            "order": 10000.0,
+            "usePercent": true
+        },
+        {
+            "id": "yi:evil_protection",
+            "intrinsic": 0.0,
+            "order": 10000.0,
+            "usePercent": false
+        },
+        {
+            "id": "yi:holy_protection",
+            "intrinsic": 0.0,
+            "order": 10000.0,
+            "usePercent": true
+        }
+    ]
+}

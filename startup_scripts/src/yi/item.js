@@ -111,7 +111,6 @@ StartupEvents.registry('item', event => {
 //物品修改
 ItemEvents.modification(e => {
     e.modify('minecraft:carrot', i => {
-
         let builder = new $BasicItemJS$Builder('')
         builder.finishUsing(
             (stack, Level,/**@type {Internal.Player}*/LivingEntity) => {

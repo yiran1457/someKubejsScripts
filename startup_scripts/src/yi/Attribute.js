@@ -13,11 +13,14 @@ StartupEvents.registry('attribute', e => {
     simpleCreateCustomAttribute('evil_protection', 0, -10, 1)
 })
 ForgeModEvents.onEvent($EntityAttributeModificationEvent,/**@param {$EntityAttributeModificationEvent_} e */e => {
-    let simpleCheckPlayerHasAttribute = (attr) => {
-        if (!e.has('player', attr)) e.add('player', attr)
+    /**@type {(attr:$Attribute_,entitylist:$EntityType_<T>[])} */
+    let addAttribute = (attr, entitylist) => {
+        entitylist.forEach(entity => {
+            if (!e.has(entity, attr)) e.add(entity, attr)
+        })
     }
-    simpleCheckPlayerHasAttribute('yi:holy_damage')
-    simpleCheckPlayerHasAttribute('yi:evil_damage')
-    simpleCheckPlayerHasAttribute('yi:holy_protection')
-    simpleCheckPlayerHasAttribute('yi:evil_protection')
+    addAttribute('yi:evil_damage', ['player',"cataclysm:ignis"])
+    addAttribute('yi:holy_damage', ['player'])
+    addAttribute('yi:evil_protection', ['player',"cataclysm:ignis"])
+    addAttribute('yi:holy_protection', ['player',"cataclysm:ignis"])
 })

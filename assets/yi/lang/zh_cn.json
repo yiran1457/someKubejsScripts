@@ -37,6 +37,8 @@
 	"death.attack.holy": "%1$s沐浴在圣光之下",
 	"attribute.name.holy_damage": "圣洁伤害",
 	"attribute.name.evil_damage": "邪恶伤害",
+	"attribute.name.holy_protection": "圣洁抗性",
+	"attribute.name.evil_protection": "邪恶抗性",
 	"death.attack.evil": "%1$s被邪恶吞噬了",
 	"tetra.material.random": "海晶",
 	"tetra.material.random.prefix": "海晶",
