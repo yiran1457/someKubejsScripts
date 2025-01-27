@@ -1,5 +1,10 @@
 //priority:1
 
+const { $CollarTagItem } = require("packages/com/github/alexthe668/domesticationinnovation/server/item/$CollarTagItem")
+const { $HoeItem } = require("packages/net/minecraft/world/item/$HoeItem")
+const { $Item } = require("packages/net/minecraft/world/item/$Item")
+const { $SwordItem } = require("packages/net/minecraft/world/item/$SwordItem")
+
 
 
 //物品注册
@@ -110,7 +115,7 @@ StartupEvents.registry('item', event => {
 
 //物品修改
 ItemEvents.modification(e => {
-    e.modify('minecraft:carrot', i => {
+    e.modify('minecraft:carrot', /**@param {$Item} i*/i => {
         let builder = new $BasicItemJS$Builder('')
         builder.finishUsing(
             (stack, Level,/**@type {Internal.Player}*/LivingEntity) => {

@@ -17,6 +17,11 @@ let {
     $ResourceKey,
     $Enchantment,
     $Player,
-    $LivingAttackEvent
+    $LivingAttackEvent,
+    $AttributeModifier,
+    $CurioAttributeModifierEvent,
+    $EquipmentSlot,
+    $ItemAttributeModifierEvent,
+    $UUID
 } = myRequire
 

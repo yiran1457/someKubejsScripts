@@ -5,8 +5,10 @@ ItemEvents.foodEaten(e => {
         e.item.count++
 }
 })
+/*
 
 MoreJSEvents.enchantmentTableTooltip(e=>{
     e.lines[0]=Text.of(`you can't see`).font('minecraft:alt')
 })
 
+*/

@@ -1,4 +1,4 @@
-const { $ArmorItem } = require("packages/net/minecraft/world/item/$ArmorItem");
+
 
 
 
@@ -71,6 +71,11 @@ let getEffectCategory = (id) => $MobEffect.byId($MobEffect.getId(id)).category
 
 let createtool$type = ['yi:tool_axe','yi:tool_pickaxe','yi:tool_shovel','yi:tool_sword','yi:tool_hoe']
 ItemEvents.tooltip(event=>{
+    event.addAdvanced('ringsofascension:ring_health',(I,A,L)=>{
+        let first = L.getFirst()
+        L.removeFirst()
+        L.addFirst(Component.of('§4Evil  ').append(first))
+    })
     event.addAdvanced('mna:wand_clone',(arg0,arg1,arg3)=>{
         if (arg0.nbt != undefined){
             let fe = ToChangeInt(arg0.nbt.getInt('energy'))

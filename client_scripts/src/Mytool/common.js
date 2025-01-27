@@ -14,9 +14,13 @@ function formatNumber(num) {
     return `${num}${unitIndex >= 0 ? units[unitIndex] : ''}`;
 }
 function rgbaColor(R, G, B, A) {
-    return new $Color(R / 255, G / 255, B / 255, A / 100).getRGB() 
+    return new $Color(checkNumberRange(R / 255), checkNumberRange(G / 255), checkNumberRange(B / 255), checkNumberRange(A / 100)).getRGB()
 }
-
+function checkNumberRange(number, min, max) {
+    min = min || 0
+    max = max || 1
+    return number > min ? number < max ? number: max : min
+}
 
 
 
@@ -31,7 +35,7 @@ function rgbaColor(R, G, B, A) {
  * } keyname 
  * @returns 
  */
-const keydown = (keyname)=>Client.isKeyDown($GLFW[`GLFW_KEY_${keyname}`]
+const keydown = (keyname) => Client.isKeyDown($GLFW[`GLFW_KEY_${keyname}`]
 
 )
 /*

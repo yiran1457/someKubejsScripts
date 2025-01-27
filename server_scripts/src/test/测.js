@@ -1,10 +1,3 @@
-const { $UUID } = require("packages/java/util/$UUID")
-const { $EquipmentSlot } = require("packages/net/minecraft/world/entity/$EquipmentSlot")
-const { $AttributeModifier } = require("packages/net/minecraft/world/entity/ai/attributes/$AttributeModifier")
-const { $ArmorItem } = require("packages/net/minecraft/world/item/$ArmorItem")
-const { $ShieldItem } = require("packages/net/minecraft/world/item/$ShieldItem")
-const { $ItemAttributeModifierEvent } = require("packages/net/minecraftforge/event/$ItemAttributeModifierEvent")
-
 
 
 
@@ -95,7 +88,7 @@ ServerEvents.recipes(e => {
         .filling$注液('64x minecraft:lava')
     x.overBuilder(e)
 
-    
+
 })
 
 
@@ -110,45 +103,23 @@ let tellSomeThings = (info) => {
 
 
 
-BlockEvents.broken('create:lectern_controller',e => {
+BlockEvents.broken('create:lectern_controller', e => {
     if (e.block.entityData.getCompound('Controller').getString('id') != 'create:linked_controller')
         e.block.entityData = {}
 })
-BlockEvents.rightClicked('create:lectern_controller',e => {
+BlockEvents.rightClicked('create:lectern_controller', e => {
     if (e.block.entityData.getCompound('Controller').getString('id') != 'create:linked_controller')
         e.block.entityData = {}
 })
-BlockEvents.leftClicked('create:lectern_controller',e => {
+BlockEvents.leftClicked('create:lectern_controller', e => {
     if (e.block.entityData.getCompound('Controller').getString('id') != 'create:linked_controller')
         e.block.entityData = {}
 })
-ItemEvents.firstLeftClicked(e=>{
-    Client.tell(e.player.username)
-    e.player.tell(`圣洁倍率${simpleGetHolyEffect(e.player)}`)
-    e.player.tell(`邪恶倍率${simpleGetEvilEffect(e.player)}`)
-    e.player.tell(e.player.getAttributeValue('yi:evil_protection'))
+ItemEvents.firstLeftClicked(e => {
+    e.player.randomTeleport(1,1,1,false)
 })
 
 
-NativeEvents.onEvent($ItemAttributeModifierEvent,/**@param {$ItemAttributeModifierEvent_} event */event => {/*
-    let itemStack = event.getItemStack()
-    if (!itemStack.isEnchanted()) return
-    if (itemStack.getItem() instanceof $ArmorItem ) {
-        if (!(event.getSlotType() == itemStack.getItem().getEquipmentSlot())) {
-            return;
-        }
-    } else if (event.getSlotType() != $EquipmentSlot.MAINHAND && event.getSlotType() != $EquipmentSlot.OFFHAND) {
-        return;
-    } else if (itemStack.getItem() instanceof $ShieldItem && !(event.getSlotType() == $EquipmentSlot.OFFHAND))
-        return;
-
-    if (itemStack.getEnchantmentLevel('minecraft:protection') > 0)
-        event.addModifier("generic.attack_speed",
-            new $AttributeModifier(
-                $UUID.randomUUID(),
-                'test',
-                0.4 * itemStack.getEnchantmentLevel('minecraft:protection'),
-                'addition'
-            ))*/
-
+MoreJSEvents.enchantmentTableIsEnchantable(e=>{
+    e.player.tell(e.get(0).requiredLevel=5)
 })

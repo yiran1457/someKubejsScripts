@@ -6,7 +6,7 @@
 let structureEffect = { 'minecraft:desert_pyramid': 1.5, 'cataclysm:burning_arena': 2.5}
 
 //玩家阶段对附魔经验的影响
-let stageEffect = { Tier1: 1.1 }
+let stageEffect = { Tier1: 1.1 ,level:255}
 
 //额外附魔的列表，name必填，其余为可选
 /**@type {{name:Special.Enchantment, requiredlevel?:number, Maxlevel?:number, chance?:number, structure?:Special.WorldgenStructure, weight?:number}[]} */

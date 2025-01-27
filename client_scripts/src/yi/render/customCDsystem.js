@@ -1,12 +1,13 @@
 
 
 //client
+
 let chectCDTag = (itemStack) => itemStack?.nbt?.cooldown?.common !== undefined 
 RenderJSEvents.RegisterItemDecorations(e => {
     
     e.registerForAllItem('CDsystem', c => {
-            c.guiGraphics.pose().pushPose()
-            c.guiGraphics.pose().translate(c.xOffset , c.yOffset , 0)
+            c.pushPose()
+            c.translate(c.xOffset , c.yOffset)
             if (chectCDTag(c.itemStack)) {
                 let {CDstart, CDrequire} = c.itemStack.nbt.cooldown.common
                 let CDtime = (Client.level.time - CDstart )/CDrequire
@@ -24,6 +25,6 @@ RenderJSEvents.RegisterItemDecorations(e => {
                     rgbaColor(255,255,255, 18)//RGBA
                 ) 
             }
-            c.guiGraphics.pose().popPose()
+            c.popPose()
     })
 })

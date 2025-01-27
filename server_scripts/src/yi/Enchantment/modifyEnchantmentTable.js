@@ -15,7 +15,7 @@ MoreJSEvents.enchantmentTableChanged((event) => {
         //使用附魔点数计算额外附魔数量与等级
         let enchantmentPoints = 100 + slot.requiredLevel * 1 - slot.enchantmentCount * 30
         addEnchantment(item, slot, level, position, enchantmentPoints)
-        slot.updateClue()
+        //slot.updateClue()
     })
 })
 

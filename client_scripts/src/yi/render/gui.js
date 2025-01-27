@@ -1,5 +1,4 @@
 
-
 NativeEvents.onEvent($ContainerScreenEvent$Render$Foreground,/**@param {$ContainerScreenEvent$Render$Foreground_} e */e => {
     if (Client.player.containerMenu.containerId == 123654789) {
         //绘制一像素宽的一个边框
@@ -10,17 +9,6 @@ NativeEvents.onEvent($ContainerScreenEvent$Render$Foreground,/**@param {$Contain
         )
 
         //绘制图片
-        RenderJSRenderSystem.defaultBlendFuncJS()
-        RenderJSRenderSystem.setShaderColorJS(0.5,0.5,0.5,0.1)
-        e.guiGraphics.blit(
-            ResourceLocation('yi:textures/gui/chest_render.png'), //资源路径
-            60,40, //渲染左上角的坐标
-            0,//深度/优先级
-            0, 0, //材质裁剪开始位置
-            175, 167, //显示大小
-            256, 256//设置材质大小
-        )
-        RenderJSRenderSystem.setShaderColorJS(1,1,1,1)
         e.guiGraphics.blit(
             ResourceLocation('yi:textures/gui/chest_render.png'), //资源路径
             0, 0, //渲染左上角的坐标

@@ -40,6 +40,7 @@
 	"attribute.name.holy_protection": "圣洁抗性",
 	"attribute.name.evil_protection": "邪恶抗性",
 	"death.attack.evil": "%1$s被邪恶吞噬了",
+	"quality.evil.name": "邪恶",
 	"tetra.material.random": "海晶",
 	"tetra.material.random.prefix": "海晶",
 	"tetra.material.index": "幻想乡",
