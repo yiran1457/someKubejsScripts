@@ -116,10 +116,5 @@ BlockEvents.leftClicked('create:lectern_controller', e => {
         e.block.entityData = {}
 })
 ItemEvents.firstLeftClicked(e => {
-    e.player.randomTeleport(1,1,1,false)
 })
 
-
-MoreJSEvents.enchantmentTableIsEnchantable(e=>{
-    e.player.tell(e.get(0).requiredLevel=5)
-})

@@ -1,7 +1,4 @@
 
-
-
-
 /**@type {Record<string, {attribute:Special.Attribute,value:number,operation:$AttributeModifier$Operation_,slot:'armor'|'curios'|'hand'|'mainhand'|'offhand'}[]>} */
 let customQuality = {
     'evil': [

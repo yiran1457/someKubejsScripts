@@ -5,7 +5,6 @@ let {
     $ChestMenu,
     $SimpleContainer,
     $SimpleMenuProvider,
-    $DamageTypes,
     $ItemEffect,
     $ForgeCapabilities,
     $CuriosApi,
@@ -22,6 +21,7 @@ let {
     $CurioAttributeModifierEvent,
     $EquipmentSlot,
     $ItemAttributeModifierEvent,
-    $UUID
+    $UUID,
+    $LivingEquipmentChangeEvent
 } = myRequire
 
