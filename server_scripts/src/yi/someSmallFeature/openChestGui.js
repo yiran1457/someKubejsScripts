@@ -1,3 +1,7 @@
+
+const { $JsonArray } = require("packages/com/google/gson/$JsonArray")
+const { $ArrayList } = require("packages/java/util/$ArrayList")
+const { $ListTag } = require("packages/net/minecraft/nbt/$ListTag")
 const { $ItemStack } = require("packages/net/minecraft/world/item/$ItemStack")
 
 ItemEvents.firstRightClicked('yi:structure_wand', e => {
@@ -76,76 +80,45 @@ PlayerEvents.chestClosed(e => {
         }
     })
 })
-global.alchemyRecipes = [
+/**@type {{input:$ItemStack_[],output:$ItemStack_}[]} */
+let alchemyRecipes = [
+    {input:['diamond','air','air','minecraft:blaze_powder','blackstone'],output:Item.of('ancient_debris')}
 ]
-global.alchemyRecipesHandle = i => {
+global.alchemyRecipesHandle = item => {
     let containerItem = []//初始化容器内物品
     let itemNbt = item.nbt.Item//获取物品存储Item
-    for (let i = 0; i < 9; i++) {//添加物品，让数组元素为27
+    for (let i = 0; i < 9; i++) {//添加物品，让数组元素为9
         if (itemNbt[i] == undefined) {
             containerItem.push('air')
         } else {
-            if (itemNbt[i].tag == undefined)
-                containerItem.push(Item.of(itemNbt[i].getString('id')))
-            else
-                containerItem.push(Item.of(itemNbt[i].getString('id'), itemNbt[i].getCompound('tag')))
+            containerItem.push(itemNbt[i].getString('id'))
         }
     }
-}
-let weakNBT = (target, origin) => {
-    for (let key in origin) {
-        if (typeof origin[key] != typeof target[key]) return false
-        switch (true) {
-            case origin[key] instanceof Array:
-                if (!target[key] instanceof Array)
-                    return false
-                /**@type {Array} */
-                let originlist = origin[key].sort()
-                /**@type {Array} */
-                let targetlist = target[key].sort()
-                if (targetlist.length == 0 && originlist.length != 0) return false
-                for (let originindex = 0; originindex < originlist.length; originindex++) {
-                    let originvalue = originlist[originindex]
-                    for (let targetindex = 0; targetindex < targetlist.length; targetindex++) {
-                        let targetvalue = targetlist[targetindex]
-                        let pass = false
-                        switch (true) {
-                            case originvalue instanceof Object:
-                                if (weakNBT(targetvalue, originvalue))
-                                    pass = true
-                                break
-                            case originvalue == targetvalue:
-                                pass = true
-                        }
-                        if (targetlist.length - targetindex < originlist.length - originindex) {
-                            return false
-                        }
-                        if (pass) {
-                            targetlist.slice(0, targetindex + 1)
-                            break
-                        }
-                        if(targetlist.length - targetindex==1)
-                            return false
-                    }
-                }
+    for (let i = 0; i < alchemyRecipes.length; i++) {
+        let {input,output} = alchemyRecipes[i]
+        let pass = true
+        let iii = containerItem
+        for (let j = 0; j < input.length; j++) {
+            if(input[j].indexOf(':')==-1)
+                input[j] = 'minecraft:' + input[j]
+            if(iii.indexOf(input[j]) == -1){
+                pass = false
                 break
-            case origin[key] instanceof Object:
-                if (!weakNBT(target[key], origin[key]))
-                    return false
-                break
-            default:
-                if (origin[key] != target[key]) return false
+            }
+            iii.splice(iii.indexOf(input[j]),1)
+        }
+        if (pass) {
+            return output
         }
     }
-    return true
+    return item
 }
-//true
-Client.tell(weakNBT({a: 1, b: 2},{b: 2}))
-//true
-Client.tell(weakNBT({x:[1,2,3,4,1,2]},{x:[1,1,2,2]}))
-//true
-Client.tell(weakNBT({x:[{a:1,b:2},{a:1}]},{x:[{b:2}]}))
-//false
-Client.tell(weakNBT({x:[{a:1,b:2},{a:1}]},{x:[{b:2,a:5}]}))
-//false
-Client.tell(weakNBT({x:[1,54,1],u:'test'},{u:'yyy'}))
+/**@type {$Class_<T>} */
+let thistest = Java.loadClass('net.minecraft.Util').__javaObject__
+//let method = thistest.getDeclaredMethod('classLoader').setAccessible(true)
+let file = thistest.classLoader.loadClass('java.io.File')
+Client.tell(file.getName())
+Java.loadClass('net.minecraft.Util$OS')
+Java.loadClass('net.minecraft.util.HttpUtil')
+
+const { $ClassFilter } = require("packages/dev/latvian/mods/kubejs/util/$ClassFilter")

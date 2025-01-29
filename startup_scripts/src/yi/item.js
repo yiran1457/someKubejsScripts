@@ -45,7 +45,8 @@ StartupEvents.registry('item', event => {
     .useAnimation('brush')
     .useDuration((i)=>{return 3*20})
     .finishUsing((i,l,p)=>{
-        return i
+        if(i.nbt?.Item == undefined)return i
+        return global.alchemyRecipesHandle(i)
     })
 
     event.create('yi:sacred_and_demonic_mirror')
