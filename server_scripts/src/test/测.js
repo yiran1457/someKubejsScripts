@@ -1,4 +1,4 @@
-
+const { $ItemStackedOnOtherEvent } = require("packages/net/minecraftforge/event/$ItemStackedOnOtherEvent")
 
 
 let { ItemStack2Json, FluidStack2Json } = Recipes.function
@@ -116,5 +116,27 @@ BlockEvents.leftClicked('create:lectern_controller', e => {
         e.block.entityData = {}
 })
 ItemEvents.firstLeftClicked(e => {
+    e.player.tell(`当前等级经验进度：${Math.round(e.player.experienceProgress*e.player.xpNeededForNextLevel)}/${e.player.xpNeededForNextLevel}`)
+    e.player.tell(`当前经验点数：${getXpPoint(e.player)}`)
 })
 
+/**
+ * 根据玩家等级和升级进度计算经验点数
+ * @param {$Player_} player 
+ */
+let getXpPoint = player => {
+    let { xpLevel: level, xpNeededForNextLevel: need, experienceProgress: pro } = player
+    let levelXp = Math.round(need * pro)
+    if (level <= 16) {
+        return levelXp + (6 + level) * level 
+    } else if (level <= 31) {
+        return levelXp + (79 + 5 * (level - 16)) * (level - 16) / 2 + 352
+    } else {
+        return levelXp + (233 + 9 * (level - 31)) * (level - 31) / 2 + 1507
+    }
+}
+NativeEvents.onEvent($ItemStackedOnOtherEvent,/**@param {$ItemStackedOnOtherEvent_} e*/e=>{
+})
+ItemEvents.rightClicked(e=>{
+    e.player.swing()
+})

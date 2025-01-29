@@ -3,8 +3,8 @@
 let customQuality = {
     'evil': [
         { attribute: "forge:block_reach", value: 1, operation: "addition", slot: 'curios' },
-        {attribute:'generic.max_health',value:-0.05,operation:"multiply_total",slot:"mainhand"},
-        {attribute:'yi:evil_damage',value:0.05,operation:"multiply_base",slot:"mainhand"}
+        { attribute: 'generic.max_health', value: -0.05, operation: "multiply_total", slot: "mainhand" },
+        { attribute: 'yi:evil_damage', value: 0.05, operation: "multiply_base", slot: "mainhand" }
     ],
     'holy': [
         { attribute: "generic.armor", value: 2, operation: "multiply_base", slot: 'armor' },
@@ -24,19 +24,18 @@ NativeEvents.onEvent($ItemAttributeModifierEvent,/**@param {$ItemAttributeModifi
                         if (itemStack.item instanceof $ArmorItem)
                             if (itemStack.item.getEquipmentSlot() != event.getSlotType())
                                 return
-                        break
                     case 'mainhand':
                         if (event.getSlotType() != $EquipmentSlot.MAINHAND)
                             return
-                        break
-                    case "hand": if (event.getSlotType() != $EquipmentSlot.MAINHAND && event.getSlotType() != $EquipmentSlot.OFFHAND)
-                        return
-                        break
+                    case "hand":
+                        if (event.getSlotType() != $EquipmentSlot.MAINHAND && event.getSlotType() != $EquipmentSlot.OFFHAND)
+                            return
                     case "offhand":
                         if (event.getSlotType() != $EquipmentSlot.OFFHAND)
                             return
-                        break
-                    default: return
+                    case "curios":
+                        return
+                    default:
                 }
                 event.addModifier(quality.attribute,
                     new $AttributeModifier(

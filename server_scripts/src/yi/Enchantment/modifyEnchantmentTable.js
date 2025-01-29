@@ -33,6 +33,18 @@ let addEnchantment = (item, slot, level, position, enchantmentPoints) => {
     let allowEnchantmentList = []
     let allowEnchantmentCount = 0
     specialEnchantment.forEach(value => {
+        switch (false) {
+            //判断物品是否能附魔
+            case checkItemCanEnchant(item, value.name):break
+            //对等级需求进行判断，如不需要则跳过
+            case value.requiredlevel == undefined || slot.requiredLevel >= value.requiredlevel:break
+            //对结构需求进行判断，如不需要则跳过
+            case value.structure == undefined || simpleCheckPosInStructure(level, position, value.structure):break
+            default:
+                allowEnchantmentCount++
+                for (let i = 0; i < (value.weight || 1); i++)//简单完成权重计算
+                    allowEnchantmentList.push(value)
+        }/*
         //判断物品是否能附魔
         if (checkItemCanEnchant(item, value.name))
             //对等级需求进行判断，如不需要则跳过
@@ -42,7 +54,7 @@ let addEnchantment = (item, slot, level, position, enchantmentPoints) => {
                     allowEnchantmentCount++
                     for (let i = 0; i < (value.weight || 1); i++)//简单完成权重计算
                         allowEnchantmentList.push(value)
-                }
+                }*/
     })
     //附魔列表对附魔点数修正
     enchantmentPoints *= (1 + allowEnchantmentCount * 0.5)

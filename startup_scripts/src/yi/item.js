@@ -37,6 +37,16 @@ StartupEvents.registry('item', event => {
     event.create('yi:structure_wand').unstackable().rarity('yi')
     event.create('yi:chest_wand').unstackable().rarity('yi')
 
+    event.create('yi:custom_alchemy')
+    .unstackable()
+    .use((l,p,h)=>{
+        return h == 'main_hand' && !p.isCrouching()
+    })
+    .useAnimation('brush')
+    .useDuration((i)=>{return 3*20})
+    .finishUsing((i,l,p)=>{
+        return i
+    })
 
     event.create('yi:sacred_and_demonic_mirror')
         .unstackable()
