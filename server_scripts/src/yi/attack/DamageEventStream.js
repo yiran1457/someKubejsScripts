@@ -1,6 +1,7 @@
 //priority:1000
 
 
+
 /**@typedef {(player:$Player_, heldItem:$ItemStack_, target:$LivingEntity_, damageCount:number, DamageType:string)} defattack */
 //========================================
 // 伤害相关
@@ -28,7 +29,6 @@ NativeEvents.onEvent($LivingAttackEvent,/**@param {$LivingAttackEvent_} e */e =>
         }
         target.getArmorSlots().forEach(armor => {
             
-            attacker.tell(armor)
         })
         if (evil_damage > 0)
             simpleAttackEntity(attacker, target, 'yi:evil', evil_damage)

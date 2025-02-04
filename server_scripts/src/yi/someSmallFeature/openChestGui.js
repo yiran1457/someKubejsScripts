@@ -1,7 +1,8 @@
 
-const { $JsonArray } = require("packages/com/google/gson/$JsonArray")
-const { $ArrayList } = require("packages/java/util/$ArrayList")
-const { $ListTag } = require("packages/net/minecraft/nbt/$ListTag")
+
+const { $Stats } = require("packages/net/minecraft/stats/$Stats")
+const { $StatsCounter } = require("packages/net/minecraft/stats/$StatsCounter")
+const { $LecternMenu } = require("packages/net/minecraft/world/inventory/$LecternMenu")
 const { $ItemStack } = require("packages/net/minecraft/world/item/$ItemStack")
 
 ItemEvents.firstRightClicked('yi:structure_wand', e => {
@@ -62,6 +63,7 @@ ItemEvents.firstRightClicked('yi:custom_alchemy', e => {
             }
             item.nbt.Item = []//清空物品存储Item
             let container = new $SimpleContainer(containerItem).asContainer()//构造容器
+            return new $LecternMenu(101)
             return new $ChestMenu('minecraft:generic_3x3', 127, inventory, container, 1)
         }, `${item.displayName.getString()}`))
         player.swing()
@@ -113,12 +115,18 @@ global.alchemyRecipesHandle = item => {
     }
     return item
 }
-/**@type {$Class_<T>} */
-let thistest = Java.loadClass('net.minecraft.Util').__javaObject__
-//let method = thistest.getDeclaredMethod('classLoader').setAccessible(true)
-let file = thistest.classLoader.loadClass('java.io.File')
-Client.tell(file.getName())
-Java.loadClass('net.minecraft.Util$OS')
-Java.loadClass('net.minecraft.util.HttpUtil')
 
-const { $ClassFilter } = require("packages/dev/latvian/mods/kubejs/util/$ClassFilter")
+PlayerEvents.chat(e => {
+    let info = e.component.getString()
+    /**@type {$ServerPlayer_} */
+    let player = e.player
+    player.statsCounter.setValue(e.player,$Stats.TIME_SINCE_REST,0)
+    if (!info.startsWith('open')) return
+    let id = Number(info.substring(4))
+    e.player.openMenu(
+        new $SimpleMenuProvider(
+            () => new $LecternMenu(id),
+            ''
+        )
+    )
+})

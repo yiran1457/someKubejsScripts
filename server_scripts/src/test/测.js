@@ -1,4 +1,10 @@
+const { $Boat } = require("packages/net/minecraft/world/entity/vehicle/$Boat")
+const { $ChestBoat } = require("packages/net/minecraft/world/entity/vehicle/$ChestBoat")
+const { $AABB } = require("packages/net/minecraft/world/phys/$AABB")
+const { $AnvilUpdateEvent } = require("packages/net/minecraftforge/event/$AnvilUpdateEvent")
+const { $GrindstoneEvent$OnPlaceItem } = require("packages/net/minecraftforge/event/$GrindstoneEvent$OnPlaceItem")
 const { $ItemStackedOnOtherEvent } = require("packages/net/minecraftforge/event/$ItemStackedOnOtherEvent")
+const { $ItemTossEvent } = require("packages/net/minecraftforge/event/entity/item/$ItemTossEvent")
 
 
 let { ItemStack2Json, FluidStack2Json } = Recipes.function
@@ -103,21 +109,7 @@ let tellSomeThings = (info) => {
 
 
 
-BlockEvents.broken('create:lectern_controller', e => {
-    if (e.block.entityData.getCompound('Controller').getString('id') != 'create:linked_controller')
-        e.block.entityData = {}
-})
-BlockEvents.rightClicked('create:lectern_controller', e => {
-    if (e.block.entityData.getCompound('Controller').getString('id') != 'create:linked_controller')
-        e.block.entityData = {}
-})
-BlockEvents.leftClicked('create:lectern_controller', e => {
-    if (e.block.entityData.getCompound('Controller').getString('id') != 'create:linked_controller')
-        e.block.entityData = {}
-})
 ItemEvents.firstLeftClicked(e => {
-    e.player.tell(`当前等级经验进度：${Math.round(e.player.experienceProgress*e.player.xpNeededForNextLevel)}/${e.player.xpNeededForNextLevel}`)
-    e.player.tell(`当前经验点数：${getXpPoint(e.player)}`)
 })
 
 /**
@@ -135,8 +127,28 @@ let getXpPoint = player => {
         return levelXp + (233 + 9 * (level - 31)) * (level - 31) / 2 + 1507
     }
 }
-NativeEvents.onEvent($ItemStackedOnOtherEvent,/**@param {$ItemStackedOnOtherEvent_} e*/e=>{
+NativeEvents.onEvent($ItemStackedOnOtherEvent,/**@param {$ItemStackedOnOtherEvent_} e*/e => {
 })
-ItemEvents.rightClicked(e=>{
-    e.player.swing()
+
+NativeEvents.onEvent($AnvilUpdateEvent,e=>{
+    
+    e.setOutput('acacia_boat')
 })
+
+NativeEvents.onEvent($GrindstoneEvent$OnPlaceItem,e=>{
+    if(e.bottomItem.id=='minecraft:book'&&e.topItem!=undefined)
+        e.setOutput(e.topItem)
+})
+Utils.getServer().sendData('reload')
+NativeEvents.onEvent($LivingDamageEvent,e=>{
+})
+ItemEvents.entityInteracted(e=>{
+    
+    console.log(e.target.class)
+    if(e.target instanceof $Boat)
+    e.target.converTo
+})
+BlockEvents.rightClicked(e=>{
+    e.block.popItem(Item.of('acacia_boat'))
+})
+ServerEvents.eff

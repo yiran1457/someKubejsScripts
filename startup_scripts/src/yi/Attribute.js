@@ -1,3 +1,5 @@
+const { $ModifyAttributeEventJS } = require("packages/net/liopyu/entityjs/events/$ModifyAttributeEventJS")
+const { $ItemAttributeModifierEvent } = require("packages/net/minecraftforge/event/$ItemAttributeModifierEvent")
 
 
 StartupEvents.registry('attribute', e => {
@@ -12,7 +14,7 @@ StartupEvents.registry('attribute', e => {
     simpleCreateCustomAttribute('holy_protection', 0, -10, 1)
     simpleCreateCustomAttribute('evil_protection', 0, -10, 1)
 })
-ForgeModEvents.onEvent($EntityAttributeModificationEvent,/**@param {$EntityAttributeModificationEvent_} e */e => {
+ForgeModEvents.onEvent($EntityAttributeModificationEvent,e => {
     /**@type {(attr:$Attribute_,entitylist:$EntityType_<T>[])} */
     let addAttribute = (attr, entitylist) => {
         entitylist.forEach(entity => {

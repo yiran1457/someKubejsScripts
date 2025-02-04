@@ -13,6 +13,9 @@ NetworkEvents.dataReceived('attr',e=>{
     for(let key in e.data)
         e.player.setAttributeBaseValue(key,e.data[key])
 })
+RenderJSEvents.onGuiPreRender(e=>{
+    e.drawString('a Text',100,50,0)
+})
 NativeEvents.onEvent($RenderGuiEvent$Pre,/**@param {$RenderGuiEvent$Pre_} e*/e=>{
     let mydate = new Date(Utils.getSystemTime())
     let { screenHeight:H, screenWidth:W ,guiScaledHeight:H0} = e.window
@@ -41,6 +44,7 @@ NativeEvents.onEvent($RenderGuiEvent$Pre,/**@param {$RenderGuiEvent$Pre_} e*/e=>
         rgbaColor(255, 255, 255, 100),//RGBA
         true//是否绘制文字阴影
     )
+    //e.guiGraphics.renderItem(Item.of('redstone'),255,255,1)
 })
 
 let nun =$NonNullList.create()

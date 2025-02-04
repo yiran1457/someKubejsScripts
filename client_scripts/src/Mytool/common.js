@@ -17,9 +17,7 @@ function rgbaColor(R, G, B, A) {
     return new $Color(checkNumberRange(R / 255), checkNumberRange(G / 255), checkNumberRange(B / 255), checkNumberRange(A / 100)).getRGB()
 }
 function checkNumberRange(number, min, max) {
-    min = min || 0
-    max = max || 1
-    return number > min ? number < max ? number: max : min
+    return Math.max(Math.min(number, max||1),min||0)
 }
 
 

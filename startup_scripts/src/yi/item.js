@@ -1,6 +1,7 @@
 //priority:1
 
 const { $CollarTagItem } = require("packages/com/github/alexthe668/domesticationinnovation/server/item/$CollarTagItem")
+const { $UUID } = require("packages/java/util/$UUID")
 const { $HoeItem } = require("packages/net/minecraft/world/item/$HoeItem")
 const { $Item } = require("packages/net/minecraft/world/item/$Item")
 const { $SwordItem } = require("packages/net/minecraft/world/item/$SwordItem")

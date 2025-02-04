@@ -71,3 +71,27 @@ NativeEvents.onEvent($CurioAttributeModifierEvent,/**@param {$CurioAttributeModi
         }
     }
 })
+if(false){
+let curiosModifyList = {}
+/**
+ * @param {Special.Item} itemid 
+ * @param {(modify:{addModifier:function(Special.Attribute,$AttributeModifier)})} modify 
+ */
+let addAttribute = (itemid,modify)=>{
+    curiosModifyList[itemid] = modify
+}
+NativeEvents.onEvent($CurioAttributeModifierEvent,/**@param {$CurioAttributeModifierEvent_} event */event => {
+    let itemStack = event.itemStack.id
+    if(curiosModifyList[itemStack]==undefined) return
+    curiosModifyList[itemStack](event)
+})
+addAttribute('moonstone:probability_stone',modify=>{
+    modify.addModifier('ars_nouveau:ars_nouveau.perk.feather',
+        new $AttributeModifier(
+            $UUID.nameUUIDFromBytes([1,2,2,5]),
+            'a',
+            11,
+            'multiply_base'
+        )
+    )
+})}

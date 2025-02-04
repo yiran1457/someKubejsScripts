@@ -54,7 +54,7 @@ const TetraEnergyCap = (e) => {
                 if (MaxEnergy > 0) {
                     if (Energy > 0) {
                         if (Energy < MaxEnergy) {
-                                //energy.receiveEnergy(item.item.getEffectLevel(item, $ItemEffect.get('yi:vibration')), false)
+                                energy.receiveEnergy(item.item.getEffectLevel(item, $ItemEffect.get('yi:vibration')), false)
                         }
                         if (Damage != MaxDamage) {
                             energy.receiveEnergy(- 20 * Damage, false)
