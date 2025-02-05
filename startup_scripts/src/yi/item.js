@@ -39,7 +39,7 @@ StartupEvents.registry('item', event => {
     event.create('yi:chest_wand').unstackable().rarity('yi')
 
     event.create('yi:custom_alchemy')
-    .unstackable()
+    //.unstackable()
     .use((l,p,h)=>{
         return h == 'main_hand' && !p.isCrouching()
     })

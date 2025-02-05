@@ -7,9 +7,10 @@ let number2symbol = number =>{
         symbol+='☆'
     return symbol
 }
+
+let ProfessionIndex = 0
 /**
- * @type {Array<
- * {
+ * @type {Array<{
  * name:string,
  *  attribute:{health:number, attack:number, armor:number, speed:number}
  * SlotRenderList:{ mainhand?: Special.Item, head?: Special.Item, feet?: Special.Item, chest?: Special.Item, legs?: Special.Item, offhand?: Special.Item}
@@ -44,16 +45,22 @@ let ProfessionList = [
         }
     }
 ]
-let ProfessionIndex = 0
-/**@type {Array<{"mainhand": Special.Item, "head": Special.Item, "feet": Special.Item, "chest": Special.Item, "legs": Special.Item, "offhand": Special.Item}>} */
-let SlotRenderList = [
-    { "chest": 'alexscaves:cloak_of_darkness','mainhand':'alexscaves:desolate_dagger','offhand':'alexscaves:dreadbow' },
-    { "chest": 'cataclysm:ignitium_elytra_chestplate' },
-    { 'chest': 'cataclysm:cursium_chestplate' ,'mainhand':'cataclysm:cursed_bow'},
-    {'head':'minecraft:leather_helmet','chest':'minecraft:leather_chestplate','legs':'minecraft:leather_leggings','feet':'minecraft:leather_boots'},
-    {'legs':'minecraft:chainmail_leggings','head':'minecraft:turtle_helmet'}
-]
 let ItemInSlot = { "mainhand": '', "head": '', "feet": '', "chest": '', "legs": '', "offhand": '' }
+let playerSkillInfo = {
+    skillpoint: 0,//技能点
+    profession: null,//职业
+    level: 1,//等级
+    xp: 0,//经验值
+    skill: {//技能
+        health:0,
+        attack:0,
+        armor:0,
+        speed:0
+    }
+}
+NetworkEvents.dataReceived('customProfessionSystem',e=>{
+    playerSkillInfo = e.data
+})
 //拆掉书本渲染，并设置叠加层渲染
 NativeEvents.onEvent($ScreenEvent$Render$Pre,e => {
     if (e.screen instanceof $LecternScreen && Client.player.containerMenu.containerId == 101) {
@@ -96,10 +103,11 @@ NativeEvents.onEvent($ScreenEvent$Render$Post,e => {
         drawString(`攻击值:${number2symbol(ProfessionList[ProfessionIndex].attribute.attack)}`,Client.window.guiScaledWidth/2+50,Client.window.guiScaledHeight/2-50+16*1)
         drawString(`防御值:${number2symbol(ProfessionList[ProfessionIndex].attribute.armor)}`,Client.window.guiScaledWidth/2+50,Client.window.guiScaledHeight/2-50+16*2)
         drawString(`速度值:${number2symbol(ProfessionList[ProfessionIndex].attribute.speed)}`,Client.window.guiScaledWidth/2+50,Client.window.guiScaledHeight/2-50+16*3)
-        drawString(`生命值:${Client.player.maxHealth}`,Client.window.guiScaledWidth/2-90,Client.window.guiScaledHeight/2-50)
-        drawString(`攻击值:${Client.player.getAttributeValue('generic.attack_damage')}`,Client.window.guiScaledWidth/2-90,Client.window.guiScaledHeight/2-50+8+8)
-        drawString(`防御值:${Client.player.getAttributeValue('generic.armor')}+(${Client.player.getAttributeValue('generic.armor_toughness')})`,Client.window.guiScaledWidth/2-90,Client.window.guiScaledHeight/2-50+8+8+8+8)
-        drawString(`魔法值:${Client.player.nbt.get('ForgeCaps').get('ars_nouveau:mana').getInt('max')}`,Client.window.guiScaledWidth/2-90,Client.window.guiScaledHeight/2-50+8+8+8+8+8+8)
+        drawString(`技能点数:${playerSkillInfo.skillpoint}`,Client.window.guiScaledWidth/2-90,Client.window.guiScaledHeight/2-50-16)
+        drawString(`生命值:${playerSkillInfo.skill.health}`,Client.window.guiScaledWidth/2-90,Client.window.guiScaledHeight/2-50)
+        drawString(`攻击值:${playerSkillInfo.skill.attack}`,Client.window.guiScaledWidth/2-90,Client.window.guiScaledHeight/2-50+8+8)
+        drawString(`防御值:${playerSkillInfo.skill.armor}`,Client.window.guiScaledWidth/2-90,Client.window.guiScaledHeight/2-50+8+8+8+8)
+        drawString(`速度值:${playerSkillInfo.skill.speed}`,Client.window.guiScaledWidth/2-90,Client.window.guiScaledHeight/2-50+8+8+8+8+8+8)
         for (let key in ItemInSlot)
             player.setItemSlot(key, ItemInSlot[key])
     }
@@ -135,16 +143,34 @@ NativeEvents.onEvent($ScreenEvent$Init$Post, e => {
             }
         )
         addCommonWidget(Component.of(`+`), W - 110, H - 50 - 4, 16, 16,
-            () => { }
+            () => {
+                Client.player.sendData('customProfessionSystem', {addhealth:0})
+            }
         )
         addCommonWidget(Component.of(`+`), W - 110, H - 50 - 4 + 8 + 8, 16, 16,
-            () => { }
+            () => {
+                Client.player.sendData('customProfessionSystem', {addattack:0})
+            }
         )
         addCommonWidget(Component.of(`+`), W - 110, H - 50 - 4 + 8 + 8 + 8 + 8, 16, 16,
-            () => { }
+            () => {
+                Client.player.sendData('customProfessionSystem', {addarmor:0})
+            }
         )
         addCommonWidget(Component.of(`+`), W - 110, H - 50 - 4 + 8 + 8 + 8 + 8 + 8 + 8, 16, 16,
-            () => { Client.tell(`ID ${Client.player.containerMenu.containerId}`) }
+            () => {
+                Client.player.sendData('customProfessionSystem', {addspeed:0})
+            }
+        )
+        addCommonWidget(Component.of(`debug`), W-16  ,H + 50 - 4 + 8 + 8 + 8 + 8 + 8 + 8, 32, 16,
+            () => {
+                Client.player.sendData('customProfessionSystem', {debug:0})
+            }
+        )
+        addCommonWidget(Component.of(`clear`), W-16  ,H + 50 - 4 + 8 + 8 + 8 + 8 + 8 + 8+18, 32, 16,
+            () => {
+                Client.player.sendData('customProfessionSystem', {clear:0})
+            }
         )
     }
 })

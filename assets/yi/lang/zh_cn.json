@@ -59,6 +59,7 @@
 	"yi.effect.mana_drain.tooltip": "攻击回复造成伤害的§e%s%%§rmana",
 	"yi.effect.energy_drain.name": "雷能涌动",
 	"yi.effect.energy_drain.tooltip": "攻击回复造成§e雷电§r伤害的§e%s00%%§rFE",
-	"profession.1.name":"剑士",
-	"profession.2.name":"游侠"
+	"profession.1.name": "剑士",
+	"profession.2.name": "游侠",
+	"item.yi.custom_alchemy": "一个小测试"
 }

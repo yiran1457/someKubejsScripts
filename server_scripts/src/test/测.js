@@ -148,7 +148,3 @@ ItemEvents.entityInteracted(e=>{
     if(e.target instanceof $Boat)
     e.target.converTo
 })
-BlockEvents.rightClicked(e=>{
-    e.block.popItem(Item.of('acacia_boat'))
-})
-ServerEvents.eff

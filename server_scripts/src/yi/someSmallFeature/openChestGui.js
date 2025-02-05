@@ -115,18 +115,3 @@ global.alchemyRecipesHandle = item => {
     }
     return item
 }
-
-PlayerEvents.chat(e => {
-    let info = e.component.getString()
-    /**@type {$ServerPlayer_} */
-    let player = e.player
-    player.statsCounter.setValue(e.player,$Stats.TIME_SINCE_REST,0)
-    if (!info.startsWith('open')) return
-    let id = Number(info.substring(4))
-    e.player.openMenu(
-        new $SimpleMenuProvider(
-            () => new $LecternMenu(id),
-            ''
-        )
-    )
-})

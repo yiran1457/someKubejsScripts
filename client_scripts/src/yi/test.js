@@ -156,10 +156,23 @@ RenderJSEvents.onLevelRender(e => {
     e.rotationDegreesZ(180)
     new $GuiGraphics(Client, e.poseStack, e.bufferSource)
         .fill(-10, -10, 10, 10, rgbaColor(255, 0, 0, 255))
-
-
     e.drawString('测试文字', 0, 0, 255, 0, 255, 255)
     e.drawShadowString('测试文字11111111', 0 - Client.font.width('测试文字11111111') / 2, -10, 255, 0, 255, 255)
+    //e.renderLevelItem('acacia_boat',e.poseStack)
+    e.popPose()
+
+    e.pushPose()
+    e.transformerCamera(e.poseStack, e.camera)
+    e.translate(Client.player.x,Client.player.y+0.01,Client.player.z)
+    //e.poseStack.mulPose(Client.entityRenderDispatcher.cameraOrientation())
+    e.scale(0.02, 0.02, 0.02)
+    //e.rotationDegreesZ(180)
+    e.rotationDegreesX(90)    
+    for(let i=0;i<360;i++){
+        e.rotationDegreesZ(1)
+        e.guiGraphics.fill(90, -1, 110, 1, rgbaColor(i/360*255, i/360*255, i/360*255, 255))
+        e.guiGraphics.fill(200, -10, 220, 10, rgbaColor(255, 0, 0, 255))
+    }
     //e.renderLevelItem('acacia_boat',e.poseStack)
     e.popPose()
 })
@@ -196,8 +209,15 @@ NativeEvents.onEvent($RenderNameTagEvent, e => {
     poseStack.popPose()
 })
 let barLink = {}
-NativeEvents.onEvent($RenderLivingEvent, e => {
-    let { poseStack, entity, multiBufferSource } = e
+const { $GameProfile } = require("packages/com/mojang/authlib/$GameProfile")
+const { $PlayerFaceRenderer } = require("packages/net/minecraft/client/gui/components/$PlayerFaceRenderer")
+const { $RenderLivingEvent$Post } = require("packages/net/minecraftforge/client/event/$RenderLivingEvent$Post")
+const { $RenderLivingEvent$Pre } = require("packages/net/minecraftforge/client/event/$RenderLivingEvent$Pre")
+const { $RenderTooltipEvent } = require("packages/net/minecraftforge/client/event/$RenderTooltipEvent")
+const { $RenderTooltipEvent$GatherComponents } = require("packages/net/minecraftforge/client/event/$RenderTooltipEvent$GatherComponents")
+const { $RenderTooltipEvent$Pre } = require("packages/net/minecraftforge/client/event/$RenderTooltipEvent$Pre")
+NativeEvents.onEvent($RenderLivingEvent$Post, e => {
+    let { poseStack, entity, multiBufferSource, renderer } = e
     if (!entity instanceof $LivingEntity) return
     let GuiGraphics = new $GuiGraphics(Client, poseStack, multiBufferSource)
     let hurt_time = entity.persistentData.hurt_time || 20 * 10
@@ -211,7 +231,7 @@ NativeEvents.onEvent($RenderLivingEvent, e => {
     if (level_time - hurt_time > 20 * 6)//在6秒后的4秒内缩小血条到消失
         poseStack.scale(1 - (level_time - hurt_time - 20 * 6) / (20 * 4), 1, 1)
     //血条底色
-    let bar1 = 88
+    let bar1 = 88 * Math.log(40 + entity.health) / 10
     //临时血条
     if (barLink[entity.uuid] < 0)
         delete barLink[entity.uuid]
@@ -221,6 +241,7 @@ NativeEvents.onEvent($RenderLivingEvent, e => {
     //真血条
     let bar3 = bar1 * entity.health / entity.maxHealth
     if (bar2 < bar3) bar2 = bar3
+    RenderJSRenderSystem.enableBlendJS()
     GuiGraphics.fill(bar2, -30, bar1, -35, rgbaColor(114, 114, 114, 100))
     GuiGraphics.fill(-bar1, -30, -bar2, -35, rgbaColor(114, 114, 114, 100))
     GuiGraphics.fill(bar3, -30, bar2, -35, rgbaColor(200, 200, 200, 100))
@@ -239,38 +260,38 @@ NativeEvents.onEvent($RenderGuiEvent$Post, e => {
     let thisPoseStack = thisGuiGraphics.pose()
     thisPoseStack.pushPose()
     $InventoryScreen.renderEntityInInventoryFollowsAngle(thisGuiGraphics,
-        Client.window.guiScaledWidth-50,Client.window.guiScaledHeight-20,40,
-        (Client.player.lookAngle.get('x')-Client.player.lookAngle.get('z'))/2,
+        Client.window.guiScaledWidth - 50, Client.window.guiScaledHeight - 20, 40,
+        (Client.player.lookAngle.get('x') - Client.player.lookAngle.get('z')) / 2,
         Client.player.lookAngle.get('y'),
         Client.player)
     thisPoseStack.popPose()
     thisPoseStack.pushPose()
     thisPoseStack.translate(50, Client.window.height / 4 - 90, 1000)
-    let KeyRender = (/**@type {String} */key, x, y,sizeX,sizeY, displayKey) => {
+    let KeyRender = (/**@type {String} */key, x, y, sizeX, sizeY, displayKey) => {
         displayKey = displayKey || key
         thisGuiGraphics.fill(x, y, x + sizeX, y + sizeY, rgbaColor(255, 255, 255, 30))
         thisPoseStack.translate(0, 0, 1)
         thisGuiGraphics['drawString(net.minecraft.client.gui.Font,java.lang.String,float,float,int,boolean)'](
             Client.font, displayKey,//字体与渲染字符
-            x + (sizeX - Client.font.width(displayKey)) / 2, y+sizeY/2 -4,//渲染位置
+            x + (sizeX - Client.font.width(displayKey)) / 2, y + sizeY / 2 - 4,//渲染位置
             -1,//RGBA
             false//是否绘制文字阴影
         )
         thisPoseStack.translate(0, 0, -1)
-        
+
         if (key.indexOf('KEY_') != -1 && Client.isKeyDown($GLFW[`GLFW_${key}`]))
             thisGuiGraphics.fill(x, y, x + sizeX, y + sizeY, rgbaColor(114, 114, 114, 60))
         if (key.indexOf('Pressed') != -1 && Client.mouseHandler[key])
             thisGuiGraphics.fill(x, y, x + sizeX, y + sizeY, rgbaColor(114, 114, 114, 60))
     }
-    
-    KeyRender('leftPressed', -25, -25,20,20,'L')
-    KeyRender('middlePressed', 0, -25,20,20,'M')
-    KeyRender('rightPressed', 25, -25,20,20,'R')
-    KeyRender('KEY_W', 0, 0,20,20,'W')
-    KeyRender('KEY_A', -25, 25,20,20,'A')
-    KeyRender('KEY_S', 0, 25,20,20,'S')
-    KeyRender('KEY_D', 25, 25,20,20,'D')
+
+    KeyRender('leftPressed', -25, -25, 20, 20, 'L')
+    KeyRender('middlePressed', 0, -25, 20, 20, 'M')
+    KeyRender('rightPressed', 25, -25, 20, 20, 'R')
+    KeyRender('KEY_W', 0, 0, 20, 20, 'W')
+    KeyRender('KEY_A', -25, 25, 20, 20, 'A')
+    KeyRender('KEY_S', 0, 25, 20, 20, 'S')
+    KeyRender('KEY_D', 25, 25, 20, 20, 'D')
     thisPoseStack.popPose()
 })
 //望远镜查看实体属性
@@ -282,7 +303,7 @@ NativeEvents.onEvent($RenderGuiEvent$Post, e => {
     let entity = Client.player.rayTrace(10000, false).entity
     e.guiGraphics.pose().translate(0, 0, 10)//修改深度保证在最上面显示
     let drawString = (Text, Shadow, Color) => {//封装字符串绘制方法
-        if(typeof Text !== 'string')
+        if (typeof Text !== 'string')
             Text = Text.getString()
         GuiGraphics['drawString(net.minecraft.client.gui.Font,java.lang.String,float,float,int,boolean)'](
             Client.font, Text,//字体与渲染字符
@@ -302,6 +323,62 @@ NativeEvents.onEvent($RenderGuiEvent$Post, e => {
             drawString(`韧性:${entity.getAttributeValue('generic.armor_toughness')}`)
     }
 })
-NetworkEvents.dataReceived('reload',()=>{
+NetworkEvents.dataReceived('reload', () => {
     $KubeJS.getClientScriptManager().reload(Client.resourceManager)
+})
+NativeEvents.onEvent($RenderGuiEvent$Post, e => {
+    let GameProfile = new $GameProfile(UUID.fromString('1'), 'prizowo')
+    let r = Client.skinManager.getInsecureSkinLocation(GameProfile)
+    e.guiGraphics.pose().pushPose()
+    e.guiGraphics.pose().translate(Client.window.guiScaledWidth / 2, Client.window.guiScaledHeight / 2, 0)
+    for(let i = 0; i < 360; i += 1){
+    e.guiGraphics.pose().rotateZ(1)
+    e.guiGraphics.fill(-20,-1,-25,1,rgbaColor(255,255,255,100))
+}
+    e.guiGraphics.pose().rotateZ(rad += 5)
+    $PlayerFaceRenderer.draw(
+        e.guiGraphics,
+        Client.skinManager.getInsecureSkinLocation(new $GameProfile(UUID.fromString('1'), '_yi_ran_'))
+        , -10, -10, 20, true, false
+    )
+    e.guiGraphics.pose().popPose()
+})
+let rad =0/*
+NativeEvents.onEvent($RenderTooltipEvent$Pre,e=>{
+    e.graphics.pose().pushPose()
+    e.graphics.pose().translate(e.x,e.y,5000)
+    e.graphics.pose().scale(2,2,1)
+    let GameProfile = new $GameProfile(UUID.fromString('1'),'_yi_ran_')
+    let r = Client.skinManager.getInsecureSkinLocation(GameProfile)
+
+    e.graphics.blit(r, //资源路径
+        30, 0, //渲染左上角的坐标
+        0,//深度/优先级
+        8, 8, //材质裁剪开始位置
+        8, 8, //显示大小
+        64, 64//设置材质大小
+    )
+    e.graphics.blit(r, //资源路径
+        30, 0, //渲染左上角的坐标
+        1,//深度/优先级
+        40, 8, //材质裁剪开始位置
+        8, 8, //显示大小
+        64, 64//设置材质大小
+    )
+    $PlayerFaceRenderer.draw(
+        e.graphics,
+        Client.skinManager.getInsecureSkinLocation(new $GameProfile(UUID.fromString('1'),'_yi_ran_'))
+        ,20,20,20,true,false
+    )
+    $PlayerFaceRenderer.draw(
+        e.graphics,
+        Client.skinManager.getInsecureSkinLocation(new $GameProfile(UUID.fromString('1'),'_yi_ran_'))
+        ,-20,20,20
+    )
+    e.graphics.pose().popPose()
+})*/
+NativeEvents.onEvent($RenderTooltipEvent$GatherComponents,e=>{
+})
+NativeEvents.onEvent($RenderTooltipEvent,e=>{
+    
 })
