@@ -1,4 +1,5 @@
 
+
 let number2symbol = number =>{
     let symbol = ''
     for(;number>1;number-=2)
@@ -69,7 +70,7 @@ NativeEvents.onEvent($ScreenEvent$Render$Pre,e => {
     }
 })
 //进行玩家渲染
-NativeEvents.onEvent($ScreenEvent$Render$Post,e => {
+NativeEvents.onEvent($ScreenEvent$Render$Post, e => {
     let { screen, guiGraphics, mouseX, mouseY } = e
     if (screen instanceof $LecternScreen && Client.player.containerMenu.containerId == 101) {
         let playerX = Client.window.guiScaledWidth/2
@@ -170,6 +171,11 @@ NativeEvents.onEvent($ScreenEvent$Init$Post, e => {
         addCommonWidget(Component.of(`clear`), W-16  ,H + 50 - 4 + 8 + 8 + 8 + 8 + 8 + 8+18, 32, 16,
             () => {
                 Client.player.sendData('customProfessionSystem', {clear:0})
+            }
+        )
+        addCommonWidget(Component.of(`技能树`), W+16  ,H + 50 - 4 + 8 + 8 + 8 + 8 + 8 + 8+18, 32, 16,
+            () => {
+                Client.player.sendData('customProfessionSystem', {open:123})
             }
         )
     }

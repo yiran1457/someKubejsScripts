@@ -18,5 +18,15 @@ let {
     $ScreenEvent$Init$Post,
     $ScreenEvent$Render$Post,
     $ScreenEvent$Render$Pre,
-    $Tooltip
+    $Tooltip,
+    $GameProfile,
+    $PlayerFaceRenderer,
+    $RenderLivingEvent$Post,
+    $RenderTooltipEvent,
+    $RenderTooltipEvent$GatherComponents,
+    $RenderTooltipEvent$Pre,
+    $ScreenEvent$MouseButtonPressed$Post,
+    $ScreenEvent$MouseDragged$Post,
+    $ScreenEvent$MouseScrolled$Post,
+    $ScreenEvent$Opening
 } = myRequire

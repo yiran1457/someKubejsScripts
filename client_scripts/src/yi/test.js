@@ -1,3 +1,6 @@
+const { $LivingAttackEvent } = require("packages/net/minecraftforge/event/entity/living/$LivingAttackEvent")
+const { $LivingDamageEvent } = require("packages/net/minecraftforge/event/entity/living/$LivingDamageEvent")
+const { $LivingHurtEvent } = require("packages/net/minecraftforge/event/entity/living/$LivingHurtEvent")
 
 
 let face = 0
@@ -160,7 +163,7 @@ RenderJSEvents.onLevelRender(e => {
     e.drawShadowString('测试文字11111111', 0 - Client.font.width('测试文字11111111') / 2, -10, 255, 0, 255, 255)
     //e.renderLevelItem('acacia_boat',e.poseStack)
     e.popPose()
-
+/*
     e.pushPose()
     e.transformerCamera(e.poseStack, e.camera)
     e.translate(Client.player.x,Client.player.y+0.01,Client.player.z)
@@ -173,8 +176,7 @@ RenderJSEvents.onLevelRender(e => {
         e.guiGraphics.fill(90, -1, 110, 1, rgbaColor(i/360*255, i/360*255, i/360*255, 255))
         e.guiGraphics.fill(200, -10, 220, 10, rgbaColor(255, 0, 0, 255))
     }
-    //e.renderLevelItem('acacia_boat',e.poseStack)
-    e.popPose()
+    e.popPose()*/
 })
 //在实体右边渲染实体属性加显示实体名称
 NativeEvents.onEvent($RenderNameTagEvent, e => {
@@ -209,27 +211,26 @@ NativeEvents.onEvent($RenderNameTagEvent, e => {
     poseStack.popPose()
 })
 let barLink = {}
-const { $GameProfile } = require("packages/com/mojang/authlib/$GameProfile")
-const { $PlayerFaceRenderer } = require("packages/net/minecraft/client/gui/components/$PlayerFaceRenderer")
-const { $RenderLivingEvent$Post } = require("packages/net/minecraftforge/client/event/$RenderLivingEvent$Post")
-const { $RenderLivingEvent$Pre } = require("packages/net/minecraftforge/client/event/$RenderLivingEvent$Pre")
-const { $RenderTooltipEvent } = require("packages/net/minecraftforge/client/event/$RenderTooltipEvent")
-const { $RenderTooltipEvent$GatherComponents } = require("packages/net/minecraftforge/client/event/$RenderTooltipEvent$GatherComponents")
-const { $RenderTooltipEvent$Pre } = require("packages/net/minecraftforge/client/event/$RenderTooltipEvent$Pre")
+let hurtTimeLink = {}
 NativeEvents.onEvent($RenderLivingEvent$Post, e => {
-    let { poseStack, entity, multiBufferSource, renderer } = e
+    let { poseStack, entity, multiBufferSource} = e
     if (!entity instanceof $LivingEntity) return
-    let GuiGraphics = new $GuiGraphics(Client, poseStack, multiBufferSource)
-    let hurt_time = entity.persistentData.hurt_time || 20 * 10
+    let hurt_time = hurtTimeLink[entity.uuid] || 20 * 10
     let level_time = Client.level.time
-    if (level_time - hurt_time > 20 * 10) return//在1攻击0秒后不进行渲染
+    if (level_time - hurt_time > 20 * 10) {//在1攻击0秒后不进行渲染
+        delete hurtTimeLink[entity.uuid]
+        return
+        }
+
+    let GuiGraphics = new $GuiGraphics(Client, poseStack, multiBufferSource)
     poseStack.pushPose()
-    poseStack.translate(0, e.entity.eyeHeight, 0)
-    poseStack.rotateY(-Client.player.yRot)
+    poseStack.translate(0, entity.eyeHeight, 0)
+    poseStack.rotateY(-Client.player.yRotO)
     poseStack.rotateZ(180)
     poseStack.scale(0.02, 0.02, 0.02)
     if (level_time - hurt_time > 20 * 6)//在6秒后的4秒内缩小血条到消失
         poseStack.scale(1 - (level_time - hurt_time - 20 * 6) / (20 * 4), 1, 1)
+
     //血条底色
     let bar1 = 88 * Math.log(40 + entity.health) / 10
     //临时血条
@@ -241,19 +242,25 @@ NativeEvents.onEvent($RenderLivingEvent$Post, e => {
     //真血条
     let bar3 = bar1 * entity.health / entity.maxHealth
     if (bar2 < bar3) bar2 = bar3
-    RenderJSRenderSystem.enableBlendJS()
+
     GuiGraphics.fill(bar2, -30, bar1, -35, rgbaColor(114, 114, 114, 100))
     GuiGraphics.fill(-bar1, -30, -bar2, -35, rgbaColor(114, 114, 114, 100))
     GuiGraphics.fill(bar3, -30, bar2, -35, rgbaColor(200, 200, 200, 100))
     GuiGraphics.fill(-bar2, -30, -bar3, -35, rgbaColor(200, 200, 200, 100))
     GuiGraphics.fill(-bar3, -30, bar3, -35, rgbaColor(255, 0, 0, 100))
+
     poseStack.popPose()
 })
-NativeEvents.onEvent($AttackEntityEvent, e => {
-    let { target } = e
-    target.persistentData.hurt_time = Client.level.time//记录攻击时间
-    barLink[target.uuid] = target.health / target.maxHealth
+NativeEvents.onEvent($LivingHurtEvent,e=>{
+    if(e.source.immediate.player||e.source.player){
+    hurtTimeLink[e.entity.uuid] = Client.level.time
+    barLink[e.entity.uuid] = e.entity.health / e.entity.maxHealth
+}
 })
+ItemEvents.firstRightClicked(e=>{
+    Client.tell(new Set(e.item.nbt.test.toArray()).has('asd'))
+})
+
 //hud显示按键
 NativeEvents.onEvent($RenderGuiEvent$Post, e => {
     let thisGuiGraphics = e.guiGraphics
@@ -326,6 +333,8 @@ NativeEvents.onEvent($RenderGuiEvent$Post, e => {
 NetworkEvents.dataReceived('reload', () => {
     $KubeJS.getClientScriptManager().reload(Client.resourceManager)
 })
+/*
+//旋转玩家头加圆环
 NativeEvents.onEvent($RenderGuiEvent$Post, e => {
     let GameProfile = new $GameProfile(UUID.fromString('1'), 'prizowo')
     let r = Client.skinManager.getInsecureSkinLocation(GameProfile)
@@ -342,8 +351,8 @@ NativeEvents.onEvent($RenderGuiEvent$Post, e => {
         , -10, -10, 20, true, false
     )
     e.guiGraphics.pose().popPose()
-})
-let rad =0/*
+})*/
+/*
 NativeEvents.onEvent($RenderTooltipEvent$Pre,e=>{
     e.graphics.pose().pushPose()
     e.graphics.pose().translate(e.x,e.y,5000)

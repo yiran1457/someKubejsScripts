@@ -1,6 +1,5 @@
-const { $Ravager } = require("packages/net/minecraft/world/entity/monster/$Ravager")
+
 const { $LecternMenu } = require("packages/net/minecraft/world/inventory/$LecternMenu")
-const { $AttackEntityEvent } = require("packages/net/minecraftforge/event/entity/player/$AttackEntityEvent")
 
 let initProfessionInfo = {
     skillpoint: 0,//技能点
@@ -33,7 +32,16 @@ NetworkEvents.dataReceived('customProfessionSystem', e => {
             player.persistentData.ProfessionInfo=initProfessionInfo
             modify = true
         }
+        if(key=='open'){
+            player.openMenu(new $SimpleMenuProvider(
+                ()=>new $LecternMenu(data[key]),
+                ''
+            ))
+        }
     }
+    player.modifyAttribute('generic.attack_damage','customtest',100,'addition')
+    player.modifyAttribute('generic.attack_speed','customtest',10,'addition')
+    player.modifyAttribute('generic.attack_damage','customtest0',20,'multiply_total')
     if (modify) {
         e.player.sendData('customProfessionSystem', player.persistentData.ProfessionInfo)
     }
