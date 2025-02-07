@@ -213,11 +213,28 @@ NativeEvents.onEvent($ScreenEvent$MouseButtonPressed$Post, e => {
                 let l = tooltip.length>0?2:1
                 for (let i = 0; i < 3 + l; i++)
                     if (simpleCheck(mouseX, mouseY, { x: x + 35 - 12 + 4, y: y - 45 + 4 + i * 16 }, 8))
-                        inputLink = i+1
+                        inputLink = i + 1
+                if (simpleCheckWithAABB(mouseX, mouseY, x - 12, y + 20, x - 12 + Client.font.width('Delete'), y + 20 + 8)) {
+                    for (let key in skillTree) {
+                        let newRequire = []
+                        skillTree[key].require.forEach(v=>{
+                            if(v!=infoLink)
+                                newRequire.push(v)
+                        })
+                        skillTree[key].require = newRequire
+                    }
+                    delete skillTree[infoLink]
+                    infoLink = ''
+                    inputLink = 0
+                    charaLink = ''
+                }
             }
         }
     }
 })
+let x = [1,2,3,4]
+Client.tell(x.splice(0,1))
+Client.tell(x)
 NativeEvents.onEvent($ScreenEvent$Render$Post, e => {
     let { screen, guiGraphics } = e
     if (screen instanceof $LecternScreen && Client.player.containerMenu.containerId == 123) {
@@ -256,6 +273,7 @@ NativeEvents.onEvent($ScreenEvent$Render$Post, e => {
                 drawString(guiGraphics, `M`, x + 35 - 12, y - 45 + 16 * 3)
                 if (l >= 1)
                     drawString(guiGraphics, `M`, x + 35 - 12, y - 45 + 16 * 4)
+                drawString(guiGraphics, `§4Delete`, x - 12, y+20)
                 drawString(guiGraphics, `Name:${infoLink}`, x + 35, y - 45)
                 drawString(guiGraphics, `posX:${x}`, x + 35, y - 45 + 16)
                 drawString(guiGraphics, `posY:${y}`, x + 35, y - 45 + 16 * 2)
