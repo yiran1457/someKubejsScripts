@@ -1,5 +1,7 @@
 const { $Boat } = require("packages/net/minecraft/world/entity/vehicle/$Boat")
 const { $ChestBoat } = require("packages/net/minecraft/world/entity/vehicle/$ChestBoat")
+const { $ArmorItem } = require("packages/net/minecraft/world/item/$ArmorItem")
+const { $SwordItem } = require("packages/net/minecraft/world/item/$SwordItem")
 const { $AABB } = require("packages/net/minecraft/world/phys/$AABB")
 const { $AnvilUpdateEvent } = require("packages/net/minecraftforge/event/$AnvilUpdateEvent")
 const { $GrindstoneEvent$OnPlaceItem } = require("packages/net/minecraftforge/event/$GrindstoneEvent$OnPlaceItem")
@@ -147,4 +149,11 @@ ItemEvents.entityInteracted(e=>{
     console.log(e.target.class)
     if(e.target instanceof $Boat)
     e.target.converTo
+})
+ServerEvents.tags('item',e=>{
+    Ingredient.of('@ae2').itemStacks.forEach(item=>{
+        if(Item.of(item).item instanceof $SwordItem)
+            console.log(item)
+            //e.add('minecraft:swords',id)
+    })
 })

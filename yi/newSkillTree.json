@@ -1,0 +1,326 @@
+{
+	"index0": {
+		"pos": {
+			"x": 0,
+			"y": 0
+		},
+		"require": [],
+		"finish": false,
+		"tooltip": [
+			{
+				"text": "§6起源§r"
+			},
+			{
+				"text": "技能树起点"
+			}
+		]
+	},
+	"index1": {
+		"pos": {
+			"x": 100,
+			"y": 0
+		},
+		"require": [
+			"index0"
+		],
+		"finish": false,
+		"tooltip": [
+			{
+				"text": "力量"
+			},
+			{
+				"text": "第1层"
+			}
+		]
+	},
+	"index2": {
+		"pos": {
+			"x": 200,
+			"y": 0
+		},
+		"require": [
+			"index1"
+		],
+		"finish": false,
+		"tooltip": [
+			{
+				"text": "重击"
+			},
+			{
+				"text": "第2层"
+			}
+		]
+	},
+	"index3": {
+		"pos": {
+			"x": 300,
+			"y": 0
+		},
+		"require": [
+			"index2"
+		],
+		"finish": false,
+		"tooltip": [
+			{
+				"text": "暴怒"
+			},
+			{
+				"text": "第3层"
+			}
+		]
+	},
+	"index4": {
+		"pos": {
+			"x": 400,
+			"y": 0
+		},
+		"require": [
+			"index3"
+		],
+		"finish": false,
+		"tooltip": [
+			{
+				"text": "粉碎"
+			},
+			{
+				"text": "第4层"
+			}
+		]
+	},
+	"index5": {
+		"pos": {
+			"x": 500,
+			"y": 0
+		},
+		"require": [
+			"index4"
+		],
+		"finish": false,
+		"tooltip": [
+			{
+				"text": "战神"
+			},
+			{
+				"text": "第5层"
+			}
+		]
+	},
+	"index11": {
+		"pos": {
+			"x": 100,
+			"y": -100
+		},
+		"require": [
+			"index0"
+		],
+		"finish": false,
+		"tooltip": [
+			{
+				"text": "敏捷"
+			},
+			{
+				"text": "第1层"
+			}
+		]
+	},
+	"index12": {
+		"pos": {
+			"x": 200,
+			"y": -200
+		},
+		"require": [
+			"index11"
+		],
+		"finish": false,
+		"tooltip": [
+			{
+				"text": "闪避"
+			},
+			{
+				"text": "第2层"
+			}
+		]
+	},
+	"index13": {
+		"pos": {
+			"x": 300,
+			"y": -300
+		},
+		"require": [
+			"index12"
+		],
+		"finish": false,
+		"tooltip": [
+			{
+				"text": "疾跑"
+			},
+			{
+				"text": "第3层"
+			}
+		]
+	},
+	"index14": {
+		"pos": {
+			"x": 400,
+			"y": -400
+		},
+		"require": [
+			"index13"
+		],
+		"finish": false,
+		"tooltip": [
+			{
+				"text": "残影"
+			},
+			{
+				"text": "第4层"
+			}
+		]
+	},
+	"index15": {
+		"pos": {
+			"x": 500,
+			"y": -500
+		},
+		"require": [
+			"index14"
+		],
+		"finish": false,
+		"tooltip": [
+			{
+				"text": "瞬身"
+			},
+			{
+				"text": "第5层"
+			}
+		]
+	},
+	"index21": {
+		"pos": {
+			"x": -100,
+			"y": 0
+		},
+		"require": [
+			"index0"
+		],
+		"finish": false,
+		"tooltip": [
+			{
+				"text": "防御"
+			},
+			{
+				"text": "第1层"
+			}
+		]
+	},
+	"index22": {
+		"pos": {
+			"x": -200,
+			"y": 0
+		},
+		"require": [
+			"index21"
+		],
+		"finish": false,
+		"tooltip": [
+			{
+				"text": "护甲"
+			},
+			{
+				"text": "第2层"
+			}
+		]
+	},
+	"index23": {
+		"pos": {
+			"x": -300,
+			"y": 0
+		},
+		"require": [
+			"index22"
+		],
+		"finish": false,
+		"tooltip": [
+			{
+				"text": "格挡"
+			},
+			{
+				"text": "第3层"
+			}
+		]
+	},
+	"index24": {
+		"pos": {
+			"x": -400,
+			"y": 0
+		},
+		"require": [
+			"index23"
+		],
+		"finish": false,
+		"tooltip": [
+			{
+				"text": "反伤"
+			},
+			{
+				"text": "第4层"
+			}
+		]
+	},
+	"index25": {
+		"pos": {
+			"x": -500,
+			"y": 0
+		},
+		"require": [
+			"index24"
+		],
+		"finish": false,
+		"tooltip": [
+			{
+				"text": "不朽"
+			},
+			{
+				"text": "第5层"
+			}
+		]
+	},
+	"index51": {
+		"pos": {
+			"x": 300,
+			"y": -300
+		},
+		"require": [
+			"index5",
+			"index15"
+		],
+		"finish": false,
+		"tooltip": [
+			{
+				"text": "§d疾风重击§r"
+			},
+			{
+				"text": "移动中造成300%伤害"
+			}
+		]
+	},
+	"index52": {
+		"pos": {
+			"x": 0,
+			"y": 200
+		},
+		"require": [
+			"index25",
+			"index5"
+		],
+		"finish": false,
+		"tooltip": [
+			{
+				"text": "§a战神之盾§r"
+			},
+			{
+				"text": "攻击时获得护盾"
+			}
+		]
+	}
+}

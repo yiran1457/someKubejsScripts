@@ -1,5 +1,5 @@
 //priority:888888
-
+if(false){
 const $ClassFilter = Java.loadClass("dev.latvian.mods.kubejs.util.ClassFilter")
 
 /**@type {$Class_<T>} */
@@ -9,4 +9,4 @@ sm.setAccessible(true)
 sm = sm.get(Java)
 let mana = $Class.classLoader.loadClass('dev.latvian.mods.kubejs.script.ScriptManager').getDeclaredField('classFilter')
 mana.setAccessible(true)
-mana.set(sm, $ClassFilter())
+mana.set(sm, $ClassFilter())}

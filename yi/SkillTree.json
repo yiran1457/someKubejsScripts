@@ -1,0 +1,109 @@
+{
+	"init": {
+		"pos": {
+			"x": 0,
+			"y": 0
+		},
+		"require": [],
+		"finish": true,
+		"tooltip": [
+			{
+				"text": "§4始"
+			},
+			{
+				"text": "一切能力的元始"
+			}
+		]
+	},
+	"index1": {
+		"pos": {
+			"x": 60,
+			"y": 60
+		},
+		"require": [
+			"init"
+		],
+		"finish": true
+	},
+	"index11": {
+		"pos": {
+			"x": 140,
+			"y": 80
+		},
+		"require": [
+			"index1"
+		],
+		"finish": false
+	},
+	"index12": {
+		"pos": {
+			"x": 80,
+			"y": 140
+		},
+		"require": [
+			"index1"
+		],
+		"finish": false
+	},
+	"index101": {
+		"pos": {
+			"x": 160,
+			"y": 160
+		},
+		"require": [
+			"index11",
+			"index12"
+		],
+		"finish": false
+	},
+	"index2": {
+		"pos": {
+			"x": -80,
+			"y": 80
+		},
+		"require": [
+			"init"
+		],
+		"finish": true
+	},
+	"index3": {
+		"pos": {
+			"x": 80,
+			"y": -80
+		},
+		"require": [
+			"init"
+		],
+		"finish": false
+	},
+	"index4": {
+		"pos": {
+			"x": -80,
+			"y": -80
+		},
+		"require": [
+			"init"
+		],
+		"finish": false
+	},
+	"index41": {
+		"pos": {
+			"x": -140,
+			"y": -80
+		},
+		"require": [
+			"index4"
+		],
+		"finish": false
+	},
+	"index42": {
+		"pos": {
+			"x": -80,
+			"y": -140
+		},
+		"require": [
+			"index4"
+		],
+		"finish": false
+	}
+}

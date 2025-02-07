@@ -1,8 +1,16 @@
 
+let json = JsonIO.read('./kubejs/yi/newSkillTree.json')
 
-/**@type {Record<string,{pos:{x:number,y:number},require?:List$Type<$Component$Type>,tooltip?:string[],finish:boolean}>}} */
-let skillTree = {
-    index1: { pos: { x: 60, y: 60 }, require: ['init'], finish: false, tooltip: [Component.of('伊始')] },
+/**@type {Record<string,{pos:{x:number,y:number},require:List$Type<$Component$Type>,tooltip?:string[],finish:boolean}>}} */
+json.forEach(v=>{
+    Client.tell(v)
+    if(json[v].tooltip)
+        json[v].tooltip=json[v].tooltip.map(t=>Component.of(t))
+})
+let skillTree = json
+/*= {
+    init:{pos:{x:0,y:0},require:[],finish:false, tooltip: [Component.of('§4始'),Component.of('一切能力的元始')] ,action:()=>{Client.tell('汝路无止')}},
+    index1: { pos: { x: 60, y: 60 }, require: ['init'], finish: false},
     index11: { pos: { x: 80 + 60, y: 80 }, require: ['index1'], finish: false },
     index12: { pos: { x: 80, y: 80 + 60 }, require: ['index1'], finish: false },
     index101: { pos: { x: 80 + 80, y: 80 + 80 }, require: ['index11', 'index12'], finish: false },
@@ -11,7 +19,7 @@ let skillTree = {
     index4: { pos: { x: -80, y: -80 }, require: ['init'], finish: false },
     index41: { pos: { x: -80 - 60, y: -80 }, require: ['index4'], finish: false },
     index42: { pos: { x: -80, y: -80 - 60 }, require: ['index4'], finish: false },
-}
+}*/
 let skillTreeSetting = {
     x: 0,
     y: 0,
@@ -19,38 +27,13 @@ let skillTreeSetting = {
 }
 let cc = 0
 let rad =0
-NativeEvents.onEvent($ScreenEvent$MouseButtonPressed$Post, e => {
-    if (e.screen instanceof $LecternScreen && Client.player.containerMenu.containerId == 123) {
-        let mouseX = e.mouseX - Client.window.guiScaledWidth / 2 - skillTreeSetting.x
-        mouseX /= skillTreeSetting.scale
-        let mouseY = e.mouseY - Client.window.guiScaledHeight / 2 - skillTreeSetting.y
-        mouseY /= skillTreeSetting.scale
-        let simpleCheck = (pos, size) => {
-            return (mouseX > pos.x - size / 2 && mouseX < pos.x + size / 2 && mouseY > pos.y - size / 2 && mouseY < pos.y + size / 2)
-        }
-        for(let key in skillTree){
-            let {pos,require} = skillTree[key]
-            let cando = true
-            require.forEach(c=>{
-                if(c=='init')return
-                if(!skillTree[c].finish)
-                    cando = false
-            })
-        if (cando&&simpleCheck(pos,20)) {
-            skillTree[key].finish = true
-            Client.player.playSound('ui.button.click', 0.3, 1)
-        }
-    }
-    }
-})
-function updateScreenAABB(){
+function updateScreenAABB() {
     screenAABB = [
-    (-Client.window.guiScaledWidth / 2 - skillTreeSetting.x) / skillTreeSetting.scale,
-    (-Client.window.guiScaledHeight / 2 - skillTreeSetting.y) / skillTreeSetting.scale,
-    (Client.window.guiScaledWidth / 2 - skillTreeSetting.x) / skillTreeSetting.scale,
-    (Client.window.guiScaledHeight / 2 - skillTreeSetting.y) / skillTreeSetting.scale
-]
-
+        (-Client.window.guiScaledWidth / 2 - skillTreeSetting.x) / skillTreeSetting.scale,
+        (-Client.window.guiScaledHeight / 2 - skillTreeSetting.y) / skillTreeSetting.scale,
+        (Client.window.guiScaledWidth / 2 - skillTreeSetting.x) / skillTreeSetting.scale,
+        (Client.window.guiScaledHeight / 2 - skillTreeSetting.y) / skillTreeSetting.scale
+    ]
 }
 let screenAABB
 updateScreenAABB()
@@ -101,6 +84,31 @@ let simpleCheck = (mouseX,mouseY,pos, size) => {
 let drawTooltip = (guiGraphics,mouseX,mouseY, text) => {
     guiGraphics.renderComponentTooltip(Client.font, text, mouseX, mouseY)
 }
+//=====================================
+// events main
+//=====================================
+NativeEvents.onEvent($ScreenEvent$MouseButtonPressed$Post, e => {
+    if (e.screen instanceof $LecternScreen && Client.player.containerMenu.containerId == 123) {
+        let mouseX = e.mouseX - Client.window.guiScaledWidth / 2 - skillTreeSetting.x
+        mouseX /= skillTreeSetting.scale
+        let mouseY = e.mouseY - Client.window.guiScaledHeight / 2 - skillTreeSetting.y
+        mouseY /= skillTreeSetting.scale
+        for (let key in skillTree) {
+            let { pos, require } = skillTree[key]
+            let cando = true
+            require.forEach(c => {
+                if (!skillTree[c].finish)
+                    cando = false
+            })
+            if (cando && simpleCheck(mouseX, mouseY, pos, 20)) {
+                skillTree[key].finish = true
+                Client.player.playSound('ui.button.click', 0.3, 1)
+                Client.player.sendData('skill', key)
+                //JsonIO.write('./kubejs/yi/SkillTree.json', skillTree)
+            }
+        }
+    }
+})
 NativeEvents.onEvent($ScreenEvent$Render$Post, e => {
     let { screen, guiGraphics} = e
     if (screen instanceof $LecternScreen && Client.player.containerMenu.containerId == 123) {
@@ -130,18 +138,18 @@ NativeEvents.onEvent($ScreenEvent$Render$Post, e => {
             let {pos:{x,y},finish,require,tooltip}= skillTree[key]
             let cando = true
             require.forEach(c => {//遍历前置并连线
-                if (c == 'init')
-                    drawLine(guiGraphics,poseStack,x, y, 0, 0, 1, -1)
-                else {
+                //if (c == 'init')
+                //    drawLine(guiGraphics,poseStack,x, y, 0, 0, 1, -1)
+                //else {
                     let colorLine = skillTree[c].finish ? rgbaColor(255, 255, 255, 100) : rgbaColor(114, 114, 114, 80)
                     drawLine(guiGraphics,poseStack,x, y, skillTree[c].pos.x, skillTree[c].pos.y, 1, colorLine)
                     if (!skillTree[c].finish)
                         cando = false
-                }
+                //}
             })
             //绘制节点
             let colorFill = finish?rgbaColor(255,255,255,100):cando?rgbaColor(200,200,200,100):rgbaColor(114,114,114,100)
-            simpleFill(guiq,poseStack,x,y,20,colorFill)
+            simpleFill(guiGraphics,poseStack,x,y,20,colorFill)
             //鼠标悬浮提示
             if(simpleCheck(mouseX,mouseY,{x:x,y:y},20)){
                 if(cando&&!finish)
