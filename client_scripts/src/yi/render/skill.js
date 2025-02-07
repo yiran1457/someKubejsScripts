@@ -135,11 +135,11 @@ NativeEvents.onEvent($ScreenEvent$KeyPressed$Post, e => {
                 infoLink = charaLink
                 break
             case 2:
-                if(Number(charaLink))
+                if(Number(charaLink)||Number(charaLink)==0)
                     skillTree[infoLink].pos.x = Number(charaLink)
                 break
             case 3:
-                if (Number(charaLink))
+                if (Number(charaLink)||Number(charaLink)==0)
                     skillTree[infoLink].pos.y = Number(charaLink)
                 break
             case 4:
@@ -157,6 +157,7 @@ NativeEvents.onEvent($ScreenEvent$KeyPressed$Post, e => {
                     skillTree[infoLink].tooltip.push(Component.of(charaLink))
                 break
         }
+        JsonIO.write('./kubejs/yi/newSkillTree.json', skillTree)
         inputLink = 0
         charaLink=''
     }
@@ -176,11 +177,11 @@ NativeEvents.onEvent($ScreenEvent$MouseButtonPressed$Post, e => {
                         cando = false
                 })
                 if (cando && simpleCheck(mouseX, mouseY, pos, 20)) {
-                    skillTree[key].finish = true
+                    //skillTree[key].finish = true
                     Client.player.playSound('ui.button.click', 0.3, 1)
                     Client.player.sendData('skill', key)
                     //存储数据
-                    //JsonIO.write('./kubejs/yi/SkillTree.json', skillTree)
+                    JsonIO.write('./kubejs/yi/newSkillTree.json', skillTree)
                 }
             }
         else {

@@ -25,6 +25,7 @@ addCommonSkill('index42', { x: -80, y: -80 - 60 }, ['index4'])
 addCommonSkill('index1-1', { x: 160, y: 160 }, ['index12', 'index11'])
 
 
+//skillTreeBuild()
 /*
 // 基础技能（核心技能）
 addCommonSkill('Core', { x: 0, y: 0 }, [], [
@@ -134,8 +135,7 @@ addCommonSkill('ArchmageAscension', { x: 0, y: 250 }, ['ArcaneMastery'], [
 addCommonSkill('ImmortalGuard', { x: 0, y: -250 }, ['Ironhide'], [
     Component.of('§c不朽守护'),
     Component.of('极大提高生存能力。')
-]);
-skillTreeBuild()
+]);*/
 
 
 /*= {

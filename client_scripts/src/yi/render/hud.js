@@ -16,7 +16,7 @@ NetworkEvents.dataReceived('attr',e=>{
 RenderJSEvents.onGuiPreRender(e=>{
     e.drawString('a Text',100,50,0)
 })
-NativeEvents.onEvent($RenderGuiEvent$Pre,/**@param {$RenderGuiEvent$Pre_} e*/e=>{
+NativeEvents.onEvent($RenderGuiEvent$Pre,e=>{
     let mydate = new Date(Utils.getSystemTime())
     let { screenHeight:H, screenWidth:W ,guiScaledHeight:H0} = e.window
     let fristHigh = H0*0.12

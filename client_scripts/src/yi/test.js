@@ -1,3 +1,5 @@
+const { $RenderLevelStageEvent } = require("packages/net/minecraftforge/client/event/$RenderLevelStageEvent")
+const { $RenderLevelStageEvent$Stage } = require("packages/net/minecraftforge/client/event/$RenderLevelStageEvent$Stage")
 const { $LivingAttackEvent } = require("packages/net/minecraftforge/event/entity/living/$LivingAttackEvent")
 const { $LivingDamageEvent } = require("packages/net/minecraftforge/event/entity/living/$LivingDamageEvent")
 const { $LivingHurtEvent } = require("packages/net/minecraftforge/event/entity/living/$LivingHurtEvent")
@@ -390,4 +392,44 @@ NativeEvents.onEvent($RenderTooltipEvent$GatherComponents,e=>{
 })
 NativeEvents.onEvent($RenderTooltipEvent,e=>{
     
+})
+
+//=========================
+// 伤害数字世界显示
+//=========================
+/**@type {Record<string,{x:number,y:number,z:number,life:number,value:number,dx:number,dz:number}>} */
+let damageList = {}
+NativeEvents.onEvent($LivingDamageEvent,e=>{
+    let {amount,entity} = e
+    let {x,y,z,bbHeight} = entity
+    damageList[entity.uuid+Client.level.time]={x:x+Math.random()-0.5,y:y+bbHeight*2+(Math.random()-0.5)/5,z:z+Math.random()-0.5,life:20*1.5,value:amount.toFixed(2)}
+})
+ClientEvents.tick(e=>{x
+    for(let key in damageList){
+        if(!damageList[key].life-->0)
+            delete damageList[key]
+    }
+})
+NativeEvents.onEvent($RenderLevelStageEvent,e=>{
+    let {stage,camera,poseStack} = e
+    let guiGraphics = new $GuiGraphics(Client,poseStack,Client.renderBuffers().bufferSource())
+    if(stage!=$RenderLevelStageEvent$Stage.AFTER_SOLID_BLOCKS)return
+    poseStack.pushPose()
+    poseStack.translate(-camera.position.x(),-camera.position.y(),-camera.position.z())
+    for(let key in damageList){
+        let {x,y,z,value,life} = damageList[key]
+        poseStack.pushPose()
+        poseStack.translate(x, y, z)
+        poseStack.mulPose(Client.entityRenderDispatcher.cameraOrientation())
+        poseStack.scale(0.04,0.04,0.04)
+        poseStack.rotateZ(180)
+        guiGraphics['drawString(net.minecraft.client.gui.Font,java.lang.String,float,float,int,boolean)'](
+                Client.font, String(value),
+                -Client.font.width(String(value))/2, 0,
+                rgbaColor(235,16,32,life*3),
+                false
+            )
+        poseStack.popPose()
+    }
+    poseStack.popPose()
 })
