@@ -6,5 +6,5 @@ TetraEvent.Damage('yi:vibration', event => {
 TetraEvent.Hurt('yi:vibration', event => {
     if(!event.isActual)return
     event.player.tell(event.effectLevel)
-    event.player.tell(event.effectEfficiencyA)
+    event.player.tell(event.effectEfficiency)
 })
