@@ -1,8 +1,14 @@
-const { $RenderLevelStageEvent } = require("packages/net/minecraftforge/client/event/$RenderLevelStageEvent")
-const { $RenderLevelStageEvent$Stage } = require("packages/net/minecraftforge/client/event/$RenderLevelStageEvent$Stage")
-const { $LivingAttackEvent } = require("packages/net/minecraftforge/event/entity/living/$LivingAttackEvent")
-const { $LivingDamageEvent } = require("packages/net/minecraftforge/event/entity/living/$LivingDamageEvent")
-const { $LivingHurtEvent } = require("packages/net/minecraftforge/event/entity/living/$LivingHurtEvent")
+const { $RenderSystem } = require("packages/com/mojang/blaze3d/systems/$RenderSystem")
+const { $DefaultVertexFormat } = require("packages/com/mojang/blaze3d/vertex/$DefaultVertexFormat")
+const { $Tesselator } = require("packages/com/mojang/blaze3d/vertex/$Tesselator")
+const { $VertexFormat$Mode } = require("packages/com/mojang/blaze3d/vertex/$VertexFormat$Mode")
+const { $Minecraft } = require("packages/net/minecraft/client/$Minecraft")
+const { $GameRenderer } = require("packages/net/minecraft/client/renderer/$GameRenderer")
+const { $RenderGuiOverlayEvent } = require("packages/net/minecraftforge/client/event/$RenderGuiOverlayEvent")
+const { $RenderGuiOverlayEvent$Post } = require("packages/net/minecraftforge/client/event/$RenderGuiOverlayEvent$Post")
+const { $RenderGuiOverlayEvent$Pre } = require("packages/net/minecraftforge/client/event/$RenderGuiOverlayEvent$Pre")
+const { $Quaternionf } = require("packages/org/joml/$Quaternionf")
+const { $GL11 } = require("packages/org/lwjgl/opengl/$GL11")
 
 
 let face = 0
@@ -165,20 +171,20 @@ RenderJSEvents.onLevelRender(e => {
     e.drawShadowString('测试文字11111111', 0 - Client.font.width('测试文字11111111') / 2, -10, 255, 0, 255, 255)
     //e.renderLevelItem('acacia_boat',e.poseStack)
     e.popPose()
-/*
-    e.pushPose()
-    e.transformerCamera(e.poseStack, e.camera)
-    e.translate(Client.player.x,Client.player.y+0.01,Client.player.z)
-    //e.poseStack.mulPose(Client.entityRenderDispatcher.cameraOrientation())
-    e.scale(0.02, 0.02, 0.02)
-    //e.rotationDegreesZ(180)
-    e.rotationDegreesX(90)    
-    for(let i=0;i<360;i++){
-        e.rotationDegreesZ(1)
-        e.guiGraphics.fill(90, -1, 110, 1, rgbaColor(i/360*255, i/360*255, i/360*255, 255))
-        e.guiGraphics.fill(200, -10, 220, 10, rgbaColor(255, 0, 0, 255))
-    }
-    e.popPose()*/
+    /*
+        e.pushPose()
+        e.transformerCamera(e.poseStack, e.camera)
+        e.translate(Client.player.x,Client.player.y+0.01,Client.player.z)
+        //e.poseStack.mulPose(Client.entityRenderDispatcher.cameraOrientation())
+        e.scale(0.02, 0.02, 0.02)
+        //e.rotationDegreesZ(180)
+        e.rotationDegreesX(90)    
+        for(let i=0;i<360;i++){
+            e.rotationDegreesZ(1)
+            e.guiGraphics.fill(90, -1, 110, 1, rgbaColor(i/360*255, i/360*255, i/360*255, 255))
+            e.guiGraphics.fill(200, -10, 220, 10, rgbaColor(255, 0, 0, 255))
+        }
+        e.popPose()*/
 })
 //在实体右边渲染实体属性加显示实体名称
 NativeEvents.onEvent($RenderNameTagEvent, e => {
@@ -215,14 +221,14 @@ NativeEvents.onEvent($RenderNameTagEvent, e => {
 let barLink = {}
 let hurtTimeLink = {}
 NativeEvents.onEvent($RenderLivingEvent$Post, e => {
-    let { poseStack, entity, multiBufferSource} = e
+    let { poseStack, entity, multiBufferSource } = e
     if (!entity instanceof $LivingEntity) return
     let hurt_time = hurtTimeLink[entity.uuid] || 20 * 10
     let level_time = Client.level.time
     if (level_time - hurt_time > 20 * 10) {//在1攻击0秒后不进行渲染
         delete hurtTimeLink[entity.uuid]
         return
-        }
+    }
 
     let GuiGraphics = new $GuiGraphics(Client, poseStack, multiBufferSource)
     poseStack.pushPose()
@@ -253,27 +259,19 @@ NativeEvents.onEvent($RenderLivingEvent$Post, e => {
 
     poseStack.popPose()
 })
-NativeEvents.onEvent($LivingHurtEvent,e=>{
-    if(e.source.immediate.player||e.source.player){
-    hurtTimeLink[e.entity.uuid] = Client.level.time
-    barLink[e.entity.uuid] = e.entity.health / e.entity.maxHealth
-}
+NativeEvents.onEvent($LivingHurtEvent, e => {
+    if (e.source.immediate.player || e.source.player) {
+        hurtTimeLink[e.entity.uuid] = Client.level.time
+        barLink[e.entity.uuid] = e.entity.health / e.entity.maxHealth
+    }
 })
-ItemEvents.firstRightClicked(e=>{
+ItemEvents.firstRightClicked(e => {
     Client.tell(new Set(e.item.nbt.test.toArray()).has('asd'))
 })
 
-//hud显示按键
 NativeEvents.onEvent($RenderGuiEvent$Post, e => {
     let thisGuiGraphics = e.guiGraphics
     let thisPoseStack = thisGuiGraphics.pose()
-    thisPoseStack.pushPose()
-    $InventoryScreen.renderEntityInInventoryFollowsAngle(thisGuiGraphics,
-        Client.window.guiScaledWidth - 50, Client.window.guiScaledHeight - 20, 40,
-        (Client.player.lookAngle.get('x') - Client.player.lookAngle.get('z')) / 2,
-        Client.player.lookAngle.get('y'),
-        Client.player)
-    thisPoseStack.popPose()
     thisPoseStack.pushPose()
     thisPoseStack.translate(50, Client.window.height / 4 - 90, 1000)
     let KeyRender = (/**@type {String} */key, x, y, sizeX, sizeY, displayKey) => {
@@ -388,10 +386,10 @@ NativeEvents.onEvent($RenderTooltipEvent$Pre,e=>{
     )
     e.graphics.pose().popPose()
 })*/
-NativeEvents.onEvent($RenderTooltipEvent$GatherComponents,e=>{
+NativeEvents.onEvent($RenderTooltipEvent$GatherComponents, e => {
 })
-NativeEvents.onEvent($RenderTooltipEvent,e=>{
-    
+NativeEvents.onEvent($RenderTooltipEvent, e => {
+
 })
 
 //=========================
@@ -399,37 +397,269 @@ NativeEvents.onEvent($RenderTooltipEvent,e=>{
 //=========================
 /**@type {Record<string,{x:number,y:number,z:number,life:number,value:number,dx:number,dz:number}>} */
 let damageList = {}
-NativeEvents.onEvent($LivingDamageEvent,e=>{
-    let {amount,entity} = e
-    let {x,y,z,bbHeight} = entity
-    damageList[entity.uuid+Client.level.time]={x:x+Math.random()-0.5,y:y+bbHeight*2+(Math.random()-0.5)/5,z:z+Math.random()-0.5,life:20*1.5,value:amount.toFixed(2)}
+NativeEvents.onEvent($LivingDamageEvent, e => {
+    let { amount, entity } = e
+    let { x, y, z, bbHeight } = entity
+    damageList[entity.uuid + Client.level.time] = { x: x + Math.random() - 0.5, y: y + bbHeight * 2 + (Math.random() - 0.5) / 5, z: z + Math.random() - 0.5, life: 20 * 1.5, value: amount.toFixed(2) }
 })
-ClientEvents.tick(e=>{x
-    for(let key in damageList){
-        if(!damageList[key].life-->0)
+ClientEvents.tick(e => {
+    for (let key in damageList) {
+        if (!damageList[key].life-- > 0)
             delete damageList[key]
     }
 })
-NativeEvents.onEvent($RenderLevelStageEvent,e=>{
-    let {stage,camera,poseStack} = e
-    let guiGraphics = new $GuiGraphics(Client,poseStack,Client.renderBuffers().bufferSource())
-    if(stage!=$RenderLevelStageEvent$Stage.AFTER_SOLID_BLOCKS)return
+NativeEvents.onEvent($RenderLevelStageEvent, e => {
+    let { stage, camera, poseStack } = e
+    let guiGraphics = new $GuiGraphics(Client, poseStack, Client.renderBuffers().bufferSource())
+    if (stage != $RenderLevelStageEvent$Stage.AFTER_SOLID_BLOCKS) return
     poseStack.pushPose()
-    poseStack.translate(-camera.position.x(),-camera.position.y(),-camera.position.z())
-    for(let key in damageList){
-        let {x,y,z,value,life} = damageList[key]
+    poseStack.translate(-camera.position.x(), -camera.position.y(), -camera.position.z())
+    for (let key in damageList) {
+        let { x, y, z, value, life } = damageList[key]
         poseStack.pushPose()
         poseStack.translate(x, y, z)
         poseStack.mulPose(Client.entityRenderDispatcher.cameraOrientation())
-        poseStack.scale(0.04,0.04,0.04)
+        poseStack.scale(0.04, 0.04, 0.04)
         poseStack.rotateZ(180)
         guiGraphics['drawString(net.minecraft.client.gui.Font,java.lang.String,float,float,int,boolean)'](
-                Client.font, String(value),
-                -Client.font.width(String(value))/2, 0,
-                rgbaColor(235,16,32,life*3),
-                false
-            )
+            Client.font, String(value),
+            -Client.font.width(String(value)) / 2, 0,
+            rgbaColor(235, 16, 32, life * 3),
+            false
+        )
         poseStack.popPose()
     }
     poseStack.popPose()
 })
+//=============================
+//BossBar渲染
+//=============================
+let BossBarLink = { uuid: '', health: 1, bar: 1 }
+let BossBarChage = []
+let countDown = 0
+let barWidht = 10000
+NativeEvents.onEvent($LivingDamageEvent, e => {
+    let { source: { actual, immediate }, entity, amount } = e
+    if ((actual && actual.isPlayer()) || (immediate && immediate.isPlayer())) {
+        if ((actual && actual.username == Client.player.username) || (immediate && immediate.username == Client.player.username)) {
+            let health = (entity.health - amount) / entity.maxHealth
+            BossBarLink.health = health < 0 ? 0 : health
+            BossBarChage.push({ type: 'D', amount: amount.toFixed(2), time: 120, x: BossBarLink.health })
+            if (BossBarLink.uuid != entity.uuid) {
+                BossBarLink.bar = entity.health / entity.maxHealth
+                BossBarLink.uuid = entity.uuid
+            }
+        }
+    }
+})
+NativeEvents.onEvent($LivingHealEvent, e => {
+    let { entity, amount } = e
+    if (entity.uuid == BossBarLink.uuid) {
+        let health = (entity.health + amount) / entity.maxHealth
+        BossBarLink.health = health > 1 ? 1 : health
+        BossBarChage.push({ type: 'H', amount: amount.toFixed(2), time: 120, x: BossBarLink.health })
+    }
+})
+NativeEvents.onEvent($RenderGuiEvent$Post, e => {
+
+    let Util = new MyGuiGraphicsUtils().buildWithGuiGraphics(e.guiGraphics)
+    Util.poseStackStart(1)
+    Util.translate(Client.window.guiScaledWidth/2,Client.window.guiScaledHeight/2)
+    Util.rotate('Z',45)
+    Util.drawStringInCenter('11111111',0,0,-1,false,111)
+    Util.fill(-10,0,111,20,20,rgbaColor(255,0,255,100),rgbaColor(0,255,255,30))
+    Util.poseStackEnd()
+
+
+    if (!BossBarLink.uuid) return
+    let { guiGraphics } = e
+    /**@type {$PoseStack_} */
+    let poseStack = guiGraphics.pose()
+    poseStack.pushPose()
+    poseStack.translate(Client.window.guiScaledWidth / 2, 10, 0)
+
+    if (BossBarLink.health <= 0) {
+        countDown -= 0.03
+        poseStack.translate(0, countDown, 0)
+        if (countDown < -25) {
+            BossBarLink = { uuid: '', health: 1, bar: 1 }
+            countDown = 0
+        }
+    }
+
+
+    //灰条
+    guiGraphics.fill(-1 - barWidht / 100, 9, 1 + barWidht / 100, 16, rgbaColor(114, 114, 114, 100))
+    //进行缩放用来获得更流畅的动画
+    poseStack.scale(0.02, 1, 1)
+    poseStack.translate(-barWidht / 2, 0, 0)
+    //白条 绿条
+    {
+        poseStack.pushPose()
+        poseStack.translate(BossBarLink.health * barWidht, 0, 1)
+        if (BossBarLink.health < BossBarLink.bar) {
+            BossBarLink.bar -= 0.001
+            if (BossBarLink.bar < BossBarLink.health) BossBarLink.bar = BossBarLink.health
+            guiGraphics.fill(0, 10, (-BossBarLink.health + BossBarLink.bar) * barWidht, 15, rgbaColor(255, 255, 255, 100))
+        }
+        if (BossBarLink.health > BossBarLink.bar) {
+            BossBarLink.bar += 0.0003
+            if (BossBarLink.bar > BossBarLink.health) BossBarLink.bar = BossBarLink.health
+            guiGraphics.fill(0, 10, (-BossBarLink.health + BossBarLink.bar) * barWidht, 15, rgbaColor(0, 255, 0, 100))
+        }
+        poseStack.popPose()
+    }
+    //红条
+    guiGraphics.fill(0, 10, BossBarLink.health * barWidht, 15, rgbaColor(243, 12, 65, 100))
+    BossBarChage.forEach((v, i) => {
+        poseStack.pushPose()
+        poseStack.scale(1 / 0.02, 1, 1)
+        if (v.type == 'D')
+            guiGraphics['drawString(net.minecraft.client.gui.Font,java.lang.String,float,float,int,boolean)'](
+                Client.font, '-' + v.amount,
+                v.x * barWidht / 50 - Client.font.width('-' + v.amount) / 2, 18 - v.time / 60,
+                rgbaColor(235, 16, 32, v.time * 1),
+                false
+            )
+        if (v.type == 'H')
+            guiGraphics['drawString(net.minecraft.client.gui.Font,java.lang.String,float,float,int,boolean)'](
+                Client.font, '+' + v.amount,
+                v.x * barWidht / 50 - Client.font.width('+' + v.amount) / 2, 0 + v.time / 60,
+                rgbaColor(50, 214, 32, v.time * 1),
+                false
+            )
+        if (BossBarChage[i].time-- < 0)
+            BossBarChage.shift()
+        poseStack.popPose()
+    })
+    poseStack.popPose()
+})
+NativeEvents.onEvent($RenderLevelStageEvent, e => {
+    let { stage, camera, poseStack } = e
+    if (stage != $RenderLevelStageEvent$Stage.AFTER_SOLID_BLOCKS) return
+    poseStack.pushPose()
+    //poseStack.translate(-camera.position.x(), -camera.position.y(), -camera.position.z())
+
+    //poseStack.translate(37, -59, 120)
+    //poseStack.mulPose(Client.entityRenderDispatcher.cameraOrientation())
+
+
+    // 获取 Tesselator 实例和 BufferBuilder
+    let tesselator = $Tesselator.getInstance()
+    let buffer = tesselator.getBuilder()
+    // 开始构建顶点（此处以 QUADS 为例）
+    buffer.begin($VertexFormat$Mode.QUADS, $DefaultVertexFormat.POSITION_COLOR)
+
+    // 定义顶点坐标和颜色（绘制一个红色四边形）
+    const x = 37, y = -59, z = 120 // 世界坐标原点
+    const size = 100
+    const red = 1.0, green = 0.0, blue = 0.0, alpha = 1.0
+
+    // 添加四个顶点
+    buffer.vertex(poseStack.last().pose(), x, y, z).color(red, green, blue, alpha).uv(20,20).uv2(240, 240).endVertex()
+    buffer.vertex(poseStack.last().pose(), x + size, y, z).color(red, green, blue, alpha).uv(50,20).uv2(240, 240).endVertex()
+    buffer.vertex(poseStack.last().pose(), x + size, y + size, z).color(red, green, blue, alpha).uv(0,0,).uv2(240, 240).endVertex()
+    buffer.vertex(poseStack.last().pose(), x, y + size, z).color(red, green, blue, alpha).uv(0,0).uv2(240, 240).endVertex()
+
+    // 完成构建并上传数据
+    tesselator.end()
+
+    //poseStack.rotateZ(180)
+    poseStack.popPose()
+})
+let fff = true
+let ffff = 0
+NativeEvents.onEvent($RenderGuiOverlayEvent$Pre, e => {
+    if(fff||ffff==e.partialTick){
+        //console.log(e.overlay.id())
+        fff=false,
+        ffff=e.partialTick
+    }
+    if(RenderGuiOverlayEvent[e.overlay.id()]!=undefined)
+        RenderGuiOverlayEvent[e.overlay.id()](e)
+})
+/**@type {Record<overlay,(e:$RenderGuiOverlayEvent$Pre_)=>viod>} */
+let RenderGuiOverlayEvent ={
+    'minecraft:player_health':e=>{
+        e.setCanceled(true)
+    },
+    'minecraft:food_level':e=>{
+        e.setCanceled(true)
+    },
+    'yes_steve_model:ysm_extra_player':e=>{
+        e.setCanceled(true)
+    }
+}
+
+/**
+ * @typedef {"relics:active_abilities"|
+ * "relics:researching_hint"|
+ * "tetra:multiblock_schematic"|
+ * "tetra:scanner"|
+ * "tetra:crossbow"|
+ * "tetra:ranged_progresss"|
+ * "tetra:block_progresss"|
+ * "tetra:booster"|
+ * "tetra:secondary_interaction"|
+ * "tetra:toolbelt"|
+ * "tetra:ability_overlays"|
+ * "tetra:howling"|
+ * "minecraft:vignette"|
+ * "minecraft:spyglass"|
+ * "minecraft:helmet"|
+ * "minecraft:frostbite"|
+ * "minecraft:portal"|
+ * "minecraft:hotbar"|
+ * "create:toolbox"|
+ * "create:schematic"|
+ * "create:linked_controller"|
+ * "create:blueprint"|
+ * "create:goggle_info"|
+ * "create:track_placement"|
+ * "create:value_settings"|
+ * "sophisticatedstorage:paintbrush_info"|
+ * "sophisticatedstorage:storage_tool_info"|
+ * "ars_nouveau:tooltip"|
+ * "minecraft:crosshair"|
+ * "l2itemselector:tool_select"|
+ * "modulargolems:golem_stats"|
+ * "patchouli:book_right_click"|
+ * "touhou_little_maid:tlm_broom_tips"|
+ * "touhou_little_maid:tlm_maid_tips"|
+ * "xaeroworldmap:xaero_wm_crosshair_message"|
+ * "patchouli:multiblock_progress"|
+ * "minecraft:boss_event_progress"|
+ * "minecraft:player_health"|
+ * "minecraft:armor_level"|
+ * "minecraft:food_level"|
+ * "minecraft:air_level"|
+ * "create:remaining_air"|
+ * "minecraft:mount_health"|
+ * "minecraft:jump_bar"|
+ * "minecraft:experience_bar"|
+ * "create:train_hud"|
+ * "minecraft:item_name"|
+ * "minecraft:sleep_fade"|
+ * "minecraft:potion_icons"|
+ * "minecraft:debug_text"|
+ * "minecraft:fps_graph"|
+ * "minecraft:record_overlay"|
+ * "minecraft:title_text"|
+ * "minecraft:subtitles"|
+ * "minecraft:scoreboard"|
+ * "minecraft:chat_panel"|
+ * "minecraft:player_list"|
+ * "mna:mna_overlays"|
+ * "mna:mna_main_hud"|
+ * "mna:mna_pinned_recipe"|
+ * "mna:mna_cantrip_timer"|
+ * "mna:mna_manaweave_timer"|
+ * "mna:mna_spellbook_chord_hud"|
+ * "ars_nouveau:scry_camera"|
+ * "ars_nouveau:mana_hud"|
+ * "ars_nouveau:spell_hud"|
+ * "refurbished_furniture:power_indicator"|
+ * "refurbished_furniture:cutting_board_helper"
+ * "yes_steve_model:ysm_extra_player"|
+ * "yes_steve_model:ysm_debug_info"} overlay 
+ * */

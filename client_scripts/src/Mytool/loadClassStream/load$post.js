@@ -28,5 +28,19 @@ let {
     $ScreenEvent$MouseButtonPressed$Post,
     $ScreenEvent$MouseDragged$Post,
     $ScreenEvent$MouseScrolled$Post,
-    $ScreenEvent$Opening
+    $ScreenEvent$Opening,
+    $BundleTooltip,
+    $CustomizeGuiOverlayEvent$BossEventProgress,
+    $Either,
+    $LivingAttackEvent,
+    $LivingDamageEvent,
+    $LivingHealEvent,
+    $LivingHurtEvent,
+    $NonNullList,
+    $RenderGuiEvent$Pre,
+    $RenderLevelStageEvent,
+    $RenderLevelStageEvent$Stage,
+    $RenderTooltipEvent$Color,
+    $ScreenEvent$CharacterTyped$Post,
+    $ScreenEvent$KeyPressed$Post
 } = myRequire

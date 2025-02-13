@@ -3,7 +3,6 @@
 
 ItemEvents.crafted(e=>{
     let item = e.item
-    e.player.tell(e.player)
     if(item.hasTag('minecraft:swords')&&!item.nbt?.owner)
         item.getOrCreateTag().owner = e.player.username
 })

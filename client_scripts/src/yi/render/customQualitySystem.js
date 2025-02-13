@@ -1,6 +1,5 @@
 //priority:999
 
-const { $RenderTooltipEvent$Color } = require("packages/net/minecraftforge/client/event/$RenderTooltipEvent$Color")
 let customQuality = {
     'evil': { R: 245, G: 25, B: 164, A: 80 }
 }

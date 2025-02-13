@@ -1,3 +1,4 @@
+const { $Enemy } = require("packages/net/minecraft/world/entity/monster/$Enemy")
 const { $Boat } = require("packages/net/minecraft/world/entity/vehicle/$Boat")
 const { $ChestBoat } = require("packages/net/minecraft/world/entity/vehicle/$ChestBoat")
 const { $ArmorItem } = require("packages/net/minecraft/world/item/$ArmorItem")
@@ -151,9 +152,14 @@ ItemEvents.entityInteracted(e=>{
     e.target.converTo
 })
 ServerEvents.tags('item',e=>{
-    Ingredient.of('@ae2').itemStacks.forEach(item=>{
+    Ingredient.of('@ae2').getItemIds().forEach(item=>{
         if(Item.of(item).item instanceof $SwordItem)
             console.log(item)
             //e.add('minecraft:swords',id)
     })
 })
+let allItems = {item:[]}
+Ingredient.all.getItemIds().forEach(id=>{
+    allItems.item.push(id)
+})
+JsonIO.write('./kubejs/AllItems.json',allItems)

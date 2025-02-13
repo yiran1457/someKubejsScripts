@@ -1,9 +1,4 @@
 
-const { $Either } = require("packages/com/mojang/datafixers/util/$Either")
-const { $NonNullList } = require("packages/net/minecraft/core/$NonNullList")
-const { $BundleTooltip } = require("packages/net/minecraft/world/inventory/tooltip/$BundleTooltip")
-const { $RenderGuiEvent$Pre } = require("packages/net/minecraftforge/client/event/$RenderGuiEvent$Pre")
-const { $RenderTooltipEvent$GatherComponents } = require("packages/net/minecraftforge/client/event/$RenderTooltipEvent$GatherComponents")
 
 NetworkEvents.dataReceived('hud',e=>{
     for(let key in e.data)
@@ -19,6 +14,8 @@ RenderJSEvents.onGuiPreRender(e=>{
 NativeEvents.onEvent($RenderGuiEvent$Pre,e=>{
     let mydate = new Date(Utils.getSystemTime())
     let { screenHeight:H, screenWidth:W ,guiScaledHeight:H0} = e.window
+    let thisGuiGraphics = e.guiGraphics
+    let thisPoseStack = thisGuiGraphics.pose()
     let fristHigh = H0*0.12
     e.guiGraphics['drawString(net.minecraft.client.gui.Font,java.lang.String,float,float,int,boolean)'](
         Client.font, `当前时间 ${mydate.getHours().toString().padStart(2, '0')}:${mydate.getMinutes().toString().padStart(2, '0')}:${mydate.getSeconds().toString().padStart(2, '0')}`,//字体与渲染字符
@@ -44,6 +41,18 @@ NativeEvents.onEvent($RenderGuiEvent$Pre,e=>{
         rgbaColor(255, 255, 255, 100),//RGBA
         true//是否绘制文字阴影
     )
+
+    //右下角显示额外玩家渲染
+    thisPoseStack.pushPose()
+    let startQuaternionf = new Quaternionf()
+    startQuaternionf.rotateX(3.14)
+    startQuaternionf.rotateY((Client.player.yBodyRot - 15) * (KMath.PI / 180))
+    $InventoryScreen.renderEntityInInventory(thisGuiGraphics,
+        Client.window.guiScaledWidth - 50, Client.window.guiScaledHeight - 20, 40,
+        startQuaternionf, new Quaternionf(),
+        Client.player
+    )
+    thisPoseStack.popPose()
     //e.guiGraphics.renderItem(Item.of('redstone'),255,255,1)
 })
 

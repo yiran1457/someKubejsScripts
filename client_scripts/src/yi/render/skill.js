@@ -1,5 +1,3 @@
-const { $ScreenEvent$CharacterTyped$Post } = require("packages/net/minecraftforge/client/event/$ScreenEvent$CharacterTyped$Post")
-const { $ScreenEvent$KeyPressed$Post } = require("packages/net/minecraftforge/client/event/$ScreenEvent$KeyPressed$Post")
 
 let json = JsonIO.read('./kubejs/yi/newSkillTree.json')
 
@@ -233,9 +231,6 @@ NativeEvents.onEvent($ScreenEvent$MouseButtonPressed$Post, e => {
         }
     }
 })
-let x = [1,2,3,4]
-Client.tell(x.splice(0,1))
-Client.tell(x)
 NativeEvents.onEvent($ScreenEvent$Render$Post, e => {
     let { screen, guiGraphics } = e
     if (screen instanceof $LecternScreen && Client.player.containerMenu.containerId == 123) {

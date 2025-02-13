@@ -5,6 +5,7 @@ RenderJSEvents.RegisterItemDecorations(e => {
 
     tetra_item.forEach(id => {
         e.register(id, 'Energy', c => {
+            if(!c.itemStack.nbt)return
             let MaxEnergy = c.itemStack.nbt.getInt('MaxEnergy')
             if (MaxEnergy > 0) {
                 let Energy = c.itemStack.nbt.getInt('Energy')

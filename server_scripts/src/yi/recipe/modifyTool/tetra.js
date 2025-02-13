@@ -243,3 +243,71 @@ ItemEvents.rightClicked(e => {
 
 
 
+
+ServerEvents.highPriorityData(e => {
+    let Offset = -5
+    e.addJson('tetra:archetypes/yi', {
+        id: 'yi',
+        //是否可以打磨
+        honeable: true,
+        //打磨基础值
+        honeBase: 100,
+        //不知道做什么的，机翻是 完整性乘数值用于计算物品需使用多少次才能进行精炼
+        honeIntegrityMultiplier: 1,
+        //定义槽位
+        slots: [{
+            //槽位id
+            key: 'R_index1',
+            //是否为主要槽位，允许打磨等改进
+            major: true,
+            //是否为必须(不可拆卸)
+            required: false,
+            //槽位在gui中的位置,xy默认为5
+            x: 16+Offset,
+            y: 5+Offset
+        },{
+            key: 'R_index2',
+            major: true,
+            required: false,
+            x: 6+Offset,
+            y: -4+Offset
+        },{
+            key: 'R_index3',
+            major: true,
+            required: false,
+            x: 16+Offset,
+            y: 23+Offset
+        },{
+            key: 'R_index4',
+            major: true,
+            required: false,
+            x: 6+Offset,
+            y: 32+Offset
+        },{
+            key: 'L_index1',
+            major: true,
+            required: false,
+            x: -6+Offset,
+            y: -4+Offset
+        },{
+            key: 'L_index2',
+            major: true,
+            required: false,
+            x: -16+Offset,
+            y: 23+Offset
+        },{
+            key: 'L_index3',
+            major: true,
+            required: false,
+            x: -6+Offset,
+            y: 32+Offset
+        },{
+            key: 'L_index4',
+            major: true,
+            required: false,
+            x: -16+Offset,
+            y: 5+Offset
+        },
+        ]
+    })
+})

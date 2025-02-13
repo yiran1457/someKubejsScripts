@@ -55,6 +55,9 @@ StartupEvents.registry('item', event => {
         .attachCapability(CuriosCapabilityBuilder.CURIOS.itemStack()
             .curioTick((i, c) => {
             })
+            .canEquip((i, c) => {
+                return true
+            })
         )
         .tag('curios:mirror')
 
