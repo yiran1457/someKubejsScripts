@@ -1,0 +1,10 @@
+[
+    {
+        "key": "basic_hilt/soot",
+        "models": [
+            {
+                "location": "tetra:item/module/sword/hilt/basic/improvements/soot"
+            }
+        ]
+    }
+]

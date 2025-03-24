@@ -1,0 +1,65 @@
+{
+    "replace": true,
+    "type": "tetra:toolbelt_module",
+    "slots": [ "toolbelt/slot1", "toolbelt/slot2", "toolbelt/slot3" ],
+    "slotSuffixes": [ "_slot1", "_slot2", "_slot3" ],
+    "improvements": [ "tetra:toolbelt/storage" ],
+    "variants": [
+        {
+            "key": "storage/forged_mesh",
+            "integrity": -3,
+            "aspects": {
+                "storage": 1
+            },
+            "effects": {
+                "storageSlot": 13
+            },
+            "glyph": {
+                "tint": "383838",
+                "textureX": 192
+            }
+        },
+        {
+            "key": "storage/leather",
+            "integrity": -4,
+            "aspects": {
+                "storage": 1
+            },
+            "effects": {
+                "storageSlot": 16
+            },
+            "glyph": {
+                "tint": "866526",
+                "textureX": 192
+            }
+        },
+        {
+            "key": "storage/wool",
+            "integrity": -1,
+            "aspects": {
+                "storage": 1
+            },
+            "effects": {
+                "storageSlot": 6
+            },
+            "glyph": {
+                "tint": "fefefe",
+                "textureX": 192
+            }
+        },
+        {
+            "key": "storage/hide",
+            "integrity": 0,
+            "aspects": {
+                "storage": 1
+            },
+            "effects": {
+                "storageSlot": 4
+            },
+            "glyph": {
+                "tint": "a88054",
+                "textureX": 192
+            }
+        }
+    ]
+}

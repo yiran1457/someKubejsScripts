@@ -1,0 +1,42 @@
+{
+    "replace": true,
+    "slots": [
+        "toolbelt/slot1",
+        "toolbelt/slot2",
+        "toolbelt/slot3"
+    ],
+    "keySuffixes": [
+        "_slot1",
+        "_slot2",
+        "_slot3"
+    ],
+    "materialSlotCount": 1,
+    "glyph": {
+        "textureX": 128
+    },
+    "displayType": "major",
+    "outcomes": [
+        {
+            "material": {
+                "items": [ "minecraft:leather" ],
+                "count": 4
+            },
+            "requiredTools": {
+                "cut": "minecraft:iron"
+            },
+            "moduleKey": "toolbelt/strap",
+            "moduleVariant": "strap4/leather"
+        },
+        {
+            "material": {
+                "items": [ "minecraft:iron_ingot" ],
+                "count": 4
+            },
+            "requiredTools": {
+                "hammer_dig": "minecraft:netherite"
+            },
+            "moduleKey": "toolbelt/strap",
+            "moduleVariant": "strap4/iron"
+        }
+    ]
+}

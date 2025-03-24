@@ -1,0 +1,14 @@
+crash-reports
+.idea
+.probe
+.vscode
+local
+logs
+modernfix
+mods/.index
+saves
+emi.json
+icon.png
+rhino.local.properties
+usercache.json
+usernamecache.json

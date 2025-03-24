@@ -1,0 +1,44 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "aaaa"
+	group: ""
+	id: "083E0B4A7C2A46EF"
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			id: "675AE7CFF0E4E1A6"
+			tasks: [{
+				id: "1A398036EA4277DE"
+				stage: ""
+				type: "gamestage"
+			}]
+			title: "这是一个任务标题"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["2600BF7D5D599430"]
+			id: "55877AE8B51DDD8E"
+			tasks: [{
+				id: "0984C9D5DE65EA38"
+				item: "minecraft:oak_button"
+				type: "item"
+			}]
+			x: 1.5d
+			y: 0.0d
+		}
+		{
+			id: "2600BF7D5D599430"
+			tasks: [{
+				id: "39F63D823700CB9C"
+				item: "minecraft:oak_planks"
+				type: "item"
+			}]
+			x: 3.0d
+			y: 0.0d
+		}
+	]
+	title: "aaaa"
+}

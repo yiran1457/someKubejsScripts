@@ -1,0 +1,15 @@
+{
+    "replace": true,
+    "type": "tetra:basic_major_module",
+    "slots": ["holo/repo"],
+    "variants": [
+        {
+            "key": "repo/default",
+            "glyph": {
+                "textureX": 192,
+                "textureY": 48
+            },
+            "models": []
+        }
+    ]
+}

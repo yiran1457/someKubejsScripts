@@ -1,0 +1,47 @@
+{
+    "replace": true,
+    "slots": ["single/head"],
+    "materialSlotCount": 0,
+    "hone": true,
+    "rarity": "hone",
+    "displayType": "major",
+    "glyph": {
+        "textureX": 224,
+        "textureY": 32
+    },
+    "requirement": {
+        "type": "tetra:and",
+        "requirements": [
+            {
+                "type": "tetra:or",
+                "requirements": [
+                    {
+                        "type": "tetra:module",
+                        "module": "single/earthpiercer"
+                    },
+                    {
+                        "type": "tetra:module",
+                        "module": "single/unbound_earthpiercer"
+                    }
+                ]
+            },
+            {
+                "type": "tetra:not",
+                "requirement": {
+                    "type": "tetra:improvement",
+                    "improvement": "head_hone/piercing"
+                }
+            }
+        ]
+    },
+    "outcomes": [
+        {
+            "requiredTools": {
+                "hammer_dig": "minecraft:iron"
+            },
+            "improvements": {
+                "head_hone/piercing": 1
+            }
+        }
+    ]
+}

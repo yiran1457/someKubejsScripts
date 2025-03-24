@@ -1,0 +1,46 @@
+[
+    {
+        "key": "hone_gild",
+        "level": 1,
+        "aspects": {
+            "honed": 1
+        },
+        "magicCapacity": 12
+    },
+    {
+        "key": "hone_gild",
+        "level": 2,
+        "integrity": -1,
+        "aspects": {
+            "honed": 2
+        },
+        "magicCapacity": 24
+    },
+    {
+        "key": "hone_gild",
+        "level": 3,
+        "integrity": -1,
+        "aspects": {
+            "honed": 3
+        },
+        "magicCapacity": 36
+    },
+    {
+        "key": "hone_gild",
+        "level": 4,
+        "integrity": -2,
+        "aspects": {
+            "honed": 4
+        },
+        "magicCapacity": 48
+    },
+    {
+        "key": "hone_gild",
+        "level": 5,
+        "integrity": -2,
+        "aspects": {
+            "honed": 5
+        },
+        "magicCapacity": 60
+    }
+]

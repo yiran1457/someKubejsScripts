@@ -1,0 +1,44 @@
+{
+    "replace": true,
+    "slots": [ "sword/hilt" ],
+    "type": "tetra:basic_major_module",
+    "renderLayer": "lower",
+    "improvements": [
+        "tetra:sword/basic_hilt/",
+        "tetra:sword/shared_hilt/",
+        "tetra:sword/shared/",
+        "tetra:shared/"
+    ],
+    "variants": [
+        {
+            "materials": [ "tetra:wood/", "tetra:metal/", "tetra:bone/", "tetra:rod/" ],
+            "key": "basic_hilt/",
+            "attributes": {
+                "generic.attack_speed": -0.35
+            },
+            "aspects": {
+                "edged_weapon": 2,
+                "breakable": 2
+            },
+            "durability": 8,
+            "integrity": 1,
+            "extract": {
+                "secondaryAttributes": {
+                    "generic.attack_speed": -0.1
+                },
+                "durability": 0.3,
+                "integrity": 1,
+                "magicCapacity": 1,
+                "glyph": {
+                    "textureX": 16
+                },
+                "availableTextures": [ "bright", "default" ],
+                "models": [
+                    {
+                        "location": "tetra:item/module/sword/hilt/basic/"
+                    }
+                ]
+            }
+        }
+    ]
+}

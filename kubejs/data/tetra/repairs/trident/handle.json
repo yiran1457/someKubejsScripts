@@ -1,0 +1,11 @@
+{
+    "material": {
+        "items": [ "minecraft:prismarine_shard" ],
+        "count": 3
+    },
+    "requiredTools": {
+        "hammer_dig": "minecraft:iron"
+    },
+    "moduleKey": "single/light_handle",
+    "moduleVariant": "light_handle/prismarine"
+}

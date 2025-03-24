@@ -1,0 +1,37 @@
+{
+    "replace": true,
+    "slots": ["holo/scanner"],
+    "materialSlotCount": 1,
+    "glyph": {
+        "textureX": 112,
+        "textureY": 48
+    },
+    "displayType": "improvement",
+    "requirement": {
+        "type": "tetra:and",
+        "requirements": [
+            {
+                "type": "tetra:improvement",
+                "improvement": "scanner/sweeper"
+            },
+            {
+                "type": "tetra:not",
+                "requirement": {
+                    "type": "tetra:improvement",
+                    "improvement": "scanner/sweeper_adjustable"
+                }
+            }
+        ]
+    },
+    "outcomes": [
+        {
+            "material": {
+                "items": ["tetra:forged_bolt"],
+                "count": 2
+            },
+            "improvements": {
+                "scanner/sweeper_adjustable": 0
+            }
+        }
+    ]
+}

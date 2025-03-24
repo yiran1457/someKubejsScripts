@@ -1,0 +1,17 @@
+{
+    "replace": true,
+    "type": "tetra:basic_major_module",
+    "slots": ["holo/scanner"],
+    "improvements": ["tetra:holo/scanner/"],
+    "tweakKey": "tetra:holo/sweeper_adjustable",
+    "variants": [
+        {
+            "key": "scanner/default",
+            "glyph": {
+                "textureX": 112,
+                "textureY": 48
+            },
+            "models": []
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+[
+    {
+        "key": "workable",
+        "level": 1,
+        "effects": {
+            "workable": 15
+        }
+    },
+    {
+        "key": "workable",
+        "level": 2,
+        "effects": {
+            "workable": 25
+        }
+    }
+]

@@ -1,0 +1,56 @@
+[
+    {
+        "key": "unbound_extractor/potency",
+        "level": 1,
+        "aspects": {
+            "honed": 1
+        },
+        "effects": {
+            "unboundExtraction": 5
+        }
+    },
+    {
+        "key": "unbound_extractor/potency",
+        "level": 2,
+        "integrity": -1,
+        "aspects": {
+            "honed": 2
+        },
+        "effects": {
+            "unboundExtraction": 10
+        }
+    },
+    {
+        "key": "unbound_extractor/potency",
+        "level": 3,
+        "integrity": -1,
+        "aspects": {
+            "honed": 3
+        },
+        "effects": {
+            "unboundExtraction": 15
+        }
+    },
+    {
+        "key": "unbound_extractor/potency",
+        "level": 4,
+        "integrity": -2,
+        "aspects": {
+            "honed": 4
+        },
+        "effects": {
+            "unboundExtraction": 20
+        }
+    },
+    {
+        "key": "unbound_extractor/potency",
+        "level": 5,
+        "integrity": -2,
+        "aspects": {
+            "honed": 5
+        },
+        "effects": {
+            "unboundExtraction": 25
+        }
+    }
+]

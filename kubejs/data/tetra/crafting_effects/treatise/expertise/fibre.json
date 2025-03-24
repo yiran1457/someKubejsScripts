@@ -1,0 +1,31 @@
+{
+    "replace": true,
+    "requirement": {
+        "type": "tetra:and",
+        "requirements": [
+            {
+                "type": "tetra:locked",
+                "key": "tetra:fibre_expertise"
+            },
+            {
+                "type": "tetra:craft_type",
+                "craft": "module"
+            },
+            {
+                "type": "tetra:material",
+                "material": {
+                    "type": "tetra:material",
+                    "category": "fibre"
+                }
+            }
+        ]
+    },
+    "outcomes": [
+        {
+            "type": "tetra:apply_improvements",
+            "improvements": {
+                "quality": 1
+            }
+        }
+    ]
+}

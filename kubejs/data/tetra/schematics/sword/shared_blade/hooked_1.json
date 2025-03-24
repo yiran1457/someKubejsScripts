@@ -1,0 +1,34 @@
+{
+    "replace": true,
+    "slots": [
+        "sword/blade"
+    ],
+    "materialSlotCount": 0,
+    "displayType": "improvement",
+    "requirement": {
+        "type": "tetra:and",
+        "requirements": [
+            {
+                "type": "tetra:not",
+                "requirement": {
+                    "type": "tetra:improvement",
+                    "improvement": "blade/hooked"
+                }
+            },
+            {
+                "type": "tetra:accepts_improvement",
+                "improvement": "blade/hooked"
+            }
+        ]
+    },
+    "outcomes": [
+        {
+            "requiredTools": {
+                "hammer_dig": "minecraft:stone"
+            },
+            "improvements": {
+                "blade/hooked": 1
+            }
+        }
+    ]
+}

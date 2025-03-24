@@ -1,0 +1,28 @@
+{
+    //测试功能
+    "BrokenClassFilter$Server": false,
+    "BrokenClassFilter$Client": false,
+    "BrokenClassFilter$Startup": false,
+
+    //=================
+    //客户端功能
+    //=================
+
+    //功能开关
+    "ExtraPlayerRender": true,
+    "ModifyMainMenu": true,
+    "ItemQuestLink": true,
+    "QualitySystemTooltip": true,
+
+    //ftb任务相关
+    "MaxHoldTime": 30,
+    "ToolTipLength": 20,
+    "DisplayQuest": true,
+
+    //=================
+    //服务器功能
+    //=================
+
+    //功能开关
+    "QualitySystem": true
+}

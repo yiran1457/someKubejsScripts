@@ -1,0 +1,44 @@
+[
+    {
+        "key": "unbound_stonecutter/fractured",
+        "level": 1,
+        "integrity": -1,
+        "effects": {
+            "sculkTaint": [ 0, 0.005 ]
+        },
+        "attributes": {
+            "generic.attack_speed": 0.1
+        },
+        "tools": {
+            "pickaxe_dig": [ 0, 5 ]
+        }
+    },
+    {
+        "key": "unbound_stonecutter/fractured",
+        "level": 2,
+        "integrity": -1,
+        "effects": {
+            "sculkTaint": [ 0, 0.01 ]
+        },
+        "attributes": {
+            "generic.attack_speed": 0.2
+        },
+        "tools": {
+            "pickaxe_dig": [ 0, 10 ]
+        }
+    },
+    {
+        "key": "unbound_stonecutter/fractured",
+        "level": 3,
+        "integrity": -2,
+        "effects": {
+            "sculkTaint": [ 0, 0.015 ]
+        },
+        "attributes": {
+            "generic.attack_speed": 0.3
+        },
+        "tools": {
+            "pickaxe_dig": [ 0, 15 ]
+        }
+    }
+]

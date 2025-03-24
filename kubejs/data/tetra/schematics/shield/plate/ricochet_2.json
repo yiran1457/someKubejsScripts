@@ -1,0 +1,29 @@
+{
+    "replace": true,
+    "slots": [
+        "shield/plate"
+    ],
+    "materialSlotCount": 0,
+    "hone": true,
+    "rarity": "hone",
+    "displayType": "improvement",
+    "glyph": {
+        "textureX": 80,
+        "textureY": 240
+    },
+    "requirement": {
+        "type": "tetra:improvement",
+        "improvement": "shield/ricochet",
+        "level": 1
+    },
+    "outcomes": [
+        {
+            "requiredTools": {
+                "hammer_dig": "minecraft:iron"
+            },
+            "improvements": {
+                "shield/ricochet": 2
+            }
+        }
+    ]
+}

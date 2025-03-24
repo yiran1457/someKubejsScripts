@@ -1,0 +1,26 @@
+{
+    "replace": true,
+    "slots": [
+        "single/head"
+    ],
+    "materialSlotCount": 1,
+    "materialRevealSlot": 0,
+    "rarity": "temporary",
+    "displayType": "major",
+    "glyph": {
+        "textureX": 224,
+        "textureY": 32
+    },
+    "outcomes": [
+        {
+            "material": {
+                "items": [ "tetra:earthpiercer" ]
+            },
+            "requiredTools": {
+                "hammer_dig": "minecraft:wood"
+            },
+            "moduleKey": "single/earthpiercer",
+            "moduleVariant": "earthpiercer/earthpiercer"
+        }
+    ]
+}

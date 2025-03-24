@@ -1,0 +1,32 @@
+{
+    "replace": true,
+    "slots": ["sword/blade"],
+    "materialSlotCount": 0,
+    "displayType": "improvement",
+    "requirement": {
+        "type": "tetra:and",
+        "requirements": [
+            {
+                "type": "tetra:not",
+                "requirement": {
+                    "type": "tetra:improvement",
+                    "improvement": "blade/serrated"
+                }
+            },
+            {
+                "type": "tetra:accepts_improvement",
+                "improvement": "blade/serrated"
+            }
+        ]
+    },
+    "outcomes": [
+        {
+            "requiredTools": {
+                "hammer_dig": "minecraft:stone"
+            },
+            "improvements": {
+                "blade/serrated": 1
+            }
+        }
+    ]
+}

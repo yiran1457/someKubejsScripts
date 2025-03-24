@@ -1,0 +1,28 @@
+{
+    "replace": true,
+    "slots": ["holo/scanner"],
+    "repair": false,
+    "materialSlotCount": 1,
+    "glyph": {
+        "textureX": 112,
+        "textureY": 48
+    },
+    "displayType": "improvement",
+    "requirement": {
+        "type": "tetra:not",
+        "requirement": {
+            "type": "tetra:improvement",
+            "improvement": "scanner/sweeper"
+        }
+    },
+    "outcomes": [
+        {
+            "material": {
+                "items": ["minecraft:ender_eye"]
+            },
+            "improvements": {
+                "scanner/sweeper": 0
+            }
+        }
+    ]
+}

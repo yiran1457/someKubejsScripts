@@ -1,0 +1,25 @@
+{
+    "replace": true,
+    "slots": [
+        "sword/blade"
+    ],
+    "materialSlotCount": 0,
+    "hone": true,
+    "rarity": "hone",
+    "displayType": "improvement",
+    "requirement": {
+        "type": "tetra:improvement",
+        "improvement": "blade/tempered",
+        "level": 2
+    },
+    "outcomes": [
+        {
+            "requiredTools": {
+                "hammer_dig": "minecraft:iron"
+            },
+            "improvements": {
+                "blade/tempered": 3
+            }
+        }
+    ]
+}

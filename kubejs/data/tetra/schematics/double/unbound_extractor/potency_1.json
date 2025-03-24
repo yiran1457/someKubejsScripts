@@ -1,0 +1,41 @@
+{
+    "replace": true,
+    "slots": ["double/head_right"],
+    "materialSlotCount": 0,
+    "hone": true,
+    "rarity": "temporary",
+    "displayType": "improvement",
+    "glyph": {
+        "textureY": 224
+    },
+    "requirement": {
+        "type": "tetra:and",
+        "requirements": [
+            {
+                "type": "tetra:locked",
+                "key": "tetra:extractor"
+            },
+            {
+                "type": "tetra:module",
+                "module": "double/unbound_extractor_right"
+            },
+            {
+                "type": "tetra:not",
+                "requirement": {
+                    "type": "tetra:improvement",
+                    "improvement": "unbound_extractor/potency"
+                }
+            }
+        ]
+    },
+    "outcomes": [
+        {
+            "requiredTools": {
+                "hammer_dig": "minecraft:iron"
+            },
+            "improvements": {
+                "unbound_extractor/potency": 1
+            }
+        }
+    ]
+}

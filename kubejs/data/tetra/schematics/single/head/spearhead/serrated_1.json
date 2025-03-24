@@ -1,0 +1,47 @@
+{
+    "replace": true,
+    "slots": [
+        "single/head"
+    ],
+    "materialSlotCount": 0,
+    "displayType": "improvement",
+    "glyph": {
+        "textureX": 208,
+        "textureY": 32
+    },
+    "requirement": {
+        "type": "tetra:and",
+        "requirements": [
+            {
+                "type": "tetra:or",
+                "requirements": [
+                    {
+                        "type": "tetra:module",
+                        "module": "single/spearhead"
+                    },
+                    {
+                        "type": "tetra:module",
+                        "module": "single/trident"
+                    }
+                ]
+            },
+            {
+                "type": "tetra:not",
+                "requirement": {
+                    "type": "tetra:improvement",
+                    "improvement": "spearhead/serrated"
+                }
+            }
+        ]
+    },
+    "outcomes": [
+        {
+            "requiredTools": {
+                "hammer_dig": "minecraft:stone"
+            },
+            "improvements": {
+                "spearhead/serrated": 1
+            }
+        }
+    ]
+}

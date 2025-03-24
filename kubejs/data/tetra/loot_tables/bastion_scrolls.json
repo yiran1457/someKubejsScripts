@@ -1,0 +1,139 @@
+{
+    "type": "minecraft:empty",
+    "pools": [
+        {
+            "name": "tetra_bastion_extended",
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "minecraft:item",
+                    "name": "tetra:scroll_rolled",
+                    "functions": [
+                        {
+                            "function": "tetra:scroll",
+                            "key": "warforge/adze",
+                            "details": "warforge",
+                            "intricate": false,
+                            "material": 2,
+                            "ribbon": "8559b3",
+                            "glyphs": [ 6, 7, 11, 7 ],
+                            "schematics": [ "tetra:warforge/adze" ]
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "name": "tetra:scroll_rolled",
+                    "functions": [
+                        {
+                            "function": "tetra:scroll",
+                            "key": "warforge/axe",
+                            "details": "warforge",
+                            "intricate": false,
+                            "material": 2,
+                            "ribbon": "b35973",
+                            "glyphs": [ 5, 10, 8, 9 ],
+                            "schematics": [ "tetra:warforge/axe" ]
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "name": "tetra:scroll_rolled",
+                    "functions": [
+                        {
+                            "function": "tetra:scroll",
+                            "key": "warforge/hammer",
+                            "details": "warforge",
+                            "intricate": false,
+                            "material": 2,
+                            "ribbon": "3d4299",
+                            "glyphs": [ 9, 8, 11, 10 ],
+                            "schematics": [ "tetra:warforge/hammer" ]
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "name": "tetra:scroll_rolled",
+                    "functions": [
+                        {
+                            "function": "tetra:scroll",
+                            "key": "warforge/pickaxe",
+                            "details": "warforge",
+                            "intricate": false,
+                            "material": 2,
+                            "ribbon": "508cb3",
+                            "glyphs": [ 6, 11, 8, 7 ],
+                            "schematics": [ "tetra:warforge/pickaxe" ]
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "name": "tetra:scroll_rolled",
+                    "functions": [
+                        {
+                            "function": "tetra:scroll",
+                            "key": "warforge/claw",
+                            "details": "warforge",
+                            "intricate": false,
+                            "material": 2,
+                            "ribbon": "1d262f",
+                            "glyphs": [ 8, 10, 5, 11 ],
+                            "schematics": [ "tetra:warforge/claw" ]
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "name": "tetra:scroll_rolled",
+                    "functions": [
+                        {
+                            "function": "tetra:scroll",
+                            "key": "warforge/hoe",
+                            "details": "warforge",
+                            "intricate": false,
+                            "material": 2,
+                            "ribbon": "93b350",
+                            "glyphs": [ 10, 7, 9, 5 ],
+                            "schematics": [ "tetra:warforge/hoe" ]
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "name": "tetra:scroll_rolled",
+                    "functions": [
+                        {
+                            "function": "tetra:scroll",
+                            "key": "warforge/sickle",
+                            "details": "warforge",
+                            "intricate": false,
+                            "material": 2,
+                            "ribbon": "d99e4c",
+                            "glyphs": [ 5, 9, 6, 10 ],
+                            "schematics": [ "tetra:warforge/sickle" ]
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "name": "tetra:scroll_rolled",
+                    "functions": [
+                        {
+                            "function": "tetra:scroll",
+                            "key": "warforge/butt",
+                            "details": "warforge",
+                            "intricate": false,
+                            "material": 2,
+                            "ribbon": "b33636",
+                            "glyphs": [ 11, 5, 8, 9 ],
+                            "schematics": [ "tetra:warforge/butt" ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

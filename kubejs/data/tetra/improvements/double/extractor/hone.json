@@ -1,0 +1,56 @@
+[
+    {
+        "key": "extractor_hone/potency",
+        "level": 1,
+        "aspects": {
+            "honed": 1
+        },
+        "effects": {
+            "extraction": 1
+        }
+    },
+    {
+        "key": "extractor_hone/potency",
+        "level": 2,
+        "integrity": -1,
+        "aspects": {
+            "honed": 2
+        },
+        "effects": {
+            "extraction": 2
+        }
+    },
+    {
+        "key": "extractor_hone/potency",
+        "level": 3,
+        "integrity": -1,
+        "aspects": {
+            "honed": 3
+        },
+        "effects": {
+            "extraction": 3
+        }
+    },
+    {
+        "key": "extractor_hone/potency",
+        "level": 4,
+        "integrity": -2,
+        "aspects": {
+            "honed": 4
+        },
+        "effects": {
+            "extraction": 4
+        }
+    },
+    {
+        "key": "extractor_hone/potency",
+        "level": 5,
+        "integrity": -2,
+        "aspects": {
+            "honed": 5
+        },
+        "effects": {
+            "extraction": 5
+        }
+    }
+]
