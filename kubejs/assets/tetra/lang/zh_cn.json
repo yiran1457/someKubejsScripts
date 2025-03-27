@@ -1,0 +1,4 @@
+{
+  "tetra.stats.spread": "散布",
+  "tetra.stats.spread.tooltip": "决定射击精度，发射的弹道可能偏离目标点最多§e%s°§r"
+}

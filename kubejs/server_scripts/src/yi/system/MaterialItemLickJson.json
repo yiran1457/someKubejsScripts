@@ -1,0 +1,14 @@
+{
+	"stone": "minecraft:cobblestone",
+	"copper": "minecraft:copper_ingot",
+	"iron": "minecraft:iron_ingot",
+	"warped": "minecraft:warped_planks",
+	"gold": "minecraft:gold_ingot",
+	"blackstone": "minecraft:blackstone",
+	"forged_steel_ingot": "art_of_forging:forged_steel_ingot",
+	"endsteel_ingot": "art_of_forging:endsteel_ingot",
+	"vobrivium_ingot": "art_of_forging:vobrivium_ingot",
+	"socket_ender_pearl": "minecraft:ender_pearl",
+	"socket_heart_of_ender": "art_of_forging:heart_of_ender",
+	"blaze_rod": "minecraft:blaze_rod"
+}

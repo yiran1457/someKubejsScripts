@@ -10,5 +10,12 @@
 		"toggle.rain": true,
 		"toggle.day": true,
 		"toggle.night": true
+	},
+	"ftbessentials": {
+		"trash_can": true
+	},
+	"ftbchunks": {
+		"chunks": true,
+		"claim_chunks": true
 	}
 }
