@@ -13,3 +13,5 @@ rhino.local.properties
 usercache.json
 usernamecache.json
 kubejs/lang
+shaderpacks
+kubejs/config/probe-settings.json

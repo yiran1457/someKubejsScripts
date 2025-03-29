@@ -39,3 +39,9 @@ function readLang(modid, lang) {
   }
   return langFile
 }
+
+
+// Ingredient.all.itemIds.forEach(v=>{
+//   if(/台阶/.test(Item.of(v).displayName.getString()))
+//     console.log(v+'/'+'/'+Item.of(v).displayName.getString())
+// })
