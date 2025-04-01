@@ -53,3 +53,6 @@ const { $VanillaTypes } = require("packages/mezz/jei/api/constants/$VanillaTypes
 const { $Internal } = require("packages/mezz/jei/common/$Internal")
 const { $ItemTooltipEvent } = require("packages/net/minecraftforge/event/entity/player/$ItemTooltipEvent")
 const $Long = Java.loadClass("java.lang.Long")
+const { $Button } = require("packages/net/minecraft/client/gui/components/$Button")
+const { $Screen } = require("packages/net/minecraft/client/gui/screens/$Screen")
+const { $TeamData } = require("packages/dev/ftb/mods/ftbquests/quest/$TeamData")

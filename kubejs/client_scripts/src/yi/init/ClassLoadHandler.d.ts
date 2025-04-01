@@ -38,6 +38,9 @@ import { $ClientQuestFile as My$ClientQuestFile } from "packages/dev/ftb/mods/ft
 import { $VanillaTypes as My$VanillaTypes } from "packages/mezz/jei/api/constants/$VanillaTypes"
 import { $Internal as My$Internal } from "packages/mezz/jei/common/$Internal"
 import { $ItemTooltipEvent as My$ItemTooltipEvent } from "packages/net/minecraftforge/event/entity/player/$ItemTooltipEvent"
+import { $Button as My$Button } from "packages/net/minecraft/client/gui/components/$Button"
+import { $Screen as My$Screen } from "packages/net/minecraft/client/gui/screens/$Screen"
+import { $TeamData as My$TeamData } from "packages/dev/ftb/mods/ftbquests/quest/$TeamData"
 
 
 declare global {
@@ -80,6 +83,9 @@ declare global {
     const $Internal: typeof My$Internal
     const $Long: typeof My$Long
     const $ItemTooltipEvent: typeof My$ItemTooltipEvent
+    const $Button: typeof My$Button
+    const $Screen: typeof My$Screen
+    const $TeamData: typeof My$TeamData
 
     
 }

@@ -1,5 +1,3 @@
-const { $TeamData } = require("packages/dev/ftb/mods/ftbquests/quest/$TeamData")
-
 if (config.ItemQuestLink) 
     {
     let openQuestGui = (id)=> {
@@ -73,16 +71,3 @@ if (config.ItemQuestLink)
         })
     })
 }
-/**
- * 
- * @param {string} str 
- */
-function tsTool(str) {
-
-    let className = str.substring(str.indexOf('{') + 2, str.indexOf('}') - 1)
-    let classPath = str.substring(str.indexOf('(') + 1, str.indexOf(')'))
-    let Import = `import { ${className} as My${className} } from ${classPath}`
-    let Const = `const ${className}: typeof My${className}`
-    console.log(Import, Const)
-}
-tsTool(`const { $ItemTooltipEvent } = require("packages/net/minecraftforge/event/entity/player/$ItemTooltipEvent")`)
