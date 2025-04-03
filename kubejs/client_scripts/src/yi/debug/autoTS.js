@@ -23,8 +23,8 @@ static parseLong(数字: string, 进制: number): My$Long
         let classPath = v.substring(v.indexOf('(') + 1, v.indexOf(')'))
         let Import = `import { ${className} as My${className} } from ${classPath}`
         let Const = `const ${className}: typeof My${className}`
-        if(customClass.indexOf(className)==-1)
-        importList.push(Import)
+        if (customClass.indexOf(className) == -1)
+          importList.push(Import)
         constList.push(Const)
       }
     })

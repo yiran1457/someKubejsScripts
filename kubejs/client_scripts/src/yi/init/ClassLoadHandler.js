@@ -43,6 +43,7 @@ const { $ImageButton } = require("packages/net/minecraft/client/gui/components/$
 const { $Random } = require("packages/java/util/$Random")
 const { $KubeJS } = require("packages/dev/latvian/mods/kubejs/$KubeJS")
 const { $KubeJSCommon } = require("packages/dev/latvian/mods/kubejs/$KubeJSCommon")
+const { $Platform } = require("packages/dev/architectury/platform/$Platform")
 
 //====================
 // 杂项

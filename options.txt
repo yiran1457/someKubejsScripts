@@ -94,7 +94,7 @@ key_key.command:key.keyboard.slash
 key_key.togglePerspective:key.keyboard.f5
 key_key.swapOffhand:key.keyboard.f
 key_key.advancements:key.keyboard.l
-key_key.debugScreen:key.keyboard.v
+key_key.debugScreen:key.keyboard.v:CONTROL
 key_key.ftb-item:key.keyboard.o:SHIFT
 key_key.refinedstorage.focusSearchBar:key.keyboard.tab
 key_key.refinedstorage.clearGridCraftingMatrix:key.keyboard.x:CONTROL

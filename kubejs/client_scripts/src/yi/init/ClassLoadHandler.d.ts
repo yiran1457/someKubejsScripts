@@ -38,6 +38,7 @@ import { $ImageButton as My$ImageButton } from "packages/net/minecraft/client/gu
 import { $Random as My$Random } from "packages/java/util/$Random"
 import { $KubeJS as My$KubeJS } from "packages/dev/latvian/mods/kubejs/$KubeJS"
 import { $KubeJSCommon as My$KubeJSCommon } from "packages/dev/latvian/mods/kubejs/$KubeJSCommon"
+import { $Platform as My$Platform } from "packages/dev/architectury/platform/$Platform"
 //====================
 // 杂项
 //====================
@@ -80,6 +81,7 @@ const $ImageButton: typeof My$ImageButton
 const $Random: typeof My$Random
 const $KubeJS: typeof My$KubeJS
 const $KubeJSCommon: typeof My$KubeJSCommon
+const $Platform: typeof My$Platform
 const $ClientQuestFile: typeof My$ClientQuestFile
 const $VanillaTypes: typeof My$VanillaTypes
 const $Internal: typeof My$Internal
