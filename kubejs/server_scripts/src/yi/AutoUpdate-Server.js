@@ -18,7 +18,7 @@ NetworkEvents.dataReceived("update", event => {
   let updateJS = {}
   let jsVersionMap = getJsVersionMap()
   for (let js in jsVersionMap) {
-    let updatedPath = js.replace("update_client_scripts", "client_scripts")
+    let updatedPath = js//.replace("update_client_scripts", "client_scripts")
     if (!event.data[updatedPath] || event.data[updatedPath] != jsVersionMap[js]) {
       updateJS[updatedPath] = JSIO.read(js)
     }
@@ -32,7 +32,8 @@ NetworkEvents.dataReceived("update", event => {
 })
 
 //获取更新列表的js的路径
-let updateFilesPath = JSIO.getJSInDirectory('kubejs/update_client_scripts/src/update')
+//let updateFilesPath = JSIO.getJSInDirectory('kubejs/update_client_scripts/src/update')
+let updateFilesPath = JSIO.findJSInDirectory('kubejs/client_scripts/src/update')
 
 function getJsVersionMap() {
   let jsVersionMap = {}
@@ -42,3 +43,6 @@ function getJsVersionMap() {
   })
   return jsVersionMap
 }
+Item.of('diamond').item.setFoodProperties(fc=>{
+  fc.hunger(5).meat().alwaysEdible()
+})

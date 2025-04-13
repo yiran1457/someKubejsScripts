@@ -26,7 +26,7 @@ NetworkEvents.dataReceived("update",event=>{
 })
 
 //获取更新列表的js的路径
-let updateFilesPath = JSIO.getJSInDirectory('kubejs/client_scripts/src/update')
+let updateFilesPath = JSIO.findJSInDirectory('kubejs/client_scripts/src/update')
 
 function getJsVersionMap() {
   let jsVersionMap = {}
